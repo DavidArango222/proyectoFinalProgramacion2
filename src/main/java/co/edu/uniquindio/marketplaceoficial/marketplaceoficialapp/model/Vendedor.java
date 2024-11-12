@@ -39,7 +39,7 @@ public class Vendedor extends Persona implements IProductoCrud {
     public boolean crearProducto(String nombre,
                                  double precio,
                                  String categoria,
-                                 Image imagen,
+                                 String imagen,
                                  TipoEstado tipoEstado,
                                  String idProducto) {
         Producto productoExistente = buscarProducto(idProducto);
@@ -74,10 +74,9 @@ public class Vendedor extends Persona implements IProductoCrud {
     public boolean actualizarProducto(String nombre,
                                       double precio,
                                       String categoria,
-                                      Image imagen,
+                                      String imagen,
                                       TipoEstado tipoEstado,
-                                      String idProducto,
-                                      String idProductoNuevo) {
+                                      String idProducto) {
         Producto productoExistente = buscarProducto(idProducto);
         if (productoExistente != null) {
             productoExistente = Producto.builder()
@@ -86,7 +85,6 @@ public class Vendedor extends Persona implements IProductoCrud {
                     .categoria(categoria)
                     .imagen(imagen)
                     .tipoEstado(tipoEstado)
-                    .idProducto(idProductoNuevo)
                     .build();
             getProductos().add(productoExistente);
             return true;

@@ -8,7 +8,7 @@ public class ProductoBuilder {
     protected String nombre;
     protected double precio;
     protected String categoria;
-    protected Image imagen;
+    protected String imagen;
     protected TipoEstado tipoEstado;
     protected String idProducto;
 
@@ -27,7 +27,7 @@ public class ProductoBuilder {
         return this;
     }
 
-    public ProductoBuilder imagen(Image imagen){
+    public ProductoBuilder imagen(String imagen){
         this.imagen=imagen;
         return this;
     }

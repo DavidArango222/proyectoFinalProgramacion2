@@ -18,7 +18,5 @@ public class MarketplaceViewController {
 
     @FXML
     void initialize() {
-        assert administradorTab != null : "fx:id=\"administradorTab\" was not injected: check your FXML file 'marketplace.fxml'.";
-
     }
 }

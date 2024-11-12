@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="820.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller.VendedorViewController">
+   <children>
+      <TabPane prefHeight="854.0" prefWidth="1400.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Productos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.6001144164759725" prefHeight="826.0" prefWidth="1400.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <SplitPane dividerPositions="0.4504854368932038" orientation="VERTICAL" prefHeight="827.0" prefWidth="837.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="696.0">
+                                             <children>
+                                                <Label layoutX="60.0" layoutY="72.0" prefHeight="30.0" prefWidth="66.0" text="Nombre:">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="512.0" layoutY="72.0" prefHeight="30.0" prefWidth="49.0" text="Precio:">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="60.0" layoutY="129.0" prefHeight="30.0" prefWidth="66.0" text="Categoria:">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="290.0" layoutY="185.0" prefHeight="30.0" prefWidth="66.0" text="Imagen:">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="232.0" layoutY="235.0" prefHeight="30.0" prefWidth="98.0" text="Tipo de Estado:">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="512.0" layoutY="129.0" prefHeight="30.0" prefWidth="29.0" text="Id:">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="356.0" layoutY="12.0" prefHeight="32.0" prefWidth="124.0" text="Producto">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="25.0" />
+                                                   </font>
+                                                </Label>
+                                                <Separator layoutX="35.0" layoutY="51.0" prefHeight="0.0" prefWidth="774.0" />
+                                                <Separator layoutX="34.0" layoutY="287.0" prefHeight="0.0" prefWidth="778.0" />
+                                                <TextField fx:id="txtNombre" layoutX="159.0" layoutY="75.0" />
+                                                <TextField fx:id="txtCategoria" layoutX="159.0" layoutY="132.0" />
+                                                <TextField fx:id="txtPrecio" layoutX="585.0" layoutY="75.0" />
+                                                <TextField fx:id="txtId" layoutX="585.0" layoutY="132.0" />
+                                                <Button fx:id="btnCrearProducto" layoutX="479.0" layoutY="306.0" mnemonicParsing="false" onAction="#crearProducto" prefHeight="31.0" prefWidth="98.0" text="Crear" />
+                                                <Button fx:id="btnModificarProducto" layoutX="246.0" layoutY="306.0" mnemonicParsing="false" onAction="#modificarProducto" prefHeight="31.0" prefWidth="98.0" text="Modificar" />
+                                                <RadioButton fx:id="rbVendido" layoutX="348.0" layoutY="242.0" mnemonicParsing="false" onAction="#vendido" text="Vendido" />
+                                                <RadioButton fx:id="rbPublicado" layoutX="434.0" layoutY="242.0" mnemonicParsing="false" onAction="#publicado" text="Publicado" />
+                                                <RadioButton fx:id="rbCancelado" layoutX="526.0" layoutY="242.0" mnemonicParsing="false" onAction="#cancelado" text="Cancelado" />
+                                                <TextField fx:id="txtImagen" layoutX="389.0" layoutY="187.0" />
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="740.0">
+                                             <children>
+                                                <TableView fx:id="tableProductos" layoutX="50.0" layoutY="25.0" prefHeight="344.0" prefWidth="743.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="tcNombre" prefWidth="162.39995193481445" text="Nombre" />
+                                                    <TableColumn fx:id="tcPrecio" prefWidth="160.8000946044922" text="Precio" />
+                                                      <TableColumn fx:id="tcCategoria" prefWidth="115.199951171875" text="Categoria" />
+                                                      <TableColumn fx:id="tcId" prefWidth="64.0" text="Id" />
+                                                      <TableColumn fx:id="tcEstado" prefWidth="108.0" text="Estado" />
+                                                      <TableColumn fx:id="tcImagen" prefWidth="137.59991455078125" text="Imagen" />
+                                                  </columns>
+                                                </TableView>
+                                                <Button fx:id="btnEliminarProducto" layoutX="691.0" layoutY="389.0" mnemonicParsing="false" onAction="#eliminarProducto" prefHeight="31.0" prefWidth="98.0" text="Eliminar" />
+                                                <Label layoutX="50.0" layoutY="389.0" prefHeight="30.0" prefWidth="66.0" text="Cedula:">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txtCedula" layoutX="123.0" layoutY="392.0" />
+                                                <Button fx:id="btnActualizarTabla" layoutX="305.0" layoutY="388.0" mnemonicParsing="false" onAction="#actualizarTabla" prefHeight="31.0" prefWidth="119.0" text="Actualizar Tabla" />
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fx:id="imgProducto" fitHeight="383.0" fitWidth="436.0" layoutX="60.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Label fx:id="labelNombre" alignment="CENTER" layoutX="90.0" layoutY="501.0" prefHeight="30.0" prefWidth="373.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelPrecio" alignment="CENTER" layoutX="90.0" layoutY="546.0" prefHeight="30.0" prefWidth="373.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelCategoria" alignment="CENTER" layoutX="90.0" layoutY="595.0" prefHeight="30.0" prefWidth="373.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelId" alignment="CENTER" layoutX="90.0" layoutY="640.0" prefHeight="30.0" prefWidth="373.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelEstado" alignment="CENTER" layoutX="90.0" layoutY="683.0" prefHeight="30.0" prefWidth="373.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Separator layoutX="46.0" layoutY="445.0" prefHeight="2.0" prefWidth="462.0" />
+                                    <Separator layoutX="47.0" layoutY="766.0" prefHeight="2.0" prefWidth="462.0" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Muro">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

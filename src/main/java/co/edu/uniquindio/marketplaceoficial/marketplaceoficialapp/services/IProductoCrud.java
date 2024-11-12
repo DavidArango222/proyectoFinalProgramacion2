@@ -6,15 +6,15 @@ public interface IProductoCrud {
     boolean crearProducto(String nombre,
                           double precio,
                           String categoria,
-                          Image imagen,
-                          TipoEstado tipoEstado, String idProducto);
+                          String imagen,
+                          TipoEstado tipoEstado,
+                          String idProducto);
     boolean eliminarProducto(String idProducto);
     boolean actualizarProducto(String nombre,
                                double precio,
                                String categoria,
-                               Image imagen,
+                               String imagen,
                                TipoEstado tipoEstado,
-                               String idProducto,
-                               String idProductoNuevo);
+                               String idProducto);
     String obtenerProducto(String idProducto);
 }
