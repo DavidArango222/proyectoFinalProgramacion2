@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp;
 
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller.MarketplaceViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,12 +10,13 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("marketplace.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Marketplace");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader marketplaceLoader = new FXMLLoader(getClass().getResource("marketplace.fxml"));
+        Scene scene = new Scene(marketplaceLoader.load());
+        MarketplaceViewController marketplaceController = marketplaceLoader.getController();
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Marketplace Application");
+        primaryStage.show();
     }
 
     public static void main(String[] args) {

@@ -147,4 +147,16 @@ public class Marketplace implements IVendedorCrud, IObservable {
         observadorList.forEach(IObservador::actualizar);
     }
 
+    public boolean agregarVendedor(String nombre, String cedula) {
+        Vendedor vendedor = obtenerVendedor(cedula);
+        if (vendedor == null) {
+            vendedor = new Vendedor();
+            vendedor.setNombre(nombre);
+            vendedor.setCedula(cedula);
+            getVendedores().add(vendedor);
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

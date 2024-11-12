@@ -2,15 +2,20 @@ package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model;
 
 
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.builder.VendedorBuilder;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObservable;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObservador;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IProductoCrud;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.TipoEstado;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vendedor extends Persona implements IProductoCrud {
-    private List<Producto> productos =new ArrayList<>();
+public class Vendedor extends Persona implements IProductoCrud, IObservable {
+    private List<IObservador> observadorList = new ArrayList<>();
+    private List<Producto> productos = new ArrayList<>();
     private Muro muro;
 
     public Vendedor() {
@@ -53,6 +58,7 @@ public class Vendedor extends Persona implements IProductoCrud {
                     .idProducto(idProducto)
                     .build();
             getProductos().add(producto);
+            notificarObservadores();
             return true;
         }else{
             return false;
@@ -64,6 +70,7 @@ public class Vendedor extends Persona implements IProductoCrud {
         Producto productoExistente = buscarProducto(idProducto);
         if(productoExistente != null){
             getProductos().remove(productoExistente);
+            notificarObservadores();
             return true;
         }else{
             return false;
@@ -87,10 +94,12 @@ public class Vendedor extends Persona implements IProductoCrud {
                     .tipoEstado(tipoEstado)
                     .build();
             getProductos().add(productoExistente);
+            notificarObservadores();
             return true;
         } else {
             return false;
         }
+
     }
 
     @Override
@@ -113,5 +122,20 @@ public class Vendedor extends Persona implements IProductoCrud {
         }
 
         return  productoExistente;
+    }
+
+    @Override
+    public void agregarObservador(IObservador observador) {
+        observadorList.add(observador);
+    }
+
+    @Override
+    public void eliminarObservador(IObservador observador) {
+        observadorList.remove(observador);
+    }
+
+    @Override
+    public void notificarObservadores() {
+        observadorList.forEach(IObservador::actualizar);
     }
 }

@@ -1,7 +1,7 @@
 package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.VendedorController;
@@ -10,24 +10,21 @@ import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Marketpl
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Producto;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObservador;
-import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.TipoEstado;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 public class VendedorViewController implements IObservador {
     VendedorController vendedorController;
     Marketplace marketplace;
-    ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
     Vendedor vendedor;
-
-    @FXML
-    private ToggleGroup grupoEstado;
 
     @FXML
     private ResourceBundle resources;
@@ -39,37 +36,19 @@ public class VendedorViewController implements IObservador {
     private Button btnCrearProducto;
 
     @FXML
-    private Button btnActualizarTabla;
-
-    @FXML
     private Button btnEliminarProducto;
 
     @FXML
     private Button btnModificarProducto;
 
     @FXML
-    private TableColumn<Producto, String> tcCategoria;
-
-    @FXML
-    private TableColumn<Producto, String> tcEstado;
-
-    @FXML
-    private TableColumn<Producto, String> tcId;
-
-    @FXML
-    private TableColumn<Producto, String> tcImagen;
-
-    @FXML
-    private TableColumn<Producto, String> tcNombre;
-
-    @FXML
-    private TableColumn<Producto, String> tcPrecio;
-
-    @FXML
     private ImageView imgProducto;
 
     @FXML
     private Label labelCategoria;
+
+    @FXML
+    private Label labelCedula;
 
     @FXML
     private Label labelEstado;
@@ -96,6 +75,24 @@ public class VendedorViewController implements IObservador {
     private TableView<Producto> tableProductos;
 
     @FXML
+    private TableColumn<Producto, String> tcCategoria;
+
+    @FXML
+    private TableColumn<Producto, String> tcEstado;
+
+    @FXML
+    private TableColumn<Producto, String> tcId;
+
+    @FXML
+    private TableColumn<Producto, String> tcImagen;
+
+    @FXML
+    private TableColumn<Producto, String> tcNombre;
+
+    @FXML
+    private TableColumn<Producto, String> tcPrecio;
+
+    @FXML
     private TextField txtCategoria;
 
     @FXML
@@ -111,15 +108,8 @@ public class VendedorViewController implements IObservador {
     private TextField txtPrecio;
 
     @FXML
-    private TextField txtCedula;
-
-    @FXML
-    void actualizarTabla(ActionEvent event) {
-
-    }
-
-    @FXML
     void cancelado(ActionEvent event) {
+
     }
 
     @FXML
@@ -134,26 +124,49 @@ public class VendedorViewController implements IObservador {
 
     @FXML
     void modificarProducto(ActionEvent event) {
+
     }
 
     @FXML
     void publicado(ActionEvent event) {
+
     }
 
     @FXML
     void vendido(ActionEvent event) {
+
     }
-
-
 
     @FXML
     void initialize() {
-
+        vendedorController = new VendedorController();
+        marketplace = ModelFactory.getInstance().getMarketplace();
+        marketplace.agregarObservador(this);
+        vendedor = marketplace.obtenerVendedor(labelCedula.getText());
+        actualizar();
     }
 
     @Override
     public void actualizar() {
+        initDataBindingTableProductos();
     }
 
-}
+    private void initDataBindingTableProductos() {
+        tcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        tcPrecio.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPrecio()).asString());
+        tcCategoria.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategoria()));
+        tcEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTipoEstado().toString()));
+        tcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIdProducto()));
+        tcImagen.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getImagen()));
+    }
 
+    public void updateView(String cedula) {
+        labelCedula.setText("Vendedor: "+cedula);
+        Vendedor vendedor = vendedorController.obtenerVendedor(cedula);
+        if(vendedor != null) {
+            labelCedula.setText(vendedor.getCedula());
+        }else{
+            labelCedula.setText("Vendedor no existe");
+        }
+    }
+}

@@ -93,13 +93,11 @@
                                                   </columns>
                                                 </TableView>
                                                 <Button fx:id="btnEliminarProducto" layoutX="691.0" layoutY="389.0" mnemonicParsing="false" onAction="#eliminarProducto" prefHeight="31.0" prefWidth="98.0" text="Eliminar" />
-                                                <Label layoutX="50.0" layoutY="389.0" prefHeight="30.0" prefWidth="66.0" text="Cedula:">
+                                                <Label fx:id="labelCedula" layoutX="50.0" layoutY="388.0" prefHeight="30.0" prefWidth="121.0">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="txtCedula" layoutX="123.0" layoutY="392.0" />
-                                                <Button fx:id="btnActualizarTabla" layoutX="305.0" layoutY="388.0" mnemonicParsing="false" onAction="#actualizarTabla" prefHeight="31.0" prefWidth="119.0" text="Actualizar Tabla" />
                                              </children>
                                           </AnchorPane>
                                       </items>

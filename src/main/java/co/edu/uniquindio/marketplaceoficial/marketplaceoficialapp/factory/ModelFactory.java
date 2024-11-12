@@ -2,6 +2,7 @@ package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.factory;
 
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Marketplace;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Producto;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.TipoEstado;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils.DataUtil;
 
@@ -22,6 +23,18 @@ public class ModelFactory {
 
     public Marketplace getMarketplace() {
         return marketplace;
+    }
+
+    public boolean agregarVendedor(String nombre, String cedula) {
+        return marketplace.agregarVendedor(nombre, cedula);
+    }
+
+    public Vendedor obtenerVendedor(String cedula) {
+        return marketplace.obtenerVendedor(cedula);
+    }
+
+    public boolean eliminarVendedor(String cedula) {
+        return marketplace.eliminarVendedor(cedula);
     }
 
 }
