@@ -37,7 +37,7 @@ public class MarketplaceViewController {
             }
             FXMLLoader loader = new FXMLLoader(adminViewUrl);
             AnchorPane adminContent = loader.load();
-            AdminViewController adminController = loader.getController();
+            AdministradorViewController adminController = loader.getController();
             adminController.setMarketplaceController(this);
             administradorTab.setContent(adminContent);
             
