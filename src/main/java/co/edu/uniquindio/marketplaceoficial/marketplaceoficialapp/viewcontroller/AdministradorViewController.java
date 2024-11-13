@@ -137,6 +137,7 @@ public class AdministradorViewController {
             if (listaVendedores.size() < 11) {
                 if (usuarioAgregado && vendedorAgregado) {
                     listaVendedores.addAll(vendedorUsuarioDto);
+                    marketplaceViewController.agregarTabVendedor(vendedorUsuarioDto.cedula());
                     limpiarCampos();
                     tableVendedor.refresh();
                     mostrarMensaje(TITULO_VENDEDOR_USUARIO_AGREGADO, HEADER, BODY_VENDEDOR_USUARIO_AGREGADO, Alert.AlertType.INFORMATION);
@@ -154,6 +155,7 @@ public class AdministradorViewController {
     private void eliminarVendedor() {
         if (datosValidosUsuario(vendedorSeleccionado) && datosValidosVendedor(vendedorSeleccionado))
             if (administradorController.eliminarVendedorUsuario(vendedorSeleccionado)) {
+                marketplaceViewController.eliminarTabVendedor(vendedorSeleccionado.cedula());
                 listaVendedores.remove(vendedorSeleccionado);
                 limpiarCampos();
                 tableVendedor.refresh();
