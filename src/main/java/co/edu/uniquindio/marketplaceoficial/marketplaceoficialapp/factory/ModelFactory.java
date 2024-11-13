@@ -24,6 +24,7 @@ public class ModelFactory {
 
     private ModelFactory() {
         marketplace = DataUtil.inicializarDatos();
+        mapper = new MarketplaceMappingImpl();
     }
 
     public Marketplace getMarketplace() {
@@ -44,5 +45,23 @@ public class ModelFactory {
 
     public List<VendedorUsuarioDto> getVendedoresUsuarioDto() {
         return mapper.getUsuariosVendedoresDto(marketplace.getVendedores(), marketplace.getUsuarios());
+    }
+
+    public boolean actualizarVendedorUsuario(String nombreUsuario, String cedula, VendedorUsuarioDto vendedorUsuarioDto) {
+        return marketplace.actualizarUsuario( nombreUsuario,  mapper.vendedorUsuarioDtoToUsuario(vendedorUsuarioDto))
+                | marketplace.actualizarVendedor(cedula,mapper.vendedorUsuarioDtoToVendedor(vendedorUsuarioDto));
+    }
+
+    public boolean eliminarVendedorUsuario(VendedorUsuarioDto vendedorUsuarioDto) {
+        return marketplace.eliminarUsuario(vendedorUsuarioDto.nombreUsuario())
+                | marketplace.eliminarVendedor(vendedorUsuarioDto.cedula());
+    }
+
+    public boolean agregarUsuarioDto(VendedorUsuarioDto vendedorUsuarioDto) {
+        return marketplace.crearUsuario(mapper.vendedorUsuarioDtoToUsuario(vendedorUsuarioDto));
+    }
+
+    public boolean agregarVendedorDto(VendedorUsuarioDto vendedorUsuarioDto) {
+        return marketplace.crearVendedor(mapper.vendedorUsuarioDtoToVendedor(vendedorUsuarioDto));
     }
 }

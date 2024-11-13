@@ -6,20 +6,20 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.AdministradorController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.dto.VendedorUsuarioDto;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+
+import static co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils.MarketplaceConstantes.*;
 
 public class AdministradorViewController {
     MarketplaceViewController marketplaceViewController;
     AdministradorController administradorController;
     ObservableList<VendedorUsuarioDto> listaVendedores = FXCollections.observableArrayList();
-    VendedorUsuarioDto vendedorUsuarioSeleccionado;
+    VendedorUsuarioDto vendedorSeleccionado;
 
 
     @FXML
@@ -78,19 +78,20 @@ public class AdministradorViewController {
 
     @FXML
     void onActionAgregar(ActionEvent event) {
-
+        agregarVendedor();
     }
 
     @FXML
     void onActionEliminar(ActionEvent event) {
+        eliminarVendedor();
 
     }
 
     @FXML
     void onActualizarVendedor(ActionEvent event) {
+        actualizarVendedor();
 
     }
-
 
     @FXML
     void initialize() {
@@ -107,6 +108,12 @@ public class AdministradorViewController {
     }
 
     private void listenerSelection() {
+        tableVendedor.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            vendedorSeleccionado = newSelection;
+            if (vendedorSeleccionado != null) {
+                mostrarInformacionVendedor(vendedorSeleccionado);
+            }
+        });
     }
 
     private void obtenerVendedores() {
@@ -114,13 +121,135 @@ public class AdministradorViewController {
     }
 
     private void initDataBinding() {
+        tcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
+        tcApellido.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().apellido()));
+        tcDireccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().direccion()));
+        tcCedula.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().cedula()));
+        tcUsuario.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombreUsuario()));
+        tcContrasena.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().contrasena()));
+    }
 
+    private void agregarVendedor() {
+        VendedorUsuarioDto vendedorUsuarioDto = crearVendedor();
+        if (datosValidosUsuario(vendedorUsuarioDto) && datosValidosVendedor(vendedorUsuarioDto)) {
+            boolean usuarioAgregado = administradorController.agregarUsuarioDto(vendedorUsuarioDto);
+            boolean vendedorAgregado = administradorController.agregarVendedorDto(vendedorUsuarioDto);
+            if (listaVendedores.size() < 11) {
+                if (usuarioAgregado && vendedorAgregado) {
+                    listaVendedores.addAll(vendedorUsuarioDto);
+                    limpiarCampos();
+                    tableVendedor.refresh();
+                    mostrarMensaje(TITULO_VENDEDOR_USUARIO_AGREGADO, HEADER, BODY_VENDEDOR_USUARIO_AGREGADO, Alert.AlertType.INFORMATION);
+                } else {
+                    mostrarMensaje(TITULO_VENDEDOR_USUARIO_NO_AGREGADO, HEADER, BODY_VENDEDOR_USUARIO_NO_AGREGADO, Alert.AlertType.ERROR);
+                }
+            } else{
+                mostrarMensaje(TITULO_MAXIMO_VENDEDORES,HEADER,BODY_MAXIMO_VENDEDORES, Alert.AlertType.WARNING);
+            }
+        }else {
+            mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.INFORMATION);
+        }
+    }
+
+    private void eliminarVendedor() {
+        if (datosValidosUsuario(vendedorSeleccionado) && datosValidosVendedor(vendedorSeleccionado))
+            if (administradorController.eliminarVendedorUsuario(vendedorSeleccionado)) {
+                listaVendedores.remove(vendedorSeleccionado);
+                limpiarCampos();
+                tableVendedor.refresh();
+                mostrarMensaje(TITULO_VENDEDOR_USUARIO_ELIMINADO, HEADER, BODY_VENDEDOR_USUARIO_ELIMINADO, Alert.AlertType.INFORMATION);
+            } else {
+                mostrarMensaje(TITULO_VENDEDOR_USUARIO_NO_ELIMINADO, HEADER, BODY_VENDEDOR_USUARIO_NO_ELIMINADO, Alert.AlertType.ERROR);
+            }else {
+            mostrarMensaje(TITULO_NO_SELECCIONADO, HEADER, BODY_NO_SELECCIONADO, Alert.AlertType.INFORMATION);
+            }
+    }
+
+    private void actualizarVendedor() {
+        VendedorUsuarioDto vendedorUsuarioDto = crearVendedor();
+        if (datosValidosUsuario(vendedorUsuarioDto) && datosValidosVendedor(vendedorUsuarioDto)) {
+            if (administradorController.actualizarVendedorUsuario(vendedorSeleccionado.nombreUsuario(), vendedorSeleccionado.cedula(), vendedorUsuarioDto)) {
+                actualizarUsuarioVendedorListaObserver(vendedorUsuarioDto);
+                limpiarCampos();
+                tableVendedor.refresh();
+                mostrarMensaje(TITULO_VENDEDOR_USUARIO_ACTUALIZADO, HEADER, BODY_VENDEDOR_USUARIO_ACTUALIZADO, Alert.AlertType.INFORMATION);
+            } else {
+                mostrarMensaje(TITULO_VENDEDOR_USUARIO_NO_ACTUALIZADO, HEADER, BODY_VENDEDOR_USUARIO_NO_ACTUALIZADO, Alert.AlertType.ERROR);
+            }
+        } else {
+            mostrarMensaje(TITULO_NO_SELECCIONADO, HEADER, BODY_NO_SELECCIONADO, Alert.AlertType.INFORMATION);
+        }
     }
 
     public void setMarketplaceController(MarketplaceViewController marketplaceViewController) {
         this.marketplaceViewController = marketplaceViewController;
     }
 
+    private void mostrarInformacionVendedor(VendedorUsuarioDto vendedorSeleccionado) {
+        if (vendedorSeleccionado != null) {
+            txtNombre.setText(vendedorSeleccionado.nombre());
+            txtApellido.setText(vendedorSeleccionado.apellido());
+            txtDireccion.setText(vendedorSeleccionado.direccion());
+            txtCedula.setText(vendedorSeleccionado.cedula());
+            txtUsuario.setText(vendedorSeleccionado.nombreUsuario());
+            txtContrasena.setText(vendedorSeleccionado.contrasena());
+        }
+    }
+
+    private VendedorUsuarioDto crearVendedor() {
+        return new VendedorUsuarioDto(txtNombre.getText(),
+                txtApellido.getText(),
+                txtCedula.getText(),
+                txtDireccion.getText(),
+                txtUsuario.getText(),
+                txtContrasena.getText());
+    }
+
+    private boolean datosValidosVendedor(VendedorUsuarioDto vendedorUsuarioDto) {
+        if(vendedorUsuarioDto.nombre().isEmpty() ||
+                vendedorUsuarioDto.apellido().isEmpty() ||
+                vendedorUsuarioDto.cedula().isEmpty() ||
+                vendedorUsuarioDto.direccion().isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    private boolean datosValidosUsuario(VendedorUsuarioDto vendedorUsuarioDto) {
+        if(vendedorUsuarioDto.nombreUsuario().isBlank() ||
+                vendedorUsuarioDto.contrasena().isBlank()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    private void actualizarUsuarioVendedorListaObserver(VendedorUsuarioDto vendedorUsuarioDto) {
+        for (int i = 0; i < listaVendedores.size(); i++) {
+            if (listaVendedores.get(i).cedula().equals(vendedorSeleccionado.cedula())) {
+                listaVendedores.set(i, vendedorUsuarioDto);
+                break;
+            }
+        }
+    }
+
+    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+        Alert aler = new Alert(alertType);
+        aler.setTitle(titulo);
+        aler.setHeaderText(header);
+        aler.setContentText(contenido);
+        aler.showAndWait();
+    }
+
+    private void limpiarCampos() {
+        txtNombre.clear();
+        txtApellido.clear();
+        txtDireccion.clear();
+        txtCedula.clear();
+        txtUsuario.clear();
+        txtContrasena.clear();
+    }
 
 
 }
