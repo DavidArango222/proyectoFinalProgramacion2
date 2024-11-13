@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vendedor extends Persona implements IProductoCrud, IObservable {
-    private List<IObservador> observadorList = new ArrayList<>();
+    private ObservableList<IObservador> observadorList = FXCollections.observableArrayList();
     private List<Producto> productos = new ArrayList<>();
     private Muro muro;
 

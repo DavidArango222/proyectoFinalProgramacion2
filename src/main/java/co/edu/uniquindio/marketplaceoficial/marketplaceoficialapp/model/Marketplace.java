@@ -88,7 +88,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
     public boolean actualizarVendedor(String cedula, Vendedor vendedor) {
         Vendedor vendedorEncontrado = obtenerVendedor(cedula);
         if (vendedorEncontrado!=null){
-            for (Vendedor vendedor1 : vendedores) {
+            for (Vendedor vendedor1 : getVendedores()) {
                 if (vendedor1.getCedula().equals(cedula)) {
                     vendedor1.setNombre(vendedor.getNombre());
                     vendedor1.setApellido(vendedor.getApellido());

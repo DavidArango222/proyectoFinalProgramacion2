@@ -15,7 +15,7 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(marketplaceLoader.load());
         MarketplaceViewController marketplaceController = marketplaceLoader.getController();
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Marketplace Application");
+        primaryStage.setTitle("TradeHub");
         primaryStage.show();
     }
 
