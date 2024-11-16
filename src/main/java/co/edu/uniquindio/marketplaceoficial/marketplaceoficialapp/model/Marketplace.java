@@ -5,9 +5,11 @@ import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObse
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObservador;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IVendedorCrud;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.TipoEstado;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Marketplace implements IVendedorCrud, IObservable {
     private String nombre;
@@ -111,11 +113,15 @@ public class Marketplace implements IVendedorCrud, IObservable {
 
     @Override
     public Vendedor obtenerVendedor(String cedula) {
+        System.out.println("Buscando vendedor con cédula: " + cedula);
         for (Vendedor vendedor : getVendedores()) {
+            System.out.println("Comparando con vendedor: " + vendedor.getCedula());
             if (vendedor.getCedula().equals(cedula)) {
+                System.out.println("Vendedor encontrado: " + vendedor.getNombre());
                 return vendedor;
             }
         }
+        System.out.println("No se encontró ningún vendedor con la cédula: " + cedula);
         return null;
     }
 

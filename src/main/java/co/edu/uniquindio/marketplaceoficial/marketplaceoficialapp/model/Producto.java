@@ -91,5 +91,6 @@ public class Producto {
     public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
     }
+
 }
 
