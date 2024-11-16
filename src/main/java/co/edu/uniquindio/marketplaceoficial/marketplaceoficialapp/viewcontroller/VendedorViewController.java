@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class VendedorViewController implements IObservador {
@@ -142,7 +143,8 @@ public class VendedorViewController implements IObservador {
         vendedorController = new VendedorController();
         marketplace = vendedorController.getModelFactory().getMarketplace();
         marketplace.agregarObservador(this);
-        actualizar();
+        initDataBindingTableProductos();
+        initView();
     }
 
     private void initView() {
@@ -156,6 +158,15 @@ public class VendedorViewController implements IObservador {
         labelPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
         labelCategoria.setText(productoSeleccionado.getCategoria());
         labelEstado.setText(productoSeleccionado.getTipoEstado().toString());
+        String rutaBase = "src/main/resources/images/";
+        String rutaImagenCompleta = rutaBase + productoSeleccionado.getImagen();
+        try {
+            imgProducto.setImage(new javafx.scene.image.Image("file:" + rutaImagenCompleta));
+            System.out.println("Imagen cargada correctamente: " + rutaImagenCompleta);
+        } catch (Exception e) {
+            System.out.println("Error al cargar la imagen: " + rutaImagenCompleta);
+            imgProducto.setImage(null);
+        }
     }
 
 
@@ -178,15 +189,23 @@ public class VendedorViewController implements IObservador {
     }
 
     public void updateView(String cedula) {
+        if (cedula == null || cedula.isEmpty()) {
+            System.out.println("Cédula no válida para actualizar la vista.");
+            return;
+        }
         this.cedula = cedula;
         labelCedula.setText(cedula);
+        System.out.println("Cédula actualizada en la vista: " + cedula);
         obtenerProductosVendedor(cedula);
     }
 
     private void obtenerProductosVendedor(String cedula) {
+        if (cedula == null || cedula.isEmpty()) {
+            System.out.println("La cédula es nula o vacía. No se pueden obtener los productos.");
+            return;
+        }
         Vendedor vendedor = marketplace.obtenerVendedor(cedula);
         if (vendedor == null) {
-            System.out.println("No se encontró ningún vendedor con la cédula: " + cedula);
             return;
         }
         List<Producto> productos = vendedor.getProductos();
@@ -199,8 +218,13 @@ public class VendedorViewController implements IObservador {
 
     @Override
     public void actualizar() {
-        updateView(cedula);
-        initView();
+        if (cedula == null || cedula.isEmpty()) {
+            System.out.println("No se puede actualizar porque la cédula es nula o vacía.");
+            return;
+        }
+
+        System.out.println("Actualizando vista para la cédula: " + cedula);
+        obtenerProductosVendedor(cedula);
     }
 
     private void initDataBindingTableProductos() {

@@ -254,4 +254,14 @@ public class Marketplace implements IVendedorCrud, IObservable {
             return false;
         }
     }
+
+    public boolean agregarProducto(String cedula, Producto producto) {
+        Vendedor vendedor = obtenerVendedor(cedula);
+        if (vendedor != null) {
+            vendedor.getProductos().add(producto);
+            notificarObservadores(); // Notifica a los observadores sobre el cambio
+            return true;
+        }
+        return false;
+    }
 }
