@@ -17,6 +17,7 @@ public class Vendedor extends Persona implements IProductoCrud, IObservable {
     private ObservableList<IObservador> observadorList = FXCollections.observableArrayList();
     private List<Producto> productos = new ArrayList<>();
     private Muro muro;
+    private Usuario usuarioAsociado;
 
     public Vendedor() {
     }
@@ -24,8 +25,17 @@ public class Vendedor extends Persona implements IProductoCrud, IObservable {
     public Vendedor(String nombre,
                     String apellido,
                     String cedula,
-                    String direccion) {
+                    String direccion, Usuario usuarioAsociado) {
         super(nombre,apellido,cedula,direccion);
+        this.usuarioAsociado=usuarioAsociado;
+    }
+
+    public Usuario getUsuarioAsociado() {
+        return usuarioAsociado;
+    }
+
+    public void setUsuarioAsociado(Usuario usuarioAsociado) {
+        this.usuarioAsociado = usuarioAsociado;
     }
 
     public Muro getMuro() {

@@ -4,13 +4,22 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="858.0" prefWidth="1460.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller.MarketplaceViewController">
+<?import javafx.scene.control.SplitPane?>
+<AnchorPane prefHeight="658.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller.MarketplaceViewController">
    <children>
-      <TabPane fx:id="mainTab" prefHeight="858.0" prefWidth="1460.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="mainTab" prefHeight="658.0" prefWidth="1160.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="administradorTab" text="Administrador">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <children>
+                  <SplitPane orientation="VERTICAL" prefHeight="788.0" prefWidth="1037.0">
+                    <items>
+                      <fx:include source="adminview.fxml" />
+                    </items>
+                  </SplitPane>
+                </children>
+              </AnchorPane>
             </content>
           </Tab>
             <Tab text="1124312515">

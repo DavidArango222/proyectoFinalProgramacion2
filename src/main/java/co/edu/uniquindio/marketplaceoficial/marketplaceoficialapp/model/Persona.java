@@ -5,7 +5,6 @@ public abstract class Persona {
     private String apellido;
     private String cedula;
     private String direccion;
-    private Usuario usuarioAsociado;
 
     public Persona() {
     }
@@ -20,9 +19,6 @@ public abstract class Persona {
         this.direccion = direccion;
     }
 
-    public Usuario getUsuarioAsociado() {
-        return usuarioAsociado;
-    }
 
     public String getNombre() {
         return nombre;
@@ -63,7 +59,6 @@ public abstract class Persona {
                 ", apellido='" + apellido + '\'' +
                 ", cedula='" + cedula + '\'' +
                 ", direccion='" + direccion + '\'' +
-                ", usuarioAsociado=" + usuarioAsociado +
                 '}';
     }
 }

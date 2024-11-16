@@ -38,6 +38,13 @@ public class Marketplace implements IVendedorCrud, IObservable {
         return nombre;
     }
 
+    public void agregarUsuario(Usuario usuario) {
+        usuarios.add(usuario);
+    }
+    public void agregarVendedor(Vendedor vendedor) {
+        vendedores.add(vendedor);
+    }
+
     public static MarketplaceBuilder builder(){
         return new MarketplaceBuilder();
     }
@@ -122,6 +129,88 @@ public class Marketplace implements IVendedorCrud, IObservable {
         }
 
         return  vendedorExistente;
+    }
+
+    public boolean crearUsuario(String nombreUsuario,
+                                String contrasena,
+                                Vendedor vendedorAsociado,
+                                Administrador administradorAsociado){
+        Usuario usuarioEncontrado = obtenerUsuario(nombreUsuario);
+        if(verificarUsuarioExiste(nombreUsuario)){
+            if (usuarioEncontrado == null) {
+                Usuario usuario = Usuario.builder()
+                        .nombreUsuario(nombreUsuario)
+                        .contrasena(contrasena)
+                        .vendedorAsociado(vendedorAsociado)
+                        .administradorAsociado(administradorAsociado)
+                        .build();
+                agregarUsuario(usuario);
+                return true;
+            }
+        }
+        return  false;
+    }
+
+    public boolean crearUsuario(Usuario nuevoUsuario){
+        Usuario usuarioEncontrado = obtenerUsuario(nuevoUsuario.getNombreUsuario());
+        if (verificarUsuarioExiste(nuevoUsuario.getNombreUsuario())){
+            if (usuarioEncontrado == null) {
+                agregarUsuario(nuevoUsuario);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean eliminarUsuario(String nombreUsuario) {
+        Usuario usuarioEncontrado = obtenerUsuario(nombreUsuario);
+        if (usuarioEncontrado!=null) {
+            usuarios.remove(usuarioEncontrado);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean actualizarUsuario(String nombreUsuario, Usuario usuario) {
+        Usuario usarioEncontrado = obtenerUsuario(nombreUsuario);
+        if (usarioEncontrado!=null){
+            for (Usuario usuario1 : usuarios) {
+                if (usuario1.getNombreUsuario().equals(nombreUsuario)) {
+                    usuario1.setNombreUsuario(usuario.getNombreUsuario());
+                    usuario1.setContrasena(usuario.getContrasena());
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private Usuario obtenerUsuario(String nombreUsuario) {
+        Usuario usuario = null;
+        for (Usuario usuario1 : usuarios) {
+            if (usuario1.getNombreUsuario().equals(nombreUsuario)
+                    || !usuario1.getNombreUsuario().isBlank()) {
+                usuario = usuario1;
+                break;
+            }
+        }
+
+
+        return usuario;
+    }
+
+    private boolean verificarUsuarioExiste(String nombreUsuario) {
+        if (nombreUsuario==null || nombreUsuario.isBlank()){
+            return false;
+        }
+        for(Usuario usuario : usuarios) {
+            if (usuario.getNombreUsuario().equals(nombreUsuario) || !usuario.getNombreUsuario().isEmpty()){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
