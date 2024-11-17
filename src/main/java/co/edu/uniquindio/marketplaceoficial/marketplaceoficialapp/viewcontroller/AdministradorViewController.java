@@ -103,6 +103,7 @@ public class AdministradorViewController implements IObservador {
 
     private void initView() {
         initDataBinding();
+        tableVendedor.getItems().clear();
         listenerSelection();
     }
 
@@ -117,7 +118,6 @@ public class AdministradorViewController implements IObservador {
 
     private void obtenerVendedores() {
         listaVendedores.addAll(administradorController.getVendedoresUsuarioDto());
-        tableVendedor.getItems().clear();
         tableVendedor.setItems(listaVendedores);
     }
 
