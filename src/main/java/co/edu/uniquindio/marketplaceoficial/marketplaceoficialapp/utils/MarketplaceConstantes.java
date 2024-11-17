@@ -44,6 +44,10 @@ public class MarketplaceConstantes {
     public static final String BODY_PRODUCTO_ELIMINADO = "El Producto se eliminó";
     public static final String TITULO_PRODUCTO_NO_ELIMINADO = "Producto no eliminado";
     public static final String BODY_PRODUCTO_NO_ELIMINADO = "El Producto no se eliminó correctamente";
+    public static final String TITULO_INCORRECTO ="Login Fallido";
+    public static final String BODY_INCORRECTO="El usuario o contraseña no coinciden.";
+    public static final String BODY_ERROR_VISTA_MARKETPLACE="No se pudo cargar la vista de Marketplace.";
+    public static final String TITULO_ERROR_VISTA_MARKETPLACE="Error";
 
 
 
