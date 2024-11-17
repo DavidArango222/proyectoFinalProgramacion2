@@ -8,42 +8,68 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="680.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller.AdministradorViewController">
+<AnchorPane prefHeight="586.0" prefWidth="1180.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller.AdministradorViewController">
     <children>
-        <TabPane prefHeight="680.0" prefWidth="1180.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="610.0" prefWidth="1180.0" side="LEFT" stylesheets="@../../../../../styles.css" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Gestion vendedor">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="364.0" prefWidth="1386.0">
+                        <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="1149.0">
                             <children>
-                                <Button fx:id="btnAgregar" layoutX="342.0" layoutY="199.0" mnemonicParsing="false" onAction="#onActionAgregar" text="Agregar" />
-                                <Label layoutX="80.0" layoutY="83.0" text="Nombre:" />
-                                <Label layoutX="83.0" layoutY="122.0" text="Cédula:" />
-                                <TextField fx:id="txtNombre" layoutX="144.0" layoutY="79.0" prefHeight="26.0" prefWidth="200.0" />
-                                <TextField fx:id="txtCedula" layoutX="145.0" layoutY="118.0" prefHeight="26.0" prefWidth="200.0" />
-                                <Button fx:id="btnEliminar" layoutX="784.0" layoutY="199.0" mnemonicParsing="false" onAction="#onActionEliminar" text="Eliminar" />
-                        <Button fx:id="btnActualizar" layoutX="559.0" layoutY="199.0" mnemonicParsing="false" onAction="#onActualizarVendedor" text="Actualizar" />
-                        <TableView fx:id="tableVendedor" layoutX="145.0" layoutY="284.0" prefHeight="251.0" prefWidth="894.0">
+                        <ImageView fitHeight="698.0" fitWidth="1191.0" layoutX="-11.0" layoutY="-46.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../images/fondoAdmin.png" />
+                           </image>
+                        </ImageView>
+                                <Button fx:id="btnAgregar" layoutX="365.0" layoutY="198.0" mnemonicParsing="false" onAction="#onActionAgregar" prefHeight="26.0" prefWidth="110.0" styleClass="rounded-button" stylesheets="@../../../../../styles.css" text="Agregar" />
+                                <Label layoutX="120.0" layoutY="61.0" text="Nombre:">
+                           <font>
+                              <Font name="SansSerif Bold" size="14.0" />
+                           </font></Label>
+                                <Label layoutX="120.0" layoutY="125.0" text="Cédula:">
+                           <font>
+                              <Font name="SansSerif Bold" size="14.0" />
+                           </font></Label>
+                                <TextField fx:id="txtNombre" layoutX="184.0" layoutY="57.0" prefHeight="26.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
+                                <TextField fx:id="txtCedula" layoutX="185.0" layoutY="116.0" prefHeight="26.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
+                                <Button fx:id="btnEliminar" layoutX="807.0" layoutY="198.0" mnemonicParsing="false" onAction="#onActionEliminar" prefHeight="26.0" prefWidth="110.0" styleClass="rounded-button" stylesheets="@../../../../../styles.css" text="Eliminar" />
+                        <Button fx:id="btnActualizar" layoutX="582.0" layoutY="198.0" mnemonicParsing="false" onAction="#onActualizarVendedor" prefHeight="26.0" prefWidth="110.0" styleClass="rounded-button" stylesheets="@../../../../../styles.css" text="Actualizar" />
+                        <TableView fx:id="tableVendedor" layoutX="145.0" layoutY="284.0" prefHeight="251.0" prefWidth="894.0" stylesheets="@../../../../../styles.css">
                           <columns>
                             <TableColumn fx:id="tcNombre" prefWidth="136.00001525878906" text="Nombre" />
                             <TableColumn fx:id="tcApellido" prefWidth="159.99996948242188" text="Apellido" />
                               <TableColumn fx:id="tcCedula" prefWidth="150.00003051757812" text="Cedula" />
                               <TableColumn fx:id="tcDireccion" prefWidth="146.0" text="Dirección" />
                               <TableColumn fx:id="tcUsuario" prefWidth="158.0" text="Usuario" />
-                              <TableColumn fx:id="tcContrasena" prefWidth="142.6666259765625" text="Contraseña" />
+                              <TableColumn fx:id="tcContrasena" prefWidth="118.39996337890625" text="Contraseña" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="txtApellido" layoutX="541.0" layoutY="79.0" prefHeight="25.0" prefWidth="200.0" />
-                        <Label layoutX="459.0" layoutY="83.0" text="Apellido:" />
-                        <Label layoutX="459.0" layoutY="123.0" text="Dirección:" />
-                        <TextField fx:id="txtDireccion" layoutX="541.0" layoutY="118.0" prefHeight="25.0" prefWidth="200.0" />
-                        <Label layoutX="808.0" layoutY="131.0" text="Contraseña:" />
-                        <TextField fx:id="txtContrasena" layoutX="890.0" layoutY="126.0" prefHeight="25.0" prefWidth="200.0" />
-                        <Label layoutX="808.0" layoutY="84.0" text="Usuario:" />
-                        <TextField fx:id="txtUsuario" layoutX="890.0" layoutY="79.0" prefHeight="25.0" prefWidth="200.0" />
-                        <Separator layoutX="4.0" layoutY="248.0" prefHeight="15.0" prefWidth="1166.0" />
+                        <TextField fx:id="txtApellido" layoutX="532.0" layoutY="57.0" prefHeight="25.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
+                        <Label layoutX="450.0" layoutY="61.0" text="Apellido:">
+                           <font>
+                              <Font name="SansSerif Bold" size="14.0" />
+                           </font></Label>
+                        <Label layoutX="447.0" layoutY="125.0" text="Dirección:">
+                           <font>
+                              <Font name="SansSerif Bold" size="14.0" />
+                           </font></Label>
+                        <TextField fx:id="txtDireccion" layoutX="538.0" layoutY="116.0" prefHeight="25.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
+                        <Label layoutX="795.0" layoutY="125.0" text="Contraseña:">
+                           <font>
+                              <Font name="SansSerif Bold" size="14.0" />
+                           </font></Label>
+                        <TextField fx:id="txtContrasena" layoutX="888.0" layoutY="116.0" prefHeight="25.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
+                        <Label layoutX="794.0" layoutY="61.0" text="Usuario:">
+                           <font>
+                              <Font name="SansSerif Bold" size="14.0" />
+                           </font></Label>
+                        <TextField fx:id="txtUsuario" layoutX="884.0" layoutY="57.0" prefHeight="25.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
+                        <Separator layoutX="31.0" layoutY="249.0" prefHeight="14.0" prefWidth="1054.0" stylesheets="@../../../../../styles.css" />
                             </children>
                         </AnchorPane>
                     </content>

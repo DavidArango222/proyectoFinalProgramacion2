@@ -39,7 +39,7 @@ public class DataUtil{
                 .categoria("animal")
                 .idProducto("20A")
                 .precio(1500000)
-                .imagen("vaca.png")
+                .imagen("vaca.jpg")
                 .tipoEstado(TipoEstado.PUBLICADO)
                 .build();
         Producto producto2 = Producto.builder()

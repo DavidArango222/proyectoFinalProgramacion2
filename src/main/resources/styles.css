@@ -19,3 +19,148 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 20, 0.3, 0, 5);
 }
 
+
+/* Estilo general para la tabla */
+.table-view {
+    -fx-background-color: white; /* Fondo blanco */
+    -fx-border-color: transparent; /* Sin bordes */
+    -fx-border-radius: 15px; /* Bordes redondeados */
+    -fx-background-radius: 15px; /* Fondo redondeado */
+    -fx-padding: 10px; /* Espaciado interno */
+    -fx-effect: dropshadow(gaussian, rgba(90, 46, 148, 0.5), 10, 0, 0, 5); /* Sombra morada */
+}
+
+/* Estilo para las filas */
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent; /* Sin bordes */
+    -fx-text-fill: #5A2E94; /* Texto morado */
+}
+
+.table-row-cell:filled:selected,
+.table-row-cell:focused {
+    -fx-background-color: #EDE7F6; /* Fondo morado claro al seleccionar */
+    -fx-text-fill: #5A2E94; /* Texto morado */
+}
+
+/* Estilo para las celdas */
+.table-cell {
+    -fx-border-color: transparent;
+    -fx-text-fill: #5A2E94; /* Texto morado */
+}
+
+/* Estilo para la cabecera */
+.column-header {
+    -fx-background-color: #8c52ff;
+    -fx-text-fill: white; /* Texto blanco */
+    -fx-font-weight: bold; /* Texto en negrita */
+    -fx-border-color: transparent; /* Sin bordes */
+    -fx-border-radius: 15px 15px 0 0; /* Bordes redondeados superiores */
+    -fx-background-radius: 15px 15px 0 0; /* Fondo redondeado superior */
+}
+
+/* Sombra adicional para la tabla completa */
+.table-view:hover {
+    -fx-effect: dropshadow(gaussian, rgba(90, 46, 148, 0.7), 15, 0.5, 0, 8); /* Sombra más intensa al pasar el mouse */
+}
+
+/* Estilo del Separator */
+.separator {
+    -fx-background-color: transparent; /* Fondo transparente */
+    -fx-border-color: transparent; /* Sin bordes */
+}
+
+/* Línea personalizada del Separator */
+.separator .line {
+    -fx-stroke: linear-gradient(to right, #6b55cf, #372b69); /* Degradado morado */
+    -fx-stroke-width: 2px; /* Grosor de la línea */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0.3, 0, 2); /* Sombra para la línea */
+    -fx-background-radius: 15; /* Bordes redondeados */
+}
+
+/* Estilo general para las pestañas */
+.tab {
+    -fx-background-color: linear-gradient(to bottom, #a594e0, #8379d2); /* Degradado suave */
+    -fx-background-radius: 10px 10px 0 0; /* Bordes redondeados superiores */
+    -fx-text-fill: white; /* Texto blanco */
+    -fx-font-family: "SansSerif"; /* Fuente SansSerif */
+    -fx-font-size: 12px; /* Tamaño de texto */
+    -fx-font-weight: bold; /* Texto en negrita */
+    -fx-border-color: transparent; /* Sin bordes visibles */
+}
+
+/* Estilo para la pestaña seleccionada */
+.tab:selected {
+    -fx-background-color: linear-gradient(to bottom, #8379d2, #a594e0); /* Degradado claro inverso */
+    -fx-text-fill: white; /* Texto blanco */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 6, 0.1, 0, 2); /* Sombra ligera */
+}
+
+
+/* Reducir el tamaño de las pestañas */
+.tab-label {
+    -fx-padding: 2px 5px; /* Espaciado interno reducido */
+}
+
+/* Efecto hover sobre las pestañas */
+.tab:hover {
+    -fx-background-color: linear-gradient(to bottom, #b3a4e5, #9488d8); /* Degradado más claro */
+    -fx-text-fill: #ffffff; /* Texto blanco */
+}
+
+/* Contenedor principal */
+.anchor-pane, .vbox, .stack-pane {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+/* Espacio dentro del TabPane */
+.tab-pane {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+/* Asegurar que no haya espacio en los contenedores de fondo */
+.tab-content-area {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0, 4); /* Sombra ligera */
+    -fx-background-radius: 15; /* Bordes redondeados para el fondo */
+    -fx-border-radius: 15; /* Bordes redondeados para el borde */
+    -fx-border-color: linear-gradient(to bottom, #8c52ff, #d4bfff); /* Degradado en el borde */
+    -fx-border-width: 3px; /* Grosor del borde */
+}
+
+.center-content {
+    -fx-alignment: center; /* Alinear al centro */
+    -fx-padding: 0; /* Eliminar márgenes extra */
+}
+
+.styled-label {
+    -fx-background-color: white; /* Fondo blanco */
+    -fx-border-color: #6b55cf; /* Color del borde */
+    -fx-border-width: 2; /* Grosor del borde */
+    -fx-border-radius: 15; /* Bordes redondeados */
+    -fx-background-radius: 15; /* Fondo redondeado */
+    -fx-padding: 10; /* Espaciado interno */
+    -fx-font-family: "SansSerif"; /* Fuente */
+    -fx-font-size: 14px; /* Tamaño del texto */
+    -fx-text-fill: #5A2E94; /* Color del texto */
+    -fx-alignment: center; /* Centrar el texto */
+}
+
+.split-pane-divider {
+    -fx-background-color: linear-gradient(to bottom, #a594e0, #8379d2); /* Degradado morado */
+    -fx-background-radius: 5; /* Bordes redondeados */
+    -fx-border-color: #6b55cf; /* Color del borde */
+    -fx-border-width: 2; /* Grosor del borde */
+    -fx-border-radius: 5; /* Bordes redondeados */
+    -fx-pref-width: 5; /* Grosor del divisor */
+}
+
+
+
