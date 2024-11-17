@@ -161,4 +161,22 @@ public class MarketplaceViewController {
         }
     }
 
+    public void mostrarTabVendedor(String cedula) {
+        Tab tabVendedor = obtenerTabPorCedula(cedula);
+        if (tabVendedor != null) {
+            mainTab.getSelectionModel().select(tabVendedor);
+        } else {
+            System.out.println("Tab no encontrado. Verifica la lógica existente para la creación.");
+        }
+    }
+
+    private Tab obtenerTabPorCedula(String cedula) {
+        for (Tab tab : mainTab.getTabs()) {
+            if (cedula.equals(tab.getId())) {
+                return tab;
+            }
+        }
+        return null;
+    }
+
 }

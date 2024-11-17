@@ -1,14 +1,15 @@
 package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.builder;
 
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Administrador;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Usuario;
 
 public class AdministradorBuilder {
     protected String nombre;
     protected String apellido;
     protected String cedula;
     protected String direccion;
-    protected String usuario;
-    protected String contrasena;
+    protected Usuario usuario;
+
 
     public AdministradorBuilder nombre(String nombre){
         this.nombre=nombre;
@@ -30,13 +31,8 @@ public class AdministradorBuilder {
         return this;
     }
 
-    public AdministradorBuilder usuario(String usuario){
+    public AdministradorBuilder usuario(Usuario usuario){
         this.usuario=usuario;
-        return this;
-    }
-
-    public AdministradorBuilder contrasena(String contrasena){
-        this.contrasena=contrasena;
         return this;
     }
 
@@ -44,7 +40,7 @@ public class AdministradorBuilder {
         return new Administrador(nombre,
                 apellido,
                 cedula,
-                direccion);
+                direccion, usuario);
     }
 
 }
