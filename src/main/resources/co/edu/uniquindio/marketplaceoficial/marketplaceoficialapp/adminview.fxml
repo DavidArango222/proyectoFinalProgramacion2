@@ -21,25 +21,25 @@
                     <content>
                         <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="1149.0">
                             <children>
-                        <ImageView fitHeight="698.0" fitWidth="1191.0" layoutX="-11.0" layoutY="-46.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="618.0" fitWidth="1152.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../images/fondoAdmin.png" />
                            </image>
                         </ImageView>
-                                <Button fx:id="btnAgregar" layoutX="365.0" layoutY="198.0" mnemonicParsing="false" onAction="#onActionAgregar" prefHeight="26.0" prefWidth="110.0" styleClass="rounded-button" stylesheets="@../../../../../styles.css" text="Agregar" />
-                                <Label layoutX="120.0" layoutY="61.0" text="Nombre:">
+                                <Button fx:id="btnAgregar" layoutX="361.0" layoutY="229.0" mnemonicParsing="false" onAction="#onActionAgregar" prefHeight="26.0" prefWidth="110.0" styleClass="rounded-button" stylesheets="@../../../../../styles.css" text="Agregar" />
+                                <Label layoutX="116.0" layoutY="92.0" text="Nombre:">
                            <font>
                               <Font name="SansSerif Bold" size="14.0" />
                            </font></Label>
-                                <Label layoutX="120.0" layoutY="125.0" text="Cédula:">
+                                <Label layoutX="116.0" layoutY="156.0" text="Cédula:">
                            <font>
                               <Font name="SansSerif Bold" size="14.0" />
                            </font></Label>
-                                <TextField fx:id="txtNombre" layoutX="184.0" layoutY="57.0" prefHeight="26.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
-                                <TextField fx:id="txtCedula" layoutX="185.0" layoutY="116.0" prefHeight="26.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
-                                <Button fx:id="btnEliminar" layoutX="807.0" layoutY="198.0" mnemonicParsing="false" onAction="#onActionEliminar" prefHeight="26.0" prefWidth="110.0" styleClass="rounded-button" stylesheets="@../../../../../styles.css" text="Eliminar" />
-                        <Button fx:id="btnActualizar" layoutX="582.0" layoutY="198.0" mnemonicParsing="false" onAction="#onActualizarVendedor" prefHeight="26.0" prefWidth="110.0" styleClass="rounded-button" stylesheets="@../../../../../styles.css" text="Actualizar" />
-                        <TableView fx:id="tableVendedor" layoutX="145.0" layoutY="284.0" prefHeight="251.0" prefWidth="894.0" stylesheets="@../../../../../styles.css">
+                                <TextField fx:id="txtNombre" layoutX="180.0" layoutY="88.0" prefHeight="26.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
+                                <TextField fx:id="txtCedula" layoutX="181.0" layoutY="147.0" prefHeight="26.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
+                                <Button fx:id="btnEliminar" layoutX="803.0" layoutY="229.0" mnemonicParsing="false" onAction="#onActionEliminar" prefHeight="26.0" prefWidth="110.0" styleClass="rounded-button" stylesheets="@../../../../../styles.css" text="Eliminar" />
+                        <Button fx:id="btnActualizar" layoutX="578.0" layoutY="229.0" mnemonicParsing="false" onAction="#onActualizarVendedor" prefHeight="26.0" prefWidth="110.0" styleClass="rounded-button" stylesheets="@../../../../../styles.css" text="Actualizar" />
+                        <TableView fx:id="tableVendedor" layoutX="116.0" layoutY="305.0" prefHeight="251.0" prefWidth="894.0" stylesheets="@../../../../../styles.css">
                           <columns>
                             <TableColumn fx:id="tcNombre" prefWidth="136.00001525878906" text="Nombre" />
                             <TableColumn fx:id="tcApellido" prefWidth="159.99996948242188" text="Apellido" />
@@ -49,27 +49,33 @@
                               <TableColumn fx:id="tcContrasena" prefWidth="118.39996337890625" text="Contraseña" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="txtApellido" layoutX="532.0" layoutY="57.0" prefHeight="25.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
-                        <Label layoutX="450.0" layoutY="61.0" text="Apellido:">
+                        <TextField fx:id="txtApellido" layoutX="528.0" layoutY="88.0" prefHeight="25.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
+                        <Label layoutX="446.0" layoutY="92.0" text="Apellido:">
                            <font>
                               <Font name="SansSerif Bold" size="14.0" />
                            </font></Label>
-                        <Label layoutX="447.0" layoutY="125.0" text="Dirección:">
+                        <Label layoutX="443.0" layoutY="156.0" text="Dirección:">
                            <font>
                               <Font name="SansSerif Bold" size="14.0" />
                            </font></Label>
-                        <TextField fx:id="txtDireccion" layoutX="538.0" layoutY="116.0" prefHeight="25.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
-                        <Label layoutX="795.0" layoutY="125.0" text="Contraseña:">
+                        <TextField fx:id="txtDireccion" layoutX="534.0" layoutY="147.0" prefHeight="25.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
+                        <Label layoutX="791.0" layoutY="156.0" text="Contraseña:">
                            <font>
                               <Font name="SansSerif Bold" size="14.0" />
                            </font></Label>
-                        <TextField fx:id="txtContrasena" layoutX="888.0" layoutY="116.0" prefHeight="25.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
-                        <Label layoutX="794.0" layoutY="61.0" text="Usuario:">
+                        <TextField fx:id="txtContrasena" layoutX="884.0" layoutY="147.0" prefHeight="25.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
+                        <Label layoutX="790.0" layoutY="92.0" text="Usuario:">
                            <font>
                               <Font name="SansSerif Bold" size="14.0" />
                            </font></Label>
-                        <TextField fx:id="txtUsuario" layoutX="884.0" layoutY="57.0" prefHeight="25.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
-                        <Separator layoutX="31.0" layoutY="249.0" prefHeight="14.0" prefWidth="1054.0" stylesheets="@../../../../../styles.css" />
+                        <TextField fx:id="txtUsuario" layoutX="880.0" layoutY="88.0" prefHeight="25.0" prefWidth="200.0" styleClass="rounded-label" stylesheets="@../../../../../styles.css" />
+                        <Separator layoutX="30.0" layoutY="278.0" prefHeight="14.0" prefWidth="1054.0" stylesheets="@../../../../../styles.css" />
+                        <Separator layoutX="30.0" layoutY="59.0" prefHeight="14.0" prefWidth="1054.0" stylesheets="@../../../../../styles.css" />
+                        <Label alignment="CENTER" layoutX="461.0" layoutY="14.0" prefHeight="37.0" prefWidth="246.0" text="Vendedores" textAlignment="CENTER" textFill="#372b69">
+                           <font>
+                              <Font name="Calibri Bold" size="36.0" />
+                           </font>
+                        </Label>
                             </children>
                         </AnchorPane>
                     </content>

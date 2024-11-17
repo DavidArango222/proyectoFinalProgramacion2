@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane prefHeight="450.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller.LoginViewController">
    <children>
       <ImageView fitHeight="414.0" fitWidth="668.0" layoutX="260.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -31,11 +31,11 @@
             <Font name="SansSerif Regular" size="12.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtContrasena" layoutX="140.0" layoutY="246.0" promptText="Contraseña" styleClass="rounded-label" stylesheets="@../../../../../styles.css">
+      <PasswordField fx:id="txtContrasena" layoutX="140.0" layoutY="246.0" promptText="Contraseña" styleClass="rounded-label" stylesheets="@../../../../../styles.css">
          <font>
             <Font name="SansSerif Regular" size="13.0" />
          </font>
-      </TextField>
+      </PasswordField>
       <Button fx:id="btnLogin" layoutX="148.0" layoutY="311.0" mnemonicParsing="false" onAction="#onActionLogin" prefHeight="6.0" prefWidth="155.0" styleClass="rounded-button" stylesheets="@../../../../../styles.css" text="LOGIN">
          <font>
             <Font name="SansSerif Regular" size="13.0" />
