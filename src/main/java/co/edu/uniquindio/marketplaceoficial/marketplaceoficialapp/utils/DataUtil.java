@@ -16,11 +16,16 @@ public class DataUtil{
                 .nombreUsuario("valery")
                 .contrasena("valery123")
                 .build();
+        Usuario usuarioadmin = Usuario.builder()
+                .nombreUsuario("admin")
+                .contrasena("admin123")
+                .build();
         Administrador administrador = Administrador.builder()
                 .nombre("Britney")
                 .apellido("Spears")
                 .cedula("123456789")
                 .direccion("New York")
+                .usuario(usuarioadmin)
                 .build();
         Vendedor vendedor1 = Vendedor.builder()
                 .nombre("David")

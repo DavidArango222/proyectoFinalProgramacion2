@@ -6,6 +6,9 @@ import java.util.ResourceBundle;
 
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.LoginController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.dto.VendedorUsuarioDto;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.EstrategiaLogin;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.strategy.EstrategiaLoginAdministrador;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.strategy.EstrategiaLoginVendedor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,18 +53,27 @@ public class LoginViewController {
         VendedorUsuarioDto vendedor = loginController.autenticarUsuario(usuario, contrasena);
 
         if (vendedor != null) {
-            abrirMarketplaceView(vendedor);
+            // El usuario es un vendedor, usamos la EstrategiaLoginVendedor
+            EstrategiaLogin estrategia = new EstrategiaLoginVendedor();
+            abrirMarketplaceView(estrategia, vendedor.cedula());
         } else {
-            mostrarMensaje(TITULO_INCORRECTO, HEADER, BODY_INCORRECTO, Alert.AlertType.ERROR);
+            // El usuario es un administrador, usamos la EstrategiaLoginAdministrador
+            if (esAdministrador(usuario, contrasena)) {
+                EstrategiaLogin estrategia = new EstrategiaLoginAdministrador();
+                abrirMarketplaceView(estrategia, null);  // No se necesita cédula para el admin
+            } else {
+                mostrarMensaje(TITULO_INCORRECTO, HEADER, BODY_INCORRECTO, Alert.AlertType.ERROR);
+            }
         }
     }
 
-    private void abrirMarketplaceView(VendedorUsuarioDto vendedor) {
+
+    private void abrirMarketplaceView(EstrategiaLogin estrategia, String cedula) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplaceoficial/marketplaceoficialapp/marketplace.fxml"));
             Parent root = loader.load();
             MarketplaceViewController marketplaceController = loader.getController();
-            marketplaceController.mostrarTabVendedor(vendedor.cedula());
+            estrategia.abrirTab(marketplaceController, cedula);  // Pasamos cédula si es un vendedor
             Stage stage = (Stage) txtUsuario.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -71,6 +83,12 @@ public class LoginViewController {
             mostrarMensaje(TITULO_ERROR_VISTA_MARKETPLACE, HEADER, BODY_ERROR_VISTA_MARKETPLACE, Alert.AlertType.ERROR);
         }
     }
+
+
+    private boolean esAdministrador(String usuario, String contrasena) {
+        return "admin".equals(usuario) && "admin123".equals(contrasena);
+    }
+
 
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);

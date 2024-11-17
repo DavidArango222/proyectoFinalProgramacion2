@@ -9,9 +9,12 @@ import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.factory.ModelF
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
+
+import static co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils.MarketplaceConstantes.*;
 
 public class MarketplaceViewController {
 
@@ -70,6 +73,7 @@ public class MarketplaceViewController {
             }
         }
     }
+
 
     public void agregarTabVendedor(String cedula) {
         if (cedula == null || cedula.isEmpty()) {
@@ -166,17 +170,34 @@ public class MarketplaceViewController {
         if (tabVendedor != null) {
             mainTab.getSelectionModel().select(tabVendedor);
         } else {
-            System.out.println("Tab no encontrado. Verifica la lógica existente para la creación.");
+            mostrarMensaje(TITULO_INCORRECTO,HEADER,BODY_INCORRECTO, Alert.AlertType.ERROR);
         }
     }
 
+
     private Tab obtenerTabPorCedula(String cedula) {
         for (Tab tab : mainTab.getTabs()) {
-            if (cedula.equals(tab.getId())) {
+            if (cedula.equals(tab.getText())) {
                 return tab;
             }
         }
         return null;
+    }
+
+    public Tab getAdministradorTab() {
+        return administradorTab;
+    }
+
+    public TabPane getMainTab() {
+        return mainTab;
+    }
+
+    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType tipo) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        alert.showAndWait();
     }
 
 }
