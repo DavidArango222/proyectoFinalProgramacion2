@@ -1,0 +1,21 @@
+.rounded-label {
+    -fx-border-color: #6b55cf;
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-padding: 5 10;
+    -fx-text-fill: #9b59b6;
+    -fx-font-family: "Inter";
+    -fx-font-size: 13px;
+}
+
+.rounded-button {
+    -fx-background-color: #372b69; /* Color de fondo */
+    -fx-background-radius: 30;   /* Bordes redondeados */
+    -fx-text-fill: white;        /* Texto en blanco */
+    -fx-font-family: "Inter";  /* Fuente del texto */
+    -fx-font-size: 13px;        /* Tamaño del texto */
+    -fx-padding: 3 5;         /* Espaciado interno */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 20, 0.3, 0, 5);
+}
+
