@@ -17,4 +17,8 @@ public class VendedorController {
     public ModelFactory getModelFactory() {
         return modelFactory;
     }
+
+    public Vendedor obtenerVendedor(String cedula) {
+        return modelFactory.obtenerVendedor(cedula);
+    }
 }

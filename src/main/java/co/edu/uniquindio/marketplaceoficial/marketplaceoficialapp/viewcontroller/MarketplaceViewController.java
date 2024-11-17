@@ -92,6 +92,53 @@ public class MarketplaceViewController {
         }
     }
 
+    public void actualizarTabVendedor(String cedulaAnterior, String cedulaNueva) {
+        if (cedulaAnterior == null || cedulaAnterior.isEmpty()) {
+            System.out.println("La cédula anterior no puede estar vacía.");
+            return;
+        }
+        if (cedulaNueva == null || cedulaNueva.isEmpty()) {
+            System.out.println("La cédula nueva no puede estar vacía.");
+            return;
+        }
+
+        // Buscar el Tab correspondiente mediante el título actual
+        Tab tabToUpdate = null;
+        for (Tab tab : mainTab.getTabs()) {
+            if (tab.getText().equals(cedulaAnterior)) { // Buscar por la cédula anterior
+                tabToUpdate = tab;
+                break;
+            }
+        }
+
+        if (tabToUpdate != null) {
+            try {
+                // Actualizar el título del Tab con la nueva cédula
+                tabToUpdate.setText(cedulaNueva);
+
+                // Actualizar el contenido del Tab si es necesario
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplaceoficial/marketplaceoficialapp/vendedor.fxml"));
+                AnchorPane vendedorContent = loader.load();
+
+                // Obtener el controlador de la vista del vendedor
+                VendedorViewController vendedorController = loader.getController();
+                vendedorController.updateView(cedulaNueva); // Actualizar los datos visuales del vendedor
+
+                tabToUpdate.setContent(vendedorContent); // Reemplazar el contenido del Tab con la vista actualizada
+                System.out.println("Tab actualizado correctamente: " + cedulaNueva);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Error al cargar o actualizar la vista del vendedor.");
+            }
+        } else {
+            // Mostrar un mensaje si no se encuentra el Tab
+            System.out.println("No se encontró un Tab con la cédula: " + cedulaAnterior);
+        }
+    }
+
+
+
+
     public void eliminarTabVendedor(String cedula) {
         if (cedula == null || cedula.isEmpty()) {
             System.out.println("Cédula no puede estar vacía.");

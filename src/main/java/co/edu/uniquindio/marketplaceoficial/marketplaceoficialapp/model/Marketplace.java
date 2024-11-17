@@ -4,12 +4,9 @@ import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.builder.
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObservable;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObservador;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IVendedorCrud;
-import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.TipoEstado;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Marketplace implements IVendedorCrud, IObservable {
     private String nombre;
@@ -43,6 +40,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
     public void agregarUsuario(Usuario usuario) {
         usuarios.add(usuario);
     }
+
     public void agregarVendedor(Vendedor vendedor) {
         vendedores.add(vendedor);
     }
@@ -67,6 +65,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
                     .direccion(direccion)
                     .build();
             getVendedores().add(vendedor);
+            notificarObservadores();
             return true;
         }else{
             return false;
@@ -77,6 +76,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
         Vendedor vendedorEncontrado = obtenerVendedor(vendedor.getCedula());
         if(vendedorEncontrado == null){
             getVendedores().add(vendedor);
+            notificarObservadores();
             return true;
         } else {
             return false;
@@ -88,6 +88,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
         Vendedor vendedorExistente = buscarVendedor(cedula);
         if(vendedorExistente != null){
             getVendedores().remove(vendedorExistente);
+            notificarObservadores();
             return true;
         }else{
             return false;
@@ -103,6 +104,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
                     vendedor1.setApellido(vendedor.getApellido());
                     vendedor1.setDireccion(vendedor.getDireccion());
                     vendedor1.setCedula(vendedor.getCedula());
+                    notificarObservadores();
                     return true;
                 }
             }
@@ -151,6 +153,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
                         .administradorAsociado(administradorAsociado)
                         .build();
                 agregarUsuario(usuario);
+                notificarObservadores();
                 return true;
             }
         }
@@ -162,6 +165,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
         if (verificarUsuarioExiste(nuevoUsuario.getNombreUsuario())){
             if (usuarioEncontrado == null) {
                 agregarUsuario(nuevoUsuario);
+                notificarObservadores();
                 return true;
             }
         }
@@ -172,6 +176,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
         Usuario usuarioEncontrado = obtenerUsuario(nombreUsuario);
         if (usuarioEncontrado!=null) {
             usuarios.remove(usuarioEncontrado);
+            notificarObservadores();
             return true;
         }
         return false;
@@ -184,6 +189,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
                 if (usuario1.getNombreUsuario().equals(nombreUsuario)) {
                     usuario1.setNombreUsuario(usuario.getNombreUsuario());
                     usuario1.setContrasena(usuario.getContrasena());
+                    notificarObservadores();
                     return true;
                 }
             }
@@ -255,13 +261,4 @@ public class Marketplace implements IVendedorCrud, IObservable {
         }
     }
 
-    public boolean agregarProducto(String cedula, Producto producto) {
-        Vendedor vendedor = obtenerVendedor(cedula);
-        if (vendedor != null) {
-            vendedor.getProductos().add(producto);
-            notificarObservadores(); // Notifica a los observadores sobre el cambio
-            return true;
-        }
-        return false;
-    }
 }

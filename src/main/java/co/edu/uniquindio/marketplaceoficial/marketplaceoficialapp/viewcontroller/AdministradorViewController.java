@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.AdministradorController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.dto.VendedorUsuarioDto;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObservador;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +16,7 @@ import javafx.scene.control.*;
 
 import static co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils.MarketplaceConstantes.*;
 
-public class AdministradorViewController {
+public class AdministradorViewController implements IObservador {
     MarketplaceViewController marketplaceViewController;
     AdministradorController administradorController;
     ObservableList<VendedorUsuarioDto> listaVendedores = FXCollections.observableArrayList();
@@ -97,13 +98,11 @@ public class AdministradorViewController {
     void initialize() {
         administradorController = new AdministradorController();
         initView();
+        actualizar();
     }
 
     private void initView() {
         initDataBinding();
-        obtenerVendedores();
-        tableVendedor.getItems().clear();
-        tableVendedor.setItems(listaVendedores);
         listenerSelection();
     }
 
@@ -118,6 +117,8 @@ public class AdministradorViewController {
 
     private void obtenerVendedores() {
         listaVendedores.addAll(administradorController.getVendedoresUsuarioDto());
+        tableVendedor.getItems().clear();
+        tableVendedor.setItems(listaVendedores);
     }
 
     private void initDataBinding() {
@@ -169,9 +170,11 @@ public class AdministradorViewController {
 
     private void actualizarVendedor() {
         VendedorUsuarioDto vendedorUsuarioDto = crearVendedor();
+        String cedulaVieja = vendedorSeleccionado.cedula();
         if (datosValidosUsuario(vendedorUsuarioDto) && datosValidosVendedor(vendedorUsuarioDto)) {
             if (administradorController.actualizarVendedorUsuario(vendedorSeleccionado.nombreUsuario(), vendedorSeleccionado.cedula(), vendedorUsuarioDto)) {
                 actualizarUsuarioVendedorListaObserver(vendedorUsuarioDto);
+                marketplaceViewController.actualizarTabVendedor(cedulaVieja, vendedorUsuarioDto.cedula());
                 limpiarCampos();
                 tableVendedor.refresh();
                 mostrarMensaje(TITULO_VENDEDOR_USUARIO_ACTUALIZADO, HEADER, BODY_VENDEDOR_USUARIO_ACTUALIZADO, Alert.AlertType.INFORMATION);
@@ -182,6 +185,8 @@ public class AdministradorViewController {
             mostrarMensaje(TITULO_NO_SELECCIONADO, HEADER, BODY_NO_SELECCIONADO, Alert.AlertType.INFORMATION);
         }
     }
+
+
 
     public void setMarketplaceController(MarketplaceViewController marketplaceViewController) {
         this.marketplaceViewController = marketplaceViewController;
@@ -254,5 +259,9 @@ public class AdministradorViewController {
     }
 
 
+    @Override
+    public void actualizar() {
+        obtenerVendedores();
+    }
 }
 

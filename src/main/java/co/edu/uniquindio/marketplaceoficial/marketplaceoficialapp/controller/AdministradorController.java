@@ -2,6 +2,7 @@ package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller;
 
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.factory.ModelFactory;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.dto.VendedorUsuarioDto;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;
 
 import java.util.List;
 
@@ -32,5 +33,9 @@ public class AdministradorController {
 
     public boolean agregarVendedorDto(VendedorUsuarioDto vendedorUsuarioDto) {
         return modelFactory.agregarVendedorDto(vendedorUsuarioDto);
+    }
+
+    public Vendedor buscarVendedorCedula(String cedula) {
+        return modelFactory.obtenerVendedor(cedula);
     }
 }

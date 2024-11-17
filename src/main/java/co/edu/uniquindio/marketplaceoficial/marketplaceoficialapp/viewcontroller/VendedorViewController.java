@@ -143,8 +143,8 @@ public class VendedorViewController implements IObservador {
         vendedorController = new VendedorController();
         marketplace = vendedorController.getModelFactory().getMarketplace();
         marketplace.agregarObservador(this);
-        initDataBindingTableProductos();
         initView();
+        actualizar();
     }
 
     private void initView() {
@@ -204,7 +204,7 @@ public class VendedorViewController implements IObservador {
             System.out.println("La cédula es nula o vacía. No se pueden obtener los productos.");
             return;
         }
-        Vendedor vendedor = marketplace.obtenerVendedor(cedula);
+        Vendedor vendedor = vendedorController.obtenerVendedor(cedula);
         if (vendedor == null) {
             return;
         }
@@ -222,7 +222,6 @@ public class VendedorViewController implements IObservador {
             System.out.println("No se puede actualizar porque la cédula es nula o vacía.");
             return;
         }
-
         System.out.println("Actualizando vista para la cédula: " + cedula);
         obtenerProductosVendedor(cedula);
     }
