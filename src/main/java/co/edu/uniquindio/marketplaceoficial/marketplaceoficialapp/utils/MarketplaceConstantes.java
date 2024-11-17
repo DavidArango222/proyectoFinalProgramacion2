@@ -32,7 +32,18 @@ public class MarketplaceConstantes {
     public static final String BODY_VENDEDOR_USUARIO_NO_AGREGADO= "Vendedor y usuario no han sido agregados";
     public static final String TITULO_MAXIMO_VENDEDORES="Máximo de vendedores";
     public static final String BODY_MAXIMO_VENDEDORES="El máximo de vendedores ha sido alcanzado";
-
+    public static final String TITULO_PRODUCTO_NO_AGREGADO = "Producto no agregado";
+    public static final String BODY_PRODUCTO_NO_AGREGADO = "El Producto no se agrego, ya existe";
+    public static final String TITULO_PRODUCTO_AGREGADO = "Producto agregado";
+    public static final String BODY_PRODUCTO_AGREGADO = "El Producto se agregó";
+    public static final String TITULO_PRODUCTO_ACTUALIZADO = "Producto actualizado";
+    public static final String BODY_PRODUCTO_ACTUALIZADO = "El Producto se actualizó";
+    public static final String TITULO_PRODUCTO_NO_ACTUALIZADO = "Producto no actualizado";
+    public static final String BODY_PRODUCTO_NO_ACTUALIZADO = "El Producto no se actualizó correctamente";
+    public static final String TITULO_PRODUCTO_ELIMINADO = "Producto eliminado";
+    public static final String BODY_PRODUCTO_ELIMINADO = "El Producto se eliminó";
+    public static final String TITULO_PRODUCTO_NO_ELIMINADO = "Producto no eliminado";
+    public static final String BODY_PRODUCTO_NO_ELIMINADO = "El Producto no se eliminó correctamente";
 
 
 
