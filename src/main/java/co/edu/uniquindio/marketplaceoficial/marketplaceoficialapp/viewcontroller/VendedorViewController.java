@@ -119,7 +119,8 @@ public class VendedorViewController implements IObservador {
 
     private void seleccionCancelado() {
         rbCancelado.setSelected(true);
-        rbCancelado.setSelected(false);
+        rbVendido.setSelected(false);
+        rbPublicado.setSelected(false);
     }
 
     @FXML
@@ -128,15 +129,14 @@ public class VendedorViewController implements IObservador {
     }
 
     private void agregarProducto() {
-        Vendedor vendedor = vendedorController.obtenerVendedor(cedula);
-
         Producto producto = crearProducto();
-
+        Vendedor vendedor = vendedorController.obtenerVendedor(cedula);
         if(datosValidos(producto)){
-            if(vendedorController.crearProducto(producto)){
-                listaProductos.addAll(producto);
+            if(vendedor.crearProducto(producto)){
+                listaProductos.add(producto);
                 limpiarCampos();
                 mostrarMensaje(TITULO_PRODUCTO_AGREGADO, HEADER, BODY_PRODUCTO_AGREGADO, Alert.AlertType.INFORMATION);
+                actualizar();
             }else{
                 mostrarMensaje(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
             }
@@ -151,18 +151,7 @@ public class VendedorViewController implements IObservador {
     }
 
     private void eliminarProductoo() {
-        if(datosValidos(productoSeleccionado)){
-            if(vendedorController.eliminarProducto(productoSeleccionado)){
-                listaProductos.remove(productoSeleccionado);
-                limpiarCampos();
-                tableProductos.refresh();
-                mostrarMensaje(TITULO_PRODUCTO_ELIMINADO,HEADER,BODY_PRODUCTO_ELIMINADO,Alert.AlertType.CONFIRMATION);
-            } else{
-                mostrarMensaje(TITULO_PRODUCTO_NO_ELIMINADO,HEADER,BODY_PRODUCTO_NO_ELIMINADO, Alert.AlertType.ERROR);
-            }
-        }else{
-            mostrarMensaje(TITULO_INCOMPLETO,HEADER,BODY_INCOMPLETO, Alert.AlertType.WARNING);
-        }
+
     }
 
     @FXML
@@ -181,7 +170,8 @@ public class VendedorViewController implements IObservador {
 
     private void seleccionPublicado() {
         rbPublicado.setSelected(true);
-        rbPublicado.setSelected(false);
+        rbVendido.setSelected(false);
+        rbCancelado.setSelected(false);
     }
 
     @FXML
@@ -191,7 +181,8 @@ public class VendedorViewController implements IObservador {
 
     private void seleccionVendido() {
         rbVendido.setSelected(true);
-        rbVendido.setSelected(false);
+        rbPublicado.setSelected(false);
+        rbCancelado.setSelected(false);
     }
 
     @FXML

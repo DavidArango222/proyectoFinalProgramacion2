@@ -25,7 +25,8 @@ public class Vendedor extends Persona implements IProductoCrud, IObservable {
     public Vendedor(String nombre,
                     String apellido,
                     String cedula,
-                    String direccion, Usuario usuarioAsociado) {
+                    String direccion,
+                    Usuario usuarioAsociado) {
         super(nombre,apellido,cedula,direccion);
         this.usuarioAsociado=usuarioAsociado;
     }

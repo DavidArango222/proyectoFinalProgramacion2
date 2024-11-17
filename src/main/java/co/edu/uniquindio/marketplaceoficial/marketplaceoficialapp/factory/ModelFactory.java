@@ -65,7 +65,4 @@ public class ModelFactory {
         return marketplace.crearVendedor(mapper.vendedorUsuarioDtoToVendedor(vendedorUsuarioDto));
     }
 
-    public boolean crearProducto(Producto producto) {
-        return marketplace.;
-    }
 }
