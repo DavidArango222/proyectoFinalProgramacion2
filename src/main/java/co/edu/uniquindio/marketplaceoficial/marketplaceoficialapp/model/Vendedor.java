@@ -75,6 +75,17 @@ public class Vendedor extends Persona implements IProductoCrud, IObservable {
         }
     }
 
+    public boolean crearProducto(Producto producto){
+        Producto productoEncontrado = buscarProducto(producto.getIdProducto());
+        if(productoEncontrado == null){
+            getProductos().add(producto);
+            notificarObservadores();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public boolean eliminarProducto(String idProducto) {
         Producto productoExistente = buscarProducto(idProducto);

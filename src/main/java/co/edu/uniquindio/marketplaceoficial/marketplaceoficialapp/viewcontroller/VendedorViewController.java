@@ -21,11 +21,15 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import static co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils.MarketplaceConstantes.*;
+
 public class VendedorViewController implements IObservador {
     VendedorController vendedorController;
     Marketplace marketplace;
     Producto productoSeleccionado;
     String cedula;
+    ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
+
 
     @FXML
     private ResourceBundle resources;
@@ -110,32 +114,84 @@ public class VendedorViewController implements IObservador {
 
     @FXML
     void cancelado(ActionEvent event) {
+        seleccionCancelado();
+    }
 
+    private void seleccionCancelado() {
+        rbCancelado.setSelected(true);
+        rbCancelado.setSelected(false);
     }
 
     @FXML
     void crearProducto(ActionEvent event) {
+        agregarProducto();
+    }
 
+    private void agregarProducto() {
+        Vendedor vendedor = vendedorController.obtenerVendedor(cedula);
+
+        Producto producto = crearProducto();
+
+        if(datosValidos(producto)){
+            if(vendedorController.crearProducto(producto)){
+                listaProductos.addAll(producto);
+                limpiarCampos();
+                mostrarMensaje(TITULO_PRODUCTO_AGREGADO, HEADER, BODY_PRODUCTO_AGREGADO, Alert.AlertType.INFORMATION);
+            }else{
+                mostrarMensaje(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
+            }
+        }else{
+            mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     void eliminarProducto(ActionEvent event) {
+        eliminarProductoo();
+    }
 
+    private void eliminarProductoo() {
+        if(datosValidos(productoSeleccionado)){
+            if(vendedorController.eliminarProducto(productoSeleccionado)){
+                listaProductos.remove(productoSeleccionado);
+                limpiarCampos();
+                tableProductos.refresh();
+                mostrarMensaje(TITULO_PRODUCTO_ELIMINADO,HEADER,BODY_PRODUCTO_ELIMINADO,Alert.AlertType.CONFIRMATION);
+            } else{
+                mostrarMensaje(TITULO_PRODUCTO_NO_ELIMINADO,HEADER,BODY_PRODUCTO_NO_ELIMINADO, Alert.AlertType.ERROR);
+            }
+        }else{
+            mostrarMensaje(TITULO_INCOMPLETO,HEADER,BODY_INCOMPLETO, Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     void modificarProducto(ActionEvent event) {
+        actualizarProducto();
+    }
+
+    private void actualizarProducto() {
 
     }
 
     @FXML
     void publicado(ActionEvent event) {
+        seleccionPublicado();
+    }
 
+    private void seleccionPublicado() {
+        rbPublicado.setSelected(true);
+        rbPublicado.setSelected(false);
     }
 
     @FXML
     void vendido(ActionEvent event) {
+        seleccionVendido();
+    }
 
+    private void seleccionVendido() {
+        rbVendido.setSelected(true);
+        rbVendido.setSelected(false);
     }
 
     @FXML
@@ -178,14 +234,6 @@ public class VendedorViewController implements IObservador {
                 mostrarInformacionProductoLabel(productoSeleccionado);
             }
         });
-    }
-
-    private void mostrarInformacionProducto(Producto productoSeleccionado) {
-        txtNombre.setText(productoSeleccionado.getNombre());
-        txtPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
-        txtCategoria.setText(productoSeleccionado.getCategoria());
-        txtId.setText(productoSeleccionado.getIdProducto());
-        txtImagen.setText(productoSeleccionado.getImagen());
     }
 
     public void updateView(String cedula) {
@@ -233,6 +281,87 @@ public class VendedorViewController implements IObservador {
         tcEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTipoEstado().toString()));
         tcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIdProducto()));
         tcImagen.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getImagen()));
+    }
+
+    private boolean datosValidos(Producto producto) {
+        if (producto.getNombre().isEmpty() ||
+                producto.getIdProducto().isEmpty() ||
+                producto.getTipoEstado() == null ||
+                producto.getCategoria().isEmpty() ||
+                producto.getImagen().isEmpty() ||
+                producto.getPrecio()==0) {
+            return false;
+        }
+        return true;
+    }
+
+    private Producto crearProducto() {
+        TipoEstado estado = null;
+        if (rbVendido.isSelected()) {
+            estado = TipoEstado.VENDIDO;
+        } else if (rbCancelado.isSelected()) {
+            estado = TipoEstado.CANCELADO;
+        } else if (rbPublicado.isSelected()) {
+            estado = TipoEstado.PUBLICADO;
+        } else {
+            mostrarMensaje(TITULO_INCOMPLETO,HEADER,BODY_INCOMPLETO, Alert.AlertType.WARNING);
+        }
+        return Producto.builder()
+                .nombre(txtNombre.getText())
+                .tipoEstado(estado)
+                .idProducto(txtId.getText())
+                .categoria(txtCategoria.getText())
+                .precio(Integer.parseInt(txtPrecio.getText()))
+                .imagen(txtImagen.getText())
+                .build();
+    }
+
+    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        alert.showAndWait();
+    }
+
+    private void actualizarListObserver(Producto producto) {
+        for (int i = 0; i < listaProductos.size(); i++) {
+            if (listaProductos.get(i).getIdProducto().equals(productoSeleccionado.getIdProducto())) {
+                listaProductos.set(i, producto);
+                break;
+            }
+        }
+    }
+
+    private void mostrarInformacionProducto(Producto productoSeleccionado) {
+        if (productoSeleccionado != null) {
+            txtNombre.setText(productoSeleccionado.getNombre());
+            txtId.setText(productoSeleccionado.getIdProducto());
+            txtPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
+            txtCategoria.setText(productoSeleccionado.getCategoria());
+            txtImagen.setText(productoSeleccionado.getImagen());
+            rbPublicado.setSelected(false);
+            rbVendido.setSelected(false);
+            rbCancelado.setSelected(false);
+            if (productoSeleccionado.getTipoEstado().equals(TipoEstado.PUBLICADO)) {
+                rbPublicado.setSelected(true);
+            } else if (productoSeleccionado.getTipoEstado().equals(TipoEstado.VENDIDO)) {
+                rbVendido.setSelected(true);
+            } else if (productoSeleccionado.getTipoEstado().equals(TipoEstado.CANCELADO)) {
+                rbCancelado.setSelected(true);
+            }
+        }
+    }
+
+    private void limpiarCampos() {
+        txtNombre.clear();
+        txtId.clear();
+        txtImagen.clear();
+        txtPrecio.clear();
+        txtCategoria.clear();
+        rbCancelado.setSelected(false);
+        rbVendido.setSelected(false);
+        rbPublicado.setSelected(false);
     }
 
 }

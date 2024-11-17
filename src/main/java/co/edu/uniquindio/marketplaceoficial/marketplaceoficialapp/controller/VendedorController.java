@@ -21,4 +21,8 @@ public class VendedorController {
     public Vendedor obtenerVendedor(String cedula) {
         return modelFactory.obtenerVendedor(cedula);
     }
+
+    public boolean crearProducto(Producto producto) {
+        return modelFactory.crearProducto(producto);
+    }
 }
