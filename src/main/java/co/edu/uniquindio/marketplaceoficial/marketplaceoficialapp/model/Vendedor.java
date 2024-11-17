@@ -121,7 +121,26 @@ public class Vendedor extends Persona implements IProductoCrud, IObservable {
         } else {
             return false;
         }
+    }
 
+    public boolean actualizarProducto(String idProducto, Producto producto) {
+        Producto productoEncontrado = buscarProducto(idProducto);
+        if (productoEncontrado!=null){
+            for (Producto producto1 : getProductos()) {
+                if (producto.getIdProducto().equals(idProducto)) {
+                    producto1.setNombre(producto.getNombre());
+                    producto1.setCategoria(producto.getCategoria());
+                    producto1.setIdProducto(producto.getIdProducto());
+                    producto1.setImagen(producto.getImagen());
+                    producto1.setPrecio(producto.getPrecio());
+                    producto1.setTipoEstado(producto.getTipoEstado());
+                    notificarObservadores();
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     @Override

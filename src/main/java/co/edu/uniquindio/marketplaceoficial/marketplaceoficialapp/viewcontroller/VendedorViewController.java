@@ -135,10 +135,12 @@ public class VendedorViewController implements IObservador {
             if(vendedor.crearProducto(producto)){
                 listaProductos.add(producto);
                 limpiarCampos();
-                mostrarMensaje(TITULO_PRODUCTO_AGREGADO, HEADER, BODY_PRODUCTO_AGREGADO, Alert.AlertType.INFORMATION);
+                mostrarMensaje(TITULO_PRODUCTO_AGREGADO, HEADER,
+                        BODY_PRODUCTO_AGREGADO, Alert.AlertType.INFORMATION);
                 actualizar();
             }else{
-                mostrarMensaje(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
+                mostrarMensaje(TITULO_PRODUCTO_NO_AGREGADO, HEADER,
+                        BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
             }
         }else{
             mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
@@ -151,7 +153,22 @@ public class VendedorViewController implements IObservador {
     }
 
     private void eliminarProductoo() {
-
+        Vendedor vendedor = vendedorController.obtenerVendedor(cedula);
+        if(datosValidos(productoSeleccionado)){
+            if(vendedor.eliminarProducto(productoSeleccionado.getIdProducto())){
+                listaProductos.remove(productoSeleccionado);
+                limpiarCampos();
+                tableProductos.refresh();
+                mostrarMensaje(TITULO_PRODUCTO_ELIMINADO,HEADER,
+                        BODY_PRODUCTO_ELIMINADO,Alert.AlertType.CONFIRMATION);
+                actualizar();
+            } else{
+                mostrarMensaje(TITULO_PRODUCTO_NO_ELIMINADO,HEADER,
+                        BODY_PRODUCTO_NO_ELIMINADO, Alert.AlertType.ERROR);
+            }
+        }else{
+            mostrarMensaje(TITULO_INCOMPLETO,HEADER,BODY_INCOMPLETO, Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
@@ -160,7 +177,21 @@ public class VendedorViewController implements IObservador {
     }
 
     private void actualizarProducto() {
-
+        Producto producto = crearProducto();
+        Vendedor vendedor = vendedorController.obtenerVendedor(cedula);
+        if (datosValidos(producto)) {
+            if (vendedor.actualizarProducto(productoSeleccionado.getIdProducto(),producto)) {
+                actualizarListObserver(producto);
+                limpiarCampos();
+                tableProductos.refresh();
+                mostrarMensaje(TITULO_PRODUCTO_ACTUALIZADO, HEADER, BODY_PRODUCTO_ACTUALIZADO, Alert.AlertType.CONFIRMATION);
+                actualizar();
+            } else {
+                mostrarMensaje(TITULO_PRODUCTO_NO_ACTUALIZADO, HEADER, BODY_PRODUCTO_NO_ACTUALIZADO, Alert.AlertType.ERROR);
+            }
+        } else {
+            mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
