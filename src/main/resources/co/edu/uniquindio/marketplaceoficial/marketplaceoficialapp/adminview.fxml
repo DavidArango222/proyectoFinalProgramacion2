@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.SplitPane?>
 <AnchorPane prefHeight="586.0" prefWidth="1180.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller.AdministradorViewController">
     <children>
         <TabPane prefHeight="610.0" prefWidth="1180.0" side="LEFT" stylesheets="@../../../../../styles.css" tabClosingPolicy="UNAVAILABLE">
@@ -82,7 +83,15 @@
                 </Tab>
                 <Tab text="Estadisticas">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="586.0" prefWidth="1160.0">
+                            <children>
+                                <SplitPane orientation="VERTICAL" prefHeight="788.0" prefWidth="1037.0">
+                                    <items>
+                                        <fx:include source="estadisticas.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
                     </content>
                 </Tab>
             </tabs>
