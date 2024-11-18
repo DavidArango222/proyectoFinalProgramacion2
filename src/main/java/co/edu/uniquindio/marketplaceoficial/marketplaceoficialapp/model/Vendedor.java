@@ -19,6 +19,7 @@ public class Vendedor extends Persona implements IProductoCrud, IObservable {
     private List<Producto> productos = new ArrayList<>();
     private Muro muro;
     private Usuario usuarioAsociado;
+    private List<Vendedor> contactos = new ArrayList<>();
 
     public Vendedor() {
     }
@@ -50,6 +51,10 @@ public class Vendedor extends Persona implements IProductoCrud, IObservable {
 
     public List<Producto> getProductos() {
         return productos;
+    }
+
+    public List<Vendedor> getContactos() {
+        return contactos;
     }
 
     @Override

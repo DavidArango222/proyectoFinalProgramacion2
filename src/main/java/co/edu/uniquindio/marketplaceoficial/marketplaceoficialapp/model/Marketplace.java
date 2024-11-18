@@ -7,7 +7,9 @@ import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IVend
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Marketplace implements IVendedorCrud, IObservable {
     private String nombre;
@@ -275,6 +277,28 @@ public class Marketplace implements IVendedorCrud, IObservable {
     public int contarProductosPublicadosFechas(Vendedor vendedor, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
         if (vendedor == null) return 0;
         return vendedor.contarProductosFechas(fechaInicio, fechaFin);
+    }
+
+    public int contarProductosPorVendedor(String cedulaVendedor) {
+        for (Vendedor vendedor : vendedores) {
+            if (vendedor.getCedula().equals(cedulaVendedor)) {
+                return vendedor.getProductos().size();
+            }
+        }
+        return 0;
+    }
+
+    public Map<String, Integer> contarContactosPorVendedor() {
+        Map<String, Integer> contactosPorVendedor = new HashMap<>();
+
+        for (Vendedor vendedor : vendedores) {
+            contactosPorVendedor.put(
+                    vendedor.getCedula(),
+                    vendedor.getContactos().size()
+            );
+        }
+
+        return contactosPorVendedor;
     }
 
 }
