@@ -267,14 +267,23 @@ public class Marketplace implements IVendedorCrud, IObservable {
         }
     }
 
-    public int contarMensajesVendedores(Vendedor vendedor1, Vendedor vendedor2) {
+    public int contarMensajesVendedores(String cedula1, String cedula2) {
+        Vendedor vendedor1 = obtenerVendedor(cedula1);
+        Vendedor vendedor2 = obtenerVendedor(cedula2);
         if (vendedor1 == null || vendedor2 == null) return 0;
         return vendedor1.contarMensajes(vendedor2) + vendedor2.contarMensajes(vendedor1);
     }
 
-    public int contarProductosPublicadosFechas(Vendedor vendedor, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
-        if (vendedor == null) return 0;
-        return vendedor.contarProductosFechas(fechaInicio, fechaFin);
+    public int contarProductosFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        int contador = 0;
+        for (Producto producto : productos) {
+            if (producto.getFecha() != null &&
+                    !producto.getFecha().isBefore(fechaInicio) &&
+                    !producto.getFecha().isAfter(fechaFin)) {
+                contador++;
+            }
+        }
+        return contador;
     }
 
     public int contarProductosPorVendedor(String cedulaVendedor) {
