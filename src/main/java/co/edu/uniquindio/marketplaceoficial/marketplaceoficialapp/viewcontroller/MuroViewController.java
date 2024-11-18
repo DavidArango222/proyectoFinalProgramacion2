@@ -1,6 +1,7 @@
 package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -24,7 +25,7 @@ import javafx.scene.image.ImageView;
 public class MuroViewController implements IObservador {
     MuroController muroController;
     Marketplace marketplace;
-    String cedula;
+    String cedula = MarketplaceViewController.getCurrentCedula();
     Producto productoSeleccionado;
     ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
     ObservableList<Vendedor> contactos = FXCollections.observableArrayList();
@@ -178,10 +179,15 @@ public class MuroViewController implements IObservador {
 
     @FXML
     void initialize() {
+        if (cedula == null || cedula.isEmpty()) {
+            System.out.println("Cédula no válida.");
+            return;
+        }
         muroController = new MuroController();
         marketplace = muroController.getModelFactory();
         marketplace.agregarObservador(this);
         initView();
+        actualizar();
     }
 
     private void initView() {
@@ -248,7 +254,12 @@ public class MuroViewController implements IObservador {
         tcEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTipoEstado().toString()));
         tcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIdProducto()));
         tcImagen.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getImagen()));
-        tcFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFecha().toString()));
+
+        // Manejo de valores nulos en fecha
+        tcFecha.setCellValueFactory(cellData -> {
+            LocalDateTime fecha = cellData.getValue().getFecha();
+            return new SimpleStringProperty(fecha != null ? fecha.toString() : "Sin fecha");
+        });
     }
 
     @Override
@@ -266,7 +277,7 @@ public class MuroViewController implements IObservador {
     }
 
     private void obtenerProductosVendedor() {
-        List<Producto> productos = marketplace.getProductos();
+        List<Producto> productos = muroController.getProductos();
         ObservableList<Producto> listaProductosObservables = FXCollections.observableArrayList(productos);
         tableProductos.setItems(listaProductosObservables);
     }
@@ -291,7 +302,4 @@ public class MuroViewController implements IObservador {
         }
     }
 
-    public void updateView(String cedula) {
-        this.cedula = cedula;
-    }
 }

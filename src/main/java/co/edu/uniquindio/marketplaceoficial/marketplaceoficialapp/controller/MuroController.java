@@ -2,6 +2,7 @@ package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller;
 
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.factory.ModelFactory;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Marketplace;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Producto;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;
 
 import java.util.List;
@@ -32,5 +33,18 @@ public class MuroController {
 
     public Vendedor obtenerVendedor(String cedula) {
         return modelFactory.obtenerVendedor(cedula);
+    }
+
+    public List<Producto> obtenerProductosVendedor(String cedula) {
+        if(cedula!=null){
+            return modelFactory.obtenerProductosVendedor(cedula);
+        } else{
+            System.out.println("no sirve la cedula en obtenerProductosVendedor");
+            return null;
+        }
+    }
+
+    public List<Producto> getProductos() {
+        return modelFactory.getProductos();
     }
 }

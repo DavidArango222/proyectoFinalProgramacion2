@@ -17,6 +17,15 @@ import javafx.scene.layout.AnchorPane;
 import static co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils.MarketplaceConstantes.*;
 
 public class MarketplaceViewController {
+    private static String currentCedula; // Variable estática para almacenar la cédula actual
+
+    public static String getCurrentCedula() {
+        return currentCedula;
+    }
+
+    public static void setCurrentCedula(String cedula) {
+        currentCedula = cedula;
+    }
 
     @FXML
     private ResourceBundle resources;
@@ -55,6 +64,7 @@ public class MarketplaceViewController {
         List<Vendedor> vendedores = ModelFactory.getInstance().getMarketplace().getVendedores();
         for (Tab tab : mainTab.getTabs()) {
             String cedula = tab.getText();
+            this.currentCedula=cedula;
             Vendedor vendedor = vendedores.stream()
                     .filter(v -> v.getCedula().equals(cedula))
                     .findFirst()
