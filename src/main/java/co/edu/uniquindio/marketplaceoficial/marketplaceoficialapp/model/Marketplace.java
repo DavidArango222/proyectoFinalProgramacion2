@@ -6,10 +6,8 @@ import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObse
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IVendedorCrud;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Marketplace implements IVendedorCrud, IObservable {
     private String nombre;
@@ -300,5 +298,33 @@ public class Marketplace implements IVendedorCrud, IObservable {
 
         return contactosPorVendedor;
     }
+
+    public List<Producto> obtenerTopProductosLikes() {
+        Map<Producto, Integer> productoLikesMap = new HashMap<>();
+
+        for (Producto producto : productos) {
+            Vendedor vendedor = producto.getVendedor(); // Se asume que cada producto tiene un vendedor asociado
+            if (vendedor != null && vendedor.getMuro() != null) {
+                Muro muro = vendedor.getMuro();
+
+                for (Publicacion publicacion : muro.getPublicaciones()) {
+                    if (publicacion != null) {
+                        productoLikesMap.put(
+                                producto,
+                                productoLikesMap.getOrDefault(producto, 0) + publicacion.getLike()
+                        );
+                    }
+                }
+            }
+        }
+
+        return productoLikesMap.entrySet()
+                .stream()
+                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue())) // Ordenar por likes
+                .limit(10)
+                .map(Map.Entry::getKey)
+                .toList();
+    }
+
 
 }

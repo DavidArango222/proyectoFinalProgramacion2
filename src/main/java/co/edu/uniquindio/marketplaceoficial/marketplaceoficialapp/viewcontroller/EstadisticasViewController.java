@@ -82,17 +82,6 @@ public class EstadisticasViewController {
 
     @FXML
     void initialize() {
-        assert DateFin != null : "fx:id=\"DateFin\" was not injected: check your FXML file 'estadisticas.fxml'.";
-        assert DateInicio != null : "fx:id=\"DateInicio\" was not injected: check your FXML file 'estadisticas.fxml'.";
-        assert btnGenerarReporte != null : "fx:id=\"btnGenerarReporte\" was not injected: check your FXML file 'estadisticas.fxml'.";
-        assert chkAñadirProductosPublicadosVendedor != null : "fx:id=\"chkAñadirProductosPublicadosVendedor\" was not injected: check your FXML file 'estadisticas.fxml'.";
-        assert chkAñadirReporteMensajesVendedores != null : "fx:id=\"chkAñadirReporteMensajesVendedores\" was not injected: check your FXML file 'estadisticas.fxml'.";
-        assert chkAñadirTopProductos != null : "fx:id=\"chkAñadirTopProductos\" was not injected: check your FXML file 'estadisticas.fxml'.";
-        assert chkCantidadContactos != null : "fx:id=\"chkCantidadContactos\" was not injected: check your FXML file 'estadisticas.fxml'.";
-        assert chkProductosPublicadosFecha != null : "fx:id=\"chkProductosPublicadosFecha\" was not injected: check your FXML file 'estadisticas.fxml'.";
-        assert txtCedulaBuscar != null : "fx:id=\"txtCedulaBuscar\" was not injected: check your FXML file 'estadisticas.fxml'.";
-        assert txtCedulaVendedor1 != null : "fx:id=\"txtCedulaVendedor1\" was not injected: check your FXML file 'estadisticas.fxml'.";
-        assert txtCedulaVendedor2 != null : "fx:id=\"txtCedulaVendedor2\" was not injected: check your FXML file 'estadisticas.fxml'.";
 
     }
 

@@ -14,6 +14,7 @@ public class Producto {
     private TipoEstado tipoEstado;
     private String idProducto;
     private LocalDateTime fecha;
+    private Vendedor vendedor;
 
     public Producto() {
     }
@@ -23,7 +24,7 @@ public class Producto {
                     String categoria,
                     String imagen,
                     TipoEstado tipoEstado,
-                    String idProducto, LocalDateTime fecha) {
+                    String idProducto, LocalDateTime fecha, Vendedor vendedor) {
         this.nombre = nombre;
         this.precio = precio;
         this.categoria = categoria;
@@ -31,10 +32,15 @@ public class Producto {
         this.tipoEstado = tipoEstado;
         this.idProducto = idProducto;
         this.fecha =fecha;
+        this.vendedor=vendedor;
     }
 
     public String getIdProducto() {
         return idProducto;
+    }
+
+    public Vendedor getVendedor() {
+        return vendedor;
     }
 
     public String getNombre() {

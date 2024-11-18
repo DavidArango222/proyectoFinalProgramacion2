@@ -1,6 +1,7 @@
 package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.builder;
 
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Producto;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.TipoEstado;
 import javafx.scene.image.Image;
 
@@ -14,6 +15,7 @@ public class ProductoBuilder {
     protected TipoEstado tipoEstado;
     protected String idProducto;
     protected LocalDateTime fecha;
+    protected Vendedor vendedorAsociado;
 
     public ProductoBuilder nombre(String nombre){
         this.nombre=nombre;
@@ -49,6 +51,11 @@ public class ProductoBuilder {
         return this;
     }
 
+    public ProductoBuilder vendedor(Vendedor vendedor){
+        this.vendedorAsociado=vendedor;
+        return this;
+    }
+
     public Producto build(){
         return new Producto(nombre,
                 precio,
@@ -56,6 +63,6 @@ public class ProductoBuilder {
                 imagen,
                 tipoEstado,
                 idProducto,
-                fecha);
+                fecha,vendedorAsociado);
     }
 }
