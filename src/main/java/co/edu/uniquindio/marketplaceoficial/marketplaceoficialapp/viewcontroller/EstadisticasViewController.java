@@ -123,14 +123,12 @@ public class EstadisticasViewController {
 
     private void generarReporte() {
         StringBuilder contenidoReporte = new StringBuilder();
-
         if (chkAñadirReporteMensajesVendedores.isSelected()) {
             int mensajes = estadisticasController.contarMensajesVendedores(
                     txtCedulaVendedor1.getText(),
                     txtCedulaVendedor2.getText());
             contenidoReporte.append("Cantidad de mensajes enviados entre vendedores: ").append(mensajes).append("\n");
         }
-
         if (chkProductosPublicadosFecha.isSelected()) {
             LocalDate fechaInicioLocal = DateInicio.getValue();
             LocalDate fechaFinLocal = DateFin.getValue();
@@ -141,12 +139,10 @@ public class EstadisticasViewController {
             int productosFecha = estadisticasController.contarProductosFechas(fechaInicio, fechaFin);
             contenidoReporte.append("Cantidad de productos publicados entre fechas: ").append(productosFecha).append("\n");
         }
-
         if (chkAñadirProductosPublicadosVendedor.isSelected()) {
             int productosVendedor = estadisticasController.contarProductosPorVendedor(txtCedulaBuscar.getText());
             contenidoReporte.append("Cantidad de productos publicados por el vendedor: ").append(productosVendedor).append("\n");
         }
-
         if (chkCantidadContactos.isSelected()) {
             Map<String, Integer> contactosPorVendedor = estadisticasController.contarContactosPorVendedor();
             contenidoReporte.append("Cantidad de contactos por vendedor:\n");
@@ -157,7 +153,6 @@ public class EstadisticasViewController {
                 contenidoReporte.append("Vendedor (Cédula: ").append(cedula).append("): ").append(cantidadContactos).append(" contactos\n");
             }
         }
-
         if (chkAñadirTopProductos.isSelected()) {
             List<Producto> topProductos = estadisticasController.obtenerTopProductosLikes();
             contenidoReporte.append("Top 10 productos con más likes:\n");
@@ -165,7 +160,7 @@ public class EstadisticasViewController {
                 contenidoReporte.append(producto.getNombre()).append("\n");
             }
         }
-        ReporteAdapter adapter = new ReporteTextoAdapter("reporte.txt"); // Usar ruta deseada
+        ReporteAdapter adapter = new ReporteTextoAdapter("src/main/java/co/edu/uniquindio/marketplaceoficial/marketplaceoficialapp/reportes/reporte.txt");
         adapter.exportarReporte(contenidoReporte.toString());
     }
 
