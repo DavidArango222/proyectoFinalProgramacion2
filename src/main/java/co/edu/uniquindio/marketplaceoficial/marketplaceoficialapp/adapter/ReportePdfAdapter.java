@@ -6,9 +6,8 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 
-import java.io.IOException;
-
 public class ReportePdfAdapter implements ReporteAdapter {
+
     private String rutaArchivo;
 
     public ReportePdfAdapter(String rutaArchivo) {
@@ -19,14 +18,18 @@ public class ReportePdfAdapter implements ReporteAdapter {
     public void exportarReporte(String contenido) {
         try {
             PdfWriter writer = new PdfWriter(rutaArchivo);
-            PdfDocument pdfDocument = new PdfDocument(writer);
-            Document document = new Document(pdfDocument);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
             document.add(new Paragraph(contenido));
             document.close();
+
             System.out.println("Reporte exportado a PDF en: " + rutaArchivo);
-        } catch (IOException e) {
-            System.err.println("Error al exportar el reporte a PDF: " + e.getMessage());
+
+        } catch (Exception e) {
+            System.err.println("Error al exportar el reporte: " + e.getMessage());
         }
     }
 }
+
+
 

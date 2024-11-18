@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.adapter.ReportePdfAdapter;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.adapter.ReporteTextoAdapter;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.EstadisticasController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Marketplace;
@@ -14,10 +15,7 @@ import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Producto
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.ReporteAdapter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class EstadisticasViewController {
     private EstadisticasController estadisticasController;
@@ -51,6 +49,12 @@ public class EstadisticasViewController {
 
     @FXML
     private CheckBox chkProductosPublicadosFecha;
+
+    @FXML
+    private RadioButton selectionPdf;
+
+    @FXML
+    private RadioButton selectionTexto;
 
     @FXML
     private TextField txtCedulaBuscar;
@@ -117,6 +121,26 @@ public class EstadisticasViewController {
     }
 
     @FXML
+    void onSelectionPdf(ActionEvent event) {
+        seleccionPdf();
+    }
+
+    private void seleccionPdf() {
+        selectionPdf.setSelected(true);
+        selectionTexto.setSelected(false);
+    }
+
+    @FXML
+    void onSelectionTexto(ActionEvent event) {
+        seleccionTexto();
+    }
+
+    private void seleccionTexto() {
+        selectionTexto.setSelected(true);
+        selectionPdf.setSelected(false);
+    }
+
+    @FXML
     void onGenerarReporte(ActionEvent event) {
         generarReporte();
     }
@@ -160,8 +184,13 @@ public class EstadisticasViewController {
                 contenidoReporte.append(producto.getNombre()).append("\n");
             }
         }
-        ReporteAdapter adapter = new ReporteTextoAdapter("src/main/java/co/edu/uniquindio/marketplaceoficial/marketplaceoficialapp/reportes/reporte.txt");
-        adapter.exportarReporte(contenidoReporte.toString());
+        if(selectionTexto.isSelected()) {
+            ReporteAdapter adapter = new ReporteTextoAdapter("src/main/java/co/edu/uniquindio/marketplaceoficial/marketplaceoficialapp/reportes/reporte.txt");
+            adapter.exportarReporte(contenidoReporte.toString());
+        }else if(selectionPdf.isSelected()){
+            ReporteAdapter adapter = new ReportePdfAdapter("C:/Users/Valery/Documents/reporte.pdf");
+            adapter.exportarReporte(contenidoReporte.toString());
+        }
     }
 
     @FXML
