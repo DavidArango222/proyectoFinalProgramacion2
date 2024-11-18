@@ -19,6 +19,10 @@ public class VendedorController {
     }
 
     public Vendedor obtenerVendedor(String cedula) {
+        if (cedula == null || cedula.isEmpty()) {
+            System.out.println("Cédula inválida: " + cedula);
+            return null;
+        }
         return modelFactory.obtenerVendedor(cedula);
     }
 

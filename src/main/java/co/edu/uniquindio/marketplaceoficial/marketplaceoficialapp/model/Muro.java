@@ -6,4 +6,12 @@ import java.util.List;
 public class Muro {
     private List<Publicacion> publicaciones = new ArrayList<>();
     private List<Mensaje> mensajes = new ArrayList<>();
+
+    public List<Publicacion> getPublicaciones() {
+        return publicaciones;
+    }
+
+    public List<Mensaje> getMensajes() {
+        return mensajes;
+    }
 }

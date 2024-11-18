@@ -326,5 +326,8 @@ public class Marketplace implements IVendedorCrud, IObservable {
                 .toList();
     }
 
+    public List<Vendedor> getContactosMensajes(String cedulaContacto) {
+        return obtenerVendedor(cedulaContacto).getContactos();
+    }
 
 }

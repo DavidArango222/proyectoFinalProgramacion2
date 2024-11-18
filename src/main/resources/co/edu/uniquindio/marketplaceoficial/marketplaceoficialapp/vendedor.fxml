@@ -158,7 +158,15 @@
                 </Tab>
                 <Tab text="Muro">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane maxWidth="-Infinity" prefHeight="2009.0" prefWidth="1146.0">
+                            <children>
+                                <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL">
+                                    <items>
+                                        <fx:include source="muro.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
                     </content>
                 </Tab>
             </tabs>

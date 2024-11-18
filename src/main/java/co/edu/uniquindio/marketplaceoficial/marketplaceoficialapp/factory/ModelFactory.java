@@ -65,4 +65,16 @@ public class ModelFactory {
         return marketplace.crearVendedor(mapper.vendedorUsuarioDtoToVendedor(vendedorUsuarioDto));
     }
 
+    public List<Vendedor> obtenerContactos(String cedula) {
+        return obtenerVendedor(cedula).getContactos();
+    }
+
+    public List<Vendedor> obtenerVendedores() {
+        return marketplace.getVendedores();
+    }
+
+    public List<Vendedor> obtenerContactosMensajes(String cedulaContacto) {
+        return marketplace.getContactosMensajes(cedulaContacto);
+    }
+
 }
