@@ -159,7 +159,13 @@ public class MuroViewController implements IObservador {
 
     @FXML
     void onActionAgregarContacto(ActionEvent event) {
-
+        Vendedor vendedor = tableVendedores.getSelectionModel().getSelectedItem();
+        if (vendedor == null) {
+            System.out.println("Debe seleccionar un vendedor.");
+            return;
+        }
+        muroController.agregarContacto(cedula, vendedor.getCedula());
+        actualizar();
     }
 
     @FXML
@@ -196,6 +202,14 @@ public class MuroViewController implements IObservador {
         initDataBindingTableContactosMensajes();
         initDataBindingTableVendedores();
         listenerSelectionTableProducto();
+        listenerSelectionTableContactosAgregados();
+    }
+
+    private void listenerSelectionTableContactosAgregados() {
+        tcNombreContacto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        tcApellidoContacto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellido()));
+        tcCedulaContacto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCedula()));
+        tcDireccionContacto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDireccion()));
     }
 
     private void initDataBindingTableVendedores() {

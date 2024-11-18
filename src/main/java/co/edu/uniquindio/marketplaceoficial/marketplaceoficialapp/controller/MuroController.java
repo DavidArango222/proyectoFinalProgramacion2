@@ -43,4 +43,8 @@ public class MuroController {
     public List<Producto> obtenerProductos(String cedula) {
         return modelFactory.obtenerProductos(cedula);
     }
+
+    public void agregarContacto(String cedula, String cedula1) {
+        modelFactory.agregarContacto(cedula, cedula1);
+    }
 }
