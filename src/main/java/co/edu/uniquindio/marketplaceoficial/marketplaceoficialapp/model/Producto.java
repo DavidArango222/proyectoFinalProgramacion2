@@ -96,5 +96,12 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
 }
 
