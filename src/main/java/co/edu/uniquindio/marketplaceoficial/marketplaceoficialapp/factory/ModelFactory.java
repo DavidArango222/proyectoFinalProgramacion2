@@ -106,4 +106,8 @@ public class ModelFactory {
     public List<Producto> obtenerProductos(String cedula) {
         return marketplace.obtenerVendedor(cedula).getProductos();
     }
+
+    public void agregarContacto(String cedula, String cedula1) {
+        marketplace.agregarContacto(cedula, cedula1);
+    }
 }

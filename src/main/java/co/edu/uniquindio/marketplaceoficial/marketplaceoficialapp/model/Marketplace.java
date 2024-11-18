@@ -348,4 +348,14 @@ public class Marketplace implements IVendedorCrud, IObservable {
         return obtenerVendedor(cedulaContacto).getContactos();
     }
 
+    public void agregarContacto(String cedula, String cedula1) {
+        Vendedor vendedor = obtenerVendedor(cedula);
+        Vendedor vendedor1 = obtenerVendedor(cedula1);
+
+        if (vendedor!= null && vendedor1!= null && !vendedor.getContactos().contains(vendedor) && !vendedor1.getContactos().contains(vendedor)) {
+            vendedor.getContactos().add(vendedor1);
+            vendedor1.getContactos().add(vendedor);
+            notificarObservadores();
+        }
+    }
 }
