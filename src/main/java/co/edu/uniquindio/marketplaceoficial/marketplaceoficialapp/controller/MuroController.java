@@ -35,14 +35,6 @@ public class MuroController {
         return modelFactory.obtenerVendedor(cedula);
     }
 
-    public List<Producto> obtenerProductosVendedor(String cedula) {
-        if(cedula!=null){
-            return modelFactory.obtenerProductosVendedor(cedula);
-        } else{
-            System.out.println("no sirve la cedula en obtenerProductosVendedor");
-            return null;
-        }
-    }
 
     public List<Producto> getProductos() {
         return modelFactory.getProductos();

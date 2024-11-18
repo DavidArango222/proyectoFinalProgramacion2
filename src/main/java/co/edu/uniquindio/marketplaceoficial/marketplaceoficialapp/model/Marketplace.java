@@ -30,7 +30,16 @@ public class Marketplace implements IVendedorCrud, IObservable {
     }
 
     public List<Producto> getProductos() {
-        return productos;
+        List<Producto> productosActualizados = new ArrayList<>();
+        agregarProductosVendedores(productosActualizados);
+        return productosActualizados;
+    }
+
+    private void agregarProductosVendedores(List<Producto> listaProductos) {
+        for (Vendedor vendedor : vendedores) {
+            List<Producto> productosVendedor = vendedor.getProductos();
+            listaProductos.addAll(productosVendedor);
+        }
     }
 
     public Marketplace(){}
