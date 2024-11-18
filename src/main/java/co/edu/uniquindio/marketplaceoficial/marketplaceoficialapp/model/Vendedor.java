@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -165,6 +166,21 @@ public class Vendedor extends Persona implements IProductoCrud, IObservable {
         return  productoExistente;
     }
 
+    public int contarMensajes(Vendedor otroVendedor) {
+        int mensajes = 0;
+        if (muro != null) {
+            for (Publicacion publicacion : muro.getPublicaciones()) {
+                for (Comentario comentario : publicacion.getComentarios()) {
+                    if (comentario.getAutor().equals(otroVendedor.getUsuarioAsociado())) {
+                        mensajes++;
+                    }
+                }
+            }
+        }
+        return mensajes;
+    }
+
+
     @Override
     public void agregarObservador(IObservador observador) {
         observadorList.add(observador);
@@ -178,5 +194,17 @@ public class Vendedor extends Persona implements IProductoCrud, IObservable {
     @Override
     public void notificarObservadores() {
         observadorList.forEach(IObservador::actualizar);
+    }
+
+    public int contarProductosFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        int contador = 0;
+        for (Producto producto : productos) {
+            if (producto.getFecha() != null &&
+                    !producto.getFecha().isBefore(fechaInicio) &&
+                    !producto.getFecha().isAfter(fechaFin)) {
+                contador++;
+            }
+        }
+        return contador;
     }
 }

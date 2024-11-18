@@ -5,6 +5,7 @@ import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObse
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObservador;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IVendedorCrud;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
     private List<Administrador> administrador = new ArrayList<>();
     private List<Usuario> usuarios = new ArrayList<>();
     private List<IObservador> observadorList = new ArrayList<>();
+    private List<Producto> productos = new ArrayList<>();
 
     public List<Vendedor> getVendedores() {
         return vendedores;
@@ -25,6 +27,10 @@ public class Marketplace implements IVendedorCrud, IObservable {
 
     public List<Usuario> getUsuarios() {
         return usuarios;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
     }
 
     public Marketplace(){}
@@ -259,6 +265,16 @@ public class Marketplace implements IVendedorCrud, IObservable {
         }else{
             return false;
         }
+    }
+
+    public int contarMensajesVendedores(Vendedor vendedor1, Vendedor vendedor2) {
+        if (vendedor1 == null || vendedor2 == null) return 0;
+        return vendedor1.contarMensajes(vendedor2) + vendedor2.contarMensajes(vendedor1);
+    }
+
+    public int contarProductosPublicadosFechas(Vendedor vendedor, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        if (vendedor == null) return 0;
+        return vendedor.contarProductosFechas(fechaInicio, fechaFin);
     }
 
 }

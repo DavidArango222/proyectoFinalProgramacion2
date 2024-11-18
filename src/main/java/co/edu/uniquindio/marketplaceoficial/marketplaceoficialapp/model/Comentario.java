@@ -1,22 +1,28 @@
 package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model;
 
 public class Comentario {
-    private String comentario;
+    private Usuario autor;
+    private String contenido;
 
-    public Comentario(String comentario){
-        this.comentario=comentario;
+    public Comentario(Usuario autor, String contenido) {
+        this.autor = autor;
+        this.contenido = contenido;
     }
 
-    public String getComentario() {
-        return comentario;
+    public Usuario getAutor() {
+        return autor;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public String getContenido() {
+        return contenido;
     }
 
-    @Override
-    public String toString() {
-        return "comentario: " + comentario;
+    public void setAutor(Usuario autor) {
+        this.autor = autor;
+    }
+
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
     }
 }
+
