@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -26,11 +27,10 @@
                                             <TableColumn fx:id="tcComentarios" prefWidth="441.59999694824216" text="Comentarios" />
                                         </columns>
                                     </TableView>
-                                    <ImageView fx:id="imgProducto" fitHeight="166.0" fitWidth="313.0" layoutX="93.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="imgProducto" fitHeight="166.0" fitWidth="313.0" layoutX="172.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                                     <Label fx:id="labelNombre" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="233.0" prefHeight="30.0" prefWidth="116.0" />
                                     <Label fx:id="labelPrecio" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="280.0" prefHeight="30.0" prefWidth="116.0" />
                                     <Label fx:id="labelCategoria" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="322.0" prefHeight="30.0" prefWidth="116.0" />
-                                    <Label fx:id="labelId" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="365.0" prefHeight="30.0" prefWidth="116.0" />
                                     <Label fx:id="labelEstado" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="411.0" prefHeight="30.0" prefWidth="116.0" />
                                     <Separator layoutX="149.0" layoutY="211.0" prefWidth="200.0" />
                                     <Separator layoutX="149.0" layoutY="469.0" prefWidth="200.0" />
@@ -39,7 +39,8 @@
                                     <Label fx:id="labelCantidadComentarios" alignment="CENTER" contentDisplay="CENTER" layoutX="424.0" layoutY="491.0" prefHeight="30.0" prefWidth="46.0" />
                                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="282.0" layoutY="491.0" prefHeight="30.0" prefWidth="124.0" text="Comentarios en total:" />
                                     <Button fx:id="btnEnviarComentario" layoutX="358.0" layoutY="764.0" mnemonicParsing="false" onAction="#onActionEnviarComentario" text="Enviar comentario" />
-                                    <Label fx:id="comentario" layoutX="35.0" layoutY="761.0" prefHeight="30.0" prefWidth="311.0" />
+                           <Label fx:id="labelIdProducto" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="368.0" prefHeight="30.0" prefWidth="116.0" />
+                           <TextField fx:id="comentarioProducto" layoutX="28.0" layoutY="764.0" prefHeight="26.0" prefWidth="272.0" />
                                 </children>
                             </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -68,7 +69,7 @@
                                             <TableColumn fx:id="tcNombreContacto" prefWidth="129.59999084472656" text="Nombre" />
                                             <TableColumn fx:id="tcApellidoContacto" prefWidth="97.59994506835938" text="Apellido" />
                                             <TableColumn fx:id="tcCedulaContacto" prefWidth="112.80001831054688" text="Cedula" />
-                                            <TableColumn fx:id="tcDireccionContacto" prefWidth="113.5999755859375" text="Dirección" />
+                                            <TableColumn fx:id="tcDireccionContacto" prefWidth="87.20001220703125" text="Dirección" />
                                         </columns>
                                     </TableView>
                                     <Label layoutX="148.0" layoutY="14.0" text="Contactos Agregados">
@@ -85,7 +86,7 @@
                                             <TableColumn fx:id="tcNombreVendedor" prefWidth="129.59999084472656" text="Nombre" />
                                             <TableColumn fx:id="tcApellidoVendedor" prefWidth="97.59994506835938" text="Apellido" />
                                             <TableColumn fx:id="tcCedulaVendedor" prefWidth="112.80001831054688" text="Cedula" />
-                                            <TableColumn fx:id="tcDireccionVendedor" prefWidth="113.5999755859375" text="Dirección" />
+                                            <TableColumn fx:id="tcDireccionVendedor" prefWidth="84.7998046875" text="Dirección" />
                                         </columns>
                                     </TableView>
                                     <Label layoutX="259.0" layoutY="14.0" text="Vendedores">
@@ -122,7 +123,7 @@
                                             <TableColumn fx:id="tcNombreMensaje" prefWidth="129.59999084472656" text="Nombre" />
                                             <TableColumn fx:id="tcApellidoMensaje" prefWidth="97.59994506835938" text="Apellido" />
                                             <TableColumn fx:id="tcCedulaMensaje" prefWidth="112.80001831054688" text="Cedula" />
-                                            <TableColumn fx:id="tcDireccionMensaje" prefWidth="113.5999755859375" text="Dirección" />
+                                            <TableColumn fx:id="tcDireccionMensaje" prefWidth="86.39996337890625" text="Dirección" />
                                         </columns>
                                     </TableView>
                                 </children>
@@ -131,7 +132,7 @@
                                 <children>
                                     <TextArea fx:id="txtMensajes" layoutX="40.0" layoutY="23.0" prefHeight="282.0" prefWidth="562.0" />
                                     <Button fx:id="btnEnviarMensaje" layoutX="506.0" layoutY="332.0" mnemonicParsing="false" onAction="#onActionEnviarMensaje" text="Enviar Mensaje" />
-                                    <Label fx:id="labelMensaje" layoutX="40.0" layoutY="327.0" prefHeight="34.0" prefWidth="403.0" />
+                           <TextField fx:id="comentarioVendedor" layoutX="40.0" layoutY="330.0" prefHeight="29.0" prefWidth="435.0" />
                                 </children>
                             </AnchorPane>
                         </items>

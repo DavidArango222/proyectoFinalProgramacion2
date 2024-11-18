@@ -8,7 +8,9 @@ import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.TipoEstado;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils.DataUtil;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class ModelFactory {
     public static ModelFactory modelFactory;
@@ -77,4 +79,27 @@ public class ModelFactory {
         return marketplace.getContactosMensajes(cedulaContacto);
     }
 
+    public List<Producto> getProductos() {
+        return marketplace.getProductos();
+    }
+
+    public int contarMensajesVendedores(String text, String text1) {
+        return marketplace.contarMensajesVendedores(text,text1);
+    }
+
+    public int contarProductosFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        return marketplace.contarProductosFechas( fechaInicio,  fechaFin);
+    }
+
+    public int contarProductosPorVendedor(String text) {
+        return marketplace.contarProductosPorVendedor( text);
+    }
+
+    public List<Producto> obtenerTopProductosLikes() {
+        return marketplace.obtenerTopProductosLikes();
+    }
+
+    public Map<String, Integer> contarContactosPorVendedor() {
+        return marketplace.contarContactosPorVendedor();
+    }
 }

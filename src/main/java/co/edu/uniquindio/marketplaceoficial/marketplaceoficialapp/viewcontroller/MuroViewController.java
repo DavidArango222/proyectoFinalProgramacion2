@@ -77,7 +77,7 @@ public class MuroViewController implements IObservador {
     private Label labelPrecio;
 
     @FXML
-    private Label labelid;
+    private Label labelIdProducto;
 
     @FXML
     private TableView<Comentario> tableComentarios;
@@ -216,10 +216,10 @@ public class MuroViewController implements IObservador {
     }
 
     private void mostrarInformacionProductoLabel(Producto productoSeleccionado) {
-        labelid.setText(productoSeleccionado.getIdProducto());
         labelNombre.setText(productoSeleccionado.getNombre());
         labelPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
         labelCategoria.setText(productoSeleccionado.getCategoria());
+        labelIdProducto.setText(productoSeleccionado.getIdProducto());
         labelEstado.setText(productoSeleccionado.getTipoEstado().toString());
         String rutaBase = "src/main/resources/images/";
         String rutaImagenCompleta = rutaBase + productoSeleccionado.getImagen();
