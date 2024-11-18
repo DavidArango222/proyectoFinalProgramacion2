@@ -277,7 +277,7 @@ public class MuroViewController implements IObservador {
     }
 
     private void obtenerProductosVendedor() {
-        List<Producto> productos = muroController.getProductos();
+        List<Producto> productos = muroController.obtenerProductos(cedula);
         ObservableList<Producto> listaProductosObservables = FXCollections.observableArrayList(productos);
         tableProductos.setItems(listaProductosObservables);
     }

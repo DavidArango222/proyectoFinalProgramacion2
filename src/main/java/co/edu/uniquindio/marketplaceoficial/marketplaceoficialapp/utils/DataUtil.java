@@ -52,7 +52,9 @@ public class DataUtil{
                 .direccion("Bogotá")
                 .usuarioAsociado(usuario3)
                 .build();
-        vendedor1.getContactos().add(vendedor1);
+        vendedor1.getContactos().add(vendedor2);
+        vendedor2.getContactos().add(vendedor1);
+        vendedor3.getContactos().add(vendedor1);
         marketplace.getAdministrador().add(administrador);
         marketplace.getVendedores().add(vendedor1);
         marketplace.getVendedores().add(vendedor2);

@@ -39,4 +39,8 @@ public class MuroController {
     public List<Producto> getProductos() {
         return modelFactory.getProductos();
     }
+
+    public List<Producto> obtenerProductos(String cedula) {
+        return modelFactory.obtenerProductos(cedula);
+    }
 }

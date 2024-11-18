@@ -102,4 +102,8 @@ public class ModelFactory {
     public Map<String, Integer> contarContactosPorVendedor() {
         return marketplace.contarContactosPorVendedor();
     }
+
+    public List<Producto> obtenerProductos(String cedula) {
+        return marketplace.obtenerVendedor(cedula).getProductos();
+    }
 }
