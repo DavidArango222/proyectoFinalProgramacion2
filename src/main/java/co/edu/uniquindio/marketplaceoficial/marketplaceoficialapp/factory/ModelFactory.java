@@ -77,11 +77,4 @@ public class ModelFactory {
         return marketplace.getContactosMensajes(cedulaContacto);
     }
 
-    public List<Producto> obtenerProductosVendedor(String cedula) {
-        return marketplace.obtenerVendedor(cedula).getProductos();
-    }
-
-    public List<Producto> getProductos() {
-        return marketplace.getProductos();
-    }
 }
