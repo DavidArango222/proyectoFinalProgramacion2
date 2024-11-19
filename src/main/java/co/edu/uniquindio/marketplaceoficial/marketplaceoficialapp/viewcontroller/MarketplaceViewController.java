@@ -2,10 +2,13 @@ package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontrolle
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.MarkeplaceController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.factory.ModelFactory;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Producto;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +20,8 @@ import javafx.scene.layout.AnchorPane;
 import static co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils.MarketplaceConstantes.*;
 
 public class MarketplaceViewController {
-    private static String currentCedula; // Variable estática para almacenar la cédula actual
-    
+    private static String currentCedula;
+    private static MarkeplaceController marketplaceController;
 
     public static String getCurrentCedula() {
         return currentCedula;
@@ -42,6 +45,7 @@ public class MarketplaceViewController {
 
     @FXML
     void initialize() {
+        marketplaceController = new MarkeplaceController();
         try {
             URL adminViewUrl = getClass().getResource("/co/edu/uniquindio/marketplaceoficial/marketplaceoficialapp/adminview.fxml");
             System.out.println("URL encontrada: " + adminViewUrl);
@@ -117,7 +121,6 @@ public class MarketplaceViewController {
             return;
         }
 
-        // Buscar el Tab correspondiente mediante el título actual
         Tab tabToUpdate = null;
         for (Tab tab : mainTab.getTabs()) {
             if (tab.getText().equals(cedulaAnterior)) { // Buscar por la cédula anterior
@@ -128,14 +131,11 @@ public class MarketplaceViewController {
 
         if (tabToUpdate != null) {
             try {
-                // Actualizar el título del Tab con la nueva cédula
                 tabToUpdate.setText(cedulaNueva);
 
-                // Actualizar el contenido del Tab si es necesario
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplaceoficial/marketplaceoficialapp/vendedor.fxml"));
                 AnchorPane vendedorContent = loader.load();
 
-                // Obtener el controlador de la vista del vendedor
                 VendedorViewController vendedorController = loader.getController();
                 vendedorController.updateView(cedulaNueva); // Actualizar los datos visuales del vendedor
 
@@ -146,7 +146,6 @@ public class MarketplaceViewController {
                 System.out.println("Error al cargar o actualizar la vista del vendedor.");
             }
         } else {
-            // Mostrar un mensaje si no se encuentra el Tab
             System.out.println("No se encontró un Tab con la cédula: " + cedulaAnterior);
         }
     }
@@ -194,6 +193,23 @@ public class MarketplaceViewController {
         }
         return null;
     }
+
+    public static List<Producto> obtenerProductosVendedor(String cedulaVendedor) {
+        Vendedor vendedor = marketplaceController.obtenerVendedor(cedulaVendedor);
+        if (vendedor != null) {
+            return vendedor.getProductos();
+        }
+        return Collections.emptyList();
+    }
+
+    public static List<Vendedor> obtenerContactosVendedor(String cedulaVendedor) {
+        Vendedor vendedor = marketplaceController.obtenerVendedor(cedulaVendedor);
+        if (vendedor != null) {
+            return vendedor.getContactos();
+        }
+        return Collections.emptyList();
+    }
+
 
     public Tab getAdministradorTab() {
         return administradorTab;

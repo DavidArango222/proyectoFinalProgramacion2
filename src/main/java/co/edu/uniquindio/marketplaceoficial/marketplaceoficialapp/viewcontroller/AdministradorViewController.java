@@ -134,8 +134,14 @@ public class AdministradorViewController implements IObservador {
             vendedorSeleccionado = newSelection;
             if (vendedorSeleccionado != null) {
                 mostrarInformacionVendedor(vendedorSeleccionado);
+                btnEliminar.setDisable(false);
+                btnActualizar.setDisable(false);
+            } else {
+                btnEliminar.setDisable(true);
+                btnActualizar.setDisable(true);
             }
         });
+
     }
 
     private void obtenerVendedores() {
@@ -192,11 +198,10 @@ public class AdministradorViewController implements IObservador {
 
     private void actualizarVendedor() {
         VendedorUsuarioDto vendedorUsuarioDto = crearVendedor();
-        String cedulaVieja = vendedorSeleccionado.cedula();
         if (datosValidosUsuario(vendedorUsuarioDto) && datosValidosVendedor(vendedorUsuarioDto)) {
+            marketplaceViewController.actualizarTabVendedor(vendedorSeleccionado.cedula(), vendedorUsuarioDto.cedula());
             if (administradorController.actualizarVendedorUsuario(vendedorSeleccionado.nombreUsuario(), vendedorSeleccionado.cedula(), vendedorUsuarioDto)) {
                 actualizarUsuarioVendedorListaObserver(vendedorUsuarioDto);
-                marketplaceViewController.actualizarTabVendedor(cedulaVieja, vendedorUsuarioDto.cedula());
                 limpiarCampos();
                 tableVendedor.refresh();
                 mostrarMensaje(TITULO_VENDEDOR_USUARIO_ACTUALIZADO, HEADER, BODY_VENDEDOR_USUARIO_ACTUALIZADO, Alert.AlertType.INFORMATION);

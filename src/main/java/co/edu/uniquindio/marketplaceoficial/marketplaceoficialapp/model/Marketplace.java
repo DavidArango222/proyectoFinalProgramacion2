@@ -30,8 +30,14 @@ public class Marketplace implements IVendedorCrud, IObservable {
         return usuarios;
     }
 
-    public List<Producto> getProductos() {
+    public List<Producto> obtenerProductos() {
         return productos;
+    }
+
+    public List<Producto> getProductos() {
+        List<Producto> productosActualizados = new ArrayList<>();
+        agregarProductosVendedores(productosActualizados);
+        return productosActualizados;
     }
 
     private void agregarProductosVendedores(List<Producto> listaProductos) {
@@ -111,7 +117,10 @@ public class Marketplace implements IVendedorCrud, IObservable {
     }
 
     public boolean actualizarVendedor(String cedula, Vendedor vendedor) {
-        Vendedor vendedorEncontrado = obtenerVendedor(cedula);
+        Vendedor vendedorEncontrado = buscarVendedor(cedula);
+        if(vendedorEncontrado==null){
+            System.out.println("el vendedor con la cedula"+ cedula+ "no existe");
+        }
         if (vendedorEncontrado!=null){
             for (Vendedor vendedor1 : getVendedores()) {
                 if (vendedor1.getCedula().equals(cedula)) {

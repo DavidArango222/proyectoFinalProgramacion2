@@ -29,6 +29,7 @@ public class MuroViewController implements IObservador {
     Producto productoSeleccionado;
     ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
     ObservableList<Vendedor> contactos = FXCollections.observableArrayList();
+    MarketplaceViewController marketplaceViewController;
 
 
     @FXML
@@ -196,6 +197,8 @@ public class MuroViewController implements IObservador {
         actualizar();
     }
 
+
+
     private void initView() {
         initDataBindingTableProductos();
         initDataBindingTableContactosAgregados();
@@ -285,16 +288,17 @@ public class MuroViewController implements IObservador {
     }
 
     private void obtenerContactosMensajes() {
-        List<Vendedor> contactosMensajes = muroController.obtenerContactosMensajes(cedula);
+        List<Vendedor> contactosMensajes = MarketplaceViewController.obtenerContactosVendedor(cedula);
         ObservableList<Vendedor> listaContactosMensajesObservables = FXCollections.observableArrayList(contactosMensajes);
         tableContactosMensajes.setItems(listaContactosMensajesObservables);
     }
 
     private void obtenerProductosVendedor() {
-        List<Producto> productos = muroController.obtenerProductos(cedula);
+        List<Producto> productos = MarketplaceViewController.obtenerProductosVendedor(cedula);
         ObservableList<Producto> listaProductosObservables = FXCollections.observableArrayList(productos);
         tableProductos.setItems(listaProductosObservables);
     }
+
 
     private void obtenerVendedores() {
         List<Vendedor> vendedores = muroController.obtenerVendedores();
