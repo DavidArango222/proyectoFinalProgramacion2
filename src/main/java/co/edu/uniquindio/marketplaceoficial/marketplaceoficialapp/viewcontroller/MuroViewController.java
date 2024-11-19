@@ -181,6 +181,11 @@ public class MuroViewController implements IObservador {
 
     @FXML
     void onActionLike(ActionEvent event) {
+        if (productoSeleccionado != null) {
+            productoSeleccionado.getPublicacion().agregarLike();
+
+            mostrarLikesDelProducto();
+        }
 
     }
 
@@ -206,7 +211,29 @@ public class MuroViewController implements IObservador {
         initDataBindingTableVendedores();
         listenerSelectionTableProducto();
         listenerSelectionTableContactosAgregados();
+        agregarLikes();
     }
+
+    private void agregarLikes() {
+        ObservableList<Producto> productos = FXCollections.observableArrayList(muroController.getProductos());
+        tableProductos.setItems(productos);
+
+        // Establecemos el evento de selección del ListView
+        tableProductos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                productoSeleccionado = newValue;
+                mostrarLikesDelProducto();
+            }
+        });
+    }
+
+    private void mostrarLikesDelProducto() {
+        if (productoSeleccionado != null) {
+            int likes = productoSeleccionado.getPublicacion().getLike();
+            labelCantidadLikes.setText("Likes: " + likes);
+        }
+    }
+
 
     private void listenerSelectionTableContactosAgregados() {
         tcNombreContacto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
@@ -272,7 +299,6 @@ public class MuroViewController implements IObservador {
         tcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIdProducto()));
         tcImagen.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getImagen()));
 
-        // Manejo de valores nulos en fecha
         tcFecha.setCellValueFactory(cellData -> {
             LocalDateTime fecha = cellData.getValue().getFecha();
             return new SimpleStringProperty(fecha != null ? fecha.toString() : "Sin fecha");
@@ -286,6 +312,7 @@ public class MuroViewController implements IObservador {
         obtenerVendedores();
         obtenerContactosMensajes();
     }
+
 
     private void obtenerContactosMensajes() {
         List<Vendedor> contactosMensajes = MarketplaceViewController.obtenerContactosVendedor(cedula);

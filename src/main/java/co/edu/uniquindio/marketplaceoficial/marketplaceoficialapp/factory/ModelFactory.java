@@ -110,4 +110,6 @@ public class ModelFactory {
     public void agregarContacto(String cedula, String cedula1) {
         marketplace.agregarContacto(cedula, cedula1);
     }
+
+
 }

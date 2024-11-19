@@ -36,4 +36,8 @@ public class Publicacion {
     public List<Comentario> getComentarios() {
         return comentarios;
     }
+
+    public void agregarLike() {
+        this.like++;
+    }
 }
