@@ -294,11 +294,11 @@ public class VendedorViewController implements IObservador {
         this.cedula = cedula;
         labelCedula.setText(cedula);
         System.out.println("Cédula actualizada en la vista: " + cedula);
-
         obtenerProductosVendedor(cedula);
-
         verificarPermisosTabs();
     }
+
+
 
     private void verificarPermisosTabs() {
         VendedorUsuarioDto vendedorLogueado = LoginController.getVendedorLogueado();

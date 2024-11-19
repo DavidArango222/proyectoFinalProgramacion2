@@ -393,5 +393,4 @@ public class MuroViewController implements IObservador {
             System.out.println("No se encontraron contactos para la cédula: " + cedula);
         }
     }
-
 }

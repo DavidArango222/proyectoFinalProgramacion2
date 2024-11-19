@@ -110,14 +110,15 @@ public class MarketplaceViewController {
             VendedorViewController vendedorController = loader.getController();
             vendedorController.updateView(cedula);
             Tab nuevoTab = new Tab();
-            nuevoTab.setText(cedula); // Título del tab con la cédula
-            nuevoTab.setContent(vendedorContent); // Establecer el contenido del tab
+            nuevoTab.setText(cedula);
+            nuevoTab.setContent(vendedorContent);
             mainTab.getTabs().add(nuevoTab);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error al cargar la vista de Vendedor.");
         }
     }
+
 
     public void actualizarTabVendedor(String cedulaAnterior, String cedulaNueva) {
         if (cedulaAnterior == null || cedulaAnterior.isEmpty()) {
@@ -131,7 +132,7 @@ public class MarketplaceViewController {
 
         Tab tabToUpdate = null;
         for (Tab tab : mainTab.getTabs()) {
-            if (tab.getText().equals(cedulaAnterior)) { // Buscar por la cédula anterior
+            if (tab.getText().equals(cedulaAnterior)) {
                 tabToUpdate = tab;
                 break;
             }
@@ -145,9 +146,9 @@ public class MarketplaceViewController {
                 AnchorPane vendedorContent = loader.load();
 
                 VendedorViewController vendedorController = loader.getController();
-                vendedorController.updateView(cedulaNueva); // Actualizar los datos visuales del vendedor
+                vendedorController.updateView(cedulaNueva);
 
-                tabToUpdate.setContent(vendedorContent); // Reemplazar el contenido del Tab con la vista actualizada
+                tabToUpdate.setContent(vendedorContent);
                 System.out.println("Tab actualizado correctamente: " + cedulaNueva);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -166,7 +167,6 @@ public class MarketplaceViewController {
             System.out.println("Cédula no puede estar vacía.");
             return;
         }
-        // Buscar el tab con el título que coincide con la cédula
         Tab tabToRemove = null;
         for (Tab tab : mainTab.getTabs()) {
             if (cedula.equals(tab.getText())) {
@@ -174,7 +174,6 @@ public class MarketplaceViewController {
                 break;
             }
         }
-        // Si se encontró el tab, eliminarlo
         if (tabToRemove != null) {
             mainTab.getTabs().remove(tabToRemove);
             System.out.println("Tab con cédula " + cedula + " eliminado.");
