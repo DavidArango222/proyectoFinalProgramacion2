@@ -201,15 +201,5 @@ public class Vendedor extends Persona implements IProductoCrud, IObservable {
         observadorList.forEach(IObservador::actualizar);
     }
 
-    public int contarProductosFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
-        int contador = 0;
-        for (Producto producto : productos) {
-            if (producto.getFecha() != null &&
-                    !producto.getFecha().isBefore(fechaInicio) &&
-                    !producto.getFecha().isAfter(fechaFin)) {
-                contador++;
-            }
-        }
-        return contador;
-    }
+
 }

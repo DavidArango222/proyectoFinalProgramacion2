@@ -115,5 +115,13 @@ public class Producto {
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
+
+    public void setPublicacion(Publicacion publicacion) {
+        this.publicacion = publicacion;
+    }
 }
 

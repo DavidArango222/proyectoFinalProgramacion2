@@ -21,6 +21,18 @@ public class Publicacion {
         return producto;
     }
 
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
     public List<Comentario> getComentarios() {
         return comentarios;
     }

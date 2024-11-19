@@ -67,23 +67,20 @@ public class EstadisticasViewController {
 
     @FXML
     void onChkAñadirProductosPublicadosVendedor(ActionEvent event) {
-        anadirProductosPublicadosVendedor();
+        productosPublicadosVendedor();
     }
 
-    private void anadirProductosPublicadosVendedor() {
-        txtCedulaBuscar.setDisable(true);
+    private void productosPublicadosVendedor() {
         boolean selected = chkAñadirProductosPublicadosVendedor.isSelected();
-        txtCedulaBuscar.setDisable(!selected);
+            txtCedulaBuscar.setDisable(!selected);
     }
 
     @FXML
     void onChkAñadirReporteMensajesVendedores(ActionEvent event) {
-        anadirReporteMensajesVendedores();
+        reporteMensajesVendedores();
     }
 
-    private void anadirReporteMensajesVendedores() {
-        txtCedulaVendedor1.setDisable(true);
-        txtCedulaVendedor2.setDisable(true);
+    private void reporteMensajesVendedores() {
         boolean selected = chkAñadirReporteMensajesVendedores.isSelected();
         txtCedulaVendedor1.setDisable(!selected);
         txtCedulaVendedor2.setDisable(!selected);
@@ -91,10 +88,10 @@ public class EstadisticasViewController {
 
     @FXML
     void onChkAñadirTopProductos(ActionEvent event) {
-        anadirTopProductos();
+        topProductos();
     }
 
-    private void anadirTopProductos() {
+    private void topProductos() {
         chkAñadirTopProductos.isSelected();
     }
 
@@ -113,8 +110,6 @@ public class EstadisticasViewController {
     }
 
     private void productosPublicadosFecha() {
-        DateInicio.setDisable(true);
-        DateFin.setDisable(true);
         boolean selected = chkProductosPublicadosFecha.isSelected();
         DateInicio.setDisable(!selected);
         DateFin.setDisable(!selected);
@@ -148,54 +143,78 @@ public class EstadisticasViewController {
     private void generarReporte() {
         StringBuilder contenidoReporte = new StringBuilder();
         if (chkAñadirReporteMensajesVendedores.isSelected()) {
-            int mensajes = estadisticasController.contarMensajesVendedores(
-                    txtCedulaVendedor1.getText(),
-                    txtCedulaVendedor2.getText());
-            contenidoReporte.append("Cantidad de mensajes enviados entre vendedores: ").append(mensajes).append("\n");
+            anadirReporteMensajesVendedores(contenidoReporte);
         }
         if (chkProductosPublicadosFecha.isSelected()) {
-            LocalDate fechaInicioLocal = DateInicio.getValue();
-            LocalDate fechaFinLocal = DateFin.getValue();
-
-            LocalDateTime fechaInicio = fechaInicioLocal.atStartOfDay();
-            LocalDateTime fechaFin = fechaFinLocal.atTime(23, 59, 59);
-
-            int productosFecha = estadisticasController.contarProductosFechas(fechaInicio, fechaFin);
-            contenidoReporte.append("Cantidad de productos publicados entre fechas: ").append(productosFecha).append("\n");
+            anadirProductosPublicadosFecha(contenidoReporte);
         }
         if (chkAñadirProductosPublicadosVendedor.isSelected()) {
-            int productosVendedor = estadisticasController.contarProductosPorVendedor(txtCedulaBuscar.getText());
-            contenidoReporte.append("Cantidad de productos publicados por el vendedor: ").append(productosVendedor).append("\n");
+            anadirProductosPublicadosVendedor(contenidoReporte);
         }
         if (chkCantidadContactos.isSelected()) {
-            Map<String, Integer> contactosPorVendedor = estadisticasController.contarContactosPorVendedor();
-            contenidoReporte.append("Cantidad de contactos por vendedor:\n");
-
-            for (Map.Entry<String, Integer> entry : contactosPorVendedor.entrySet()) {
-                String cedula = entry.getKey();
-                Integer cantidadContactos = entry.getValue();
-                contenidoReporte.append("Vendedor (Cédula: ").append(cedula).append("): ").append(cantidadContactos).append(" contactos\n");
-            }
+            anadirCantidadContactos(contenidoReporte);
         }
         if (chkAñadirTopProductos.isSelected()) {
-            List<Producto> topProductos = estadisticasController.obtenerTopProductosLikes();
-            contenidoReporte.append("Top 10 productos con más likes:\n");
-            for (Producto producto : topProductos) {
-                contenidoReporte.append(producto.getNombre()).append("\n");
-            }
+            anadirTopProductos(contenidoReporte);
         }
         if(selectionTexto.isSelected()) {
-            ReporteAdapter adapter = new ReporteTextoAdapter("src/main/java/co/edu/uniquindio/marketplaceoficial/marketplaceoficialapp/reportes/reporte.txt");
+            ReporteAdapter adapter = new ReporteTextoAdapter(
+                    "src/main/java/co/edu/uniquindio/marketplaceoficial/marketplaceoficialapp/reportes/reporte.txt");
             adapter.exportarReporte(contenidoReporte.toString());
         }else if(selectionPdf.isSelected()){
-            ReporteAdapter adapter = new ReportePdfAdapter("C:/Users/Valery/Documents/reporte.pdf");
+            ReporteAdapter adapter = new ReportePdfAdapter(
+                    "C:/Users/Valery/Documents/reporte.pdf");
             adapter.exportarReporte(contenidoReporte.toString());
         }
+    }
+
+    private void anadirTopProductos(StringBuilder contenidoReporte) {
+        List<Producto> topProductos = estadisticasController.obtenerTopProductosLikes();
+        contenidoReporte.append("Top 10 productos con más likes:\n");
+        for (Producto producto : topProductos) {
+            contenidoReporte.append(producto.getNombre()).append("\n");
+        }
+    }
+
+    private void anadirCantidadContactos(StringBuilder contenidoReporte) {
+        Map<String, Integer> contactosPorVendedor = estadisticasController.contarContactosPorVendedor();
+        contenidoReporte.append("Cantidad de contactos por vendedor:\n");
+        for (Map.Entry<String, Integer> entry : contactosPorVendedor.entrySet()) {
+            String cedula = entry.getKey();
+            Integer cantidadContactos = entry.getValue();
+            contenidoReporte.append("Vendedor (Cédula: ").append(cedula).append("): ").append(cantidadContactos).append(" contactos\n");
+        }
+    }
+
+    private void anadirProductosPublicadosVendedor(StringBuilder contenidoReporte) {
+        int productosVendedor = estadisticasController.contarProductosPorVendedor(txtCedulaBuscar.getText());
+        contenidoReporte.append("Cantidad de productos publicados por el vendedor: ").append(productosVendedor).append("\n");
+    }
+
+    private void anadirProductosPublicadosFecha(StringBuilder contenidoReporte) {
+        LocalDate fechaInicioLocal = DateInicio.getValue();
+        LocalDate fechaFinLocal = DateFin.getValue();
+        LocalDateTime fechaInicio = fechaInicioLocal.atStartOfDay();
+        LocalDateTime fechaFin = fechaFinLocal.atTime(23, 59, 59);
+        int productosFecha = estadisticasController.contarProductosFechas(fechaInicio, fechaFin);
+        contenidoReporte.append("Cantidad de productos publicados entre fechas: ").append(productosFecha).append("\n");
+    }
+
+    private void anadirReporteMensajesVendedores(StringBuilder contenidoReporte) {
+        int mensajes = estadisticasController.contarMensajesVendedores(
+                txtCedulaVendedor1.getText(),
+                txtCedulaVendedor2.getText());
+        contenidoReporte.append("Cantidad de mensajes enviados entre vendedores: ").append(mensajes).append("\n");
     }
 
     @FXML
     void initialize() {
         estadisticasController= new EstadisticasController();
+        txtCedulaBuscar.setDisable(true);
+        txtCedulaVendedor1.setDisable(true);
+        txtCedulaVendedor2.setDisable(true);
+        DateInicio.setDisable(true);
+        DateFin.setDisable(true);
     }
 
 }

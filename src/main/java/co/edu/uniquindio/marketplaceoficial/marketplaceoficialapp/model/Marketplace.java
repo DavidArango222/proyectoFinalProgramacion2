@@ -16,6 +16,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
     private List<Usuario> usuarios = new ArrayList<>();
     private List<IObservador> observadorList = new ArrayList<>();
     private List<Producto> productos = new ArrayList<>();
+    private List<Mensaje> mensajes = new ArrayList<>();
 
     public List<Vendedor> getVendedores() {
         return vendedores;
@@ -59,6 +60,10 @@ public class Marketplace implements IVendedorCrud, IObservable {
 
     public static MarketplaceBuilder builder(){
         return new MarketplaceBuilder();
+    }
+
+    public List<Mensaje> getMensajes() {
+        return mensajes;
     }
 
     @Override
