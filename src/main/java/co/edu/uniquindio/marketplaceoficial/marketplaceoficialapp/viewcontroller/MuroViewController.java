@@ -2,10 +2,14 @@ package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontrolle
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.LoginController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.MuroController;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.dto.VendedorUsuarioDto;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.mapper.MarketplaceMappingImpl;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.*;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObservador;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.TipoEstado;
@@ -15,11 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 public class MuroViewController implements IObservador {
@@ -30,6 +30,8 @@ public class MuroViewController implements IObservador {
     ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
     ObservableList<Vendedor> contactos = FXCollections.observableArrayList();
     MarketplaceViewController marketplaceViewController;
+    VendedorUsuarioDto usuarioActual;
+    MarketplaceMappingImpl mapper;
 
 
     @FXML
@@ -159,7 +161,14 @@ public class MuroViewController implements IObservador {
     private TextArea txtMensajes;
 
     @FXML
+    private TextField txtComentarioProducto;
+
+    @FXML
     void onActionAgregarContacto(ActionEvent event) {
+        agregarContacto();
+    }
+
+    private void agregarContacto() {
         Vendedor vendedor = tableVendedores.getSelectionModel().getSelectedItem();
         if (vendedor == null) {
             System.out.println("Debe seleccionar un vendedor.");
@@ -171,6 +180,18 @@ public class MuroViewController implements IObservador {
 
     @FXML
     void onActionEnviarComentario(ActionEvent event) {
+        if (productoSeleccionado != null) {
+            String comentarioText = txtComentarioProducto.getText();
+            if (!comentarioText.isEmpty() && usuarioActual != null) {
+                Comentario nuevoComentario = new Comentario(mapper.vendedorUsuarioDtoToUsuario(usuarioActual), comentarioText);
+
+                productoSeleccionado.getPublicacion().getComentarios().add(nuevoComentario);
+
+                txtComentarioProducto.clear();
+
+                mostrarComentariosProducto();
+            }
+        }
 
     }
 
@@ -181,12 +202,14 @@ public class MuroViewController implements IObservador {
 
     @FXML
     void onActionLike(ActionEvent event) {
+        darLike();
+    }
+
+    private void darLike() {
         if (productoSeleccionado != null) {
             productoSeleccionado.getPublicacion().agregarLike();
-
             mostrarLikesDelProducto();
         }
-
     }
 
     @FXML
@@ -197,6 +220,8 @@ public class MuroViewController implements IObservador {
         }
         muroController = new MuroController();
         marketplace = muroController.getModelFactory();
+        mapper = new MarketplaceMappingImpl();
+        usuarioActual= LoginController.getVendedorLogueado();
         marketplace.agregarObservador(this);
         initView();
         actualizar();
@@ -206,25 +231,47 @@ public class MuroViewController implements IObservador {
 
     private void initView() {
         initDataBindingTableProductos();
+        initDataBindingTableComentarios();
         initDataBindingTableContactosAgregados();
         initDataBindingTableContactosMensajes();
         initDataBindingTableVendedores();
         listenerSelectionTableProducto();
         listenerSelectionTableContactosAgregados();
         agregarLikes();
+        agregarComentarios();
+    }
+
+    private void initDataBindingTableComentarios() {
+        tcComentarios.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContenido()));
+    }
+
+    private void agregarComentarios() {
+        tableProductos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                productoSeleccionado = newValue;
+                mostrarComentariosProducto();
+            }
+        });
     }
 
     private void agregarLikes() {
         ObservableList<Producto> productos = FXCollections.observableArrayList(muroController.getProductos());
         tableProductos.setItems(productos);
 
-        // Establecemos el evento de selección del ListView
         tableProductos.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 productoSeleccionado = newValue;
                 mostrarLikesDelProducto();
             }
         });
+    }
+
+    private void mostrarComentariosProducto() {
+        if (productoSeleccionado != null) {
+            List<Comentario> comentarios = productoSeleccionado.getPublicacion().getComentarios();
+            ObservableList<Comentario> comentariosList = FXCollections.observableArrayList(comentarios);
+            tableComentarios.setItems(comentariosList);
+        }
     }
 
     private void mostrarLikesDelProducto() {

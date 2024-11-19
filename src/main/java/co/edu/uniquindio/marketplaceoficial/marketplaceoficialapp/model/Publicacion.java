@@ -40,4 +40,6 @@ public class Publicacion {
     public void agregarLike() {
         this.like++;
     }
+
+
 }

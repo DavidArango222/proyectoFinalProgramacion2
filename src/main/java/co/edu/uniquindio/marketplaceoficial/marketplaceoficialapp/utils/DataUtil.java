@@ -213,11 +213,43 @@ public class DataUtil{
         Mensaje mensaje3 = new Mensaje("Me interesa tu oferta.", vendedor3, vendedor4);
         Comentario comentario1 = new Comentario(usuario2, "¡Qué buen producto!");
         Comentario comentario2 = new Comentario(usuario3, "Me interesa, ¿cómo puedo comprar?");
+        Comentario comentario3 = new Comentario(usuario4, "¿A qué hora se puede ver?");
+        Comentario comentario4 = new Comentario(usuario5, "¿Cuántos colores tiene?");
+        Comentario comentario5 = new Comentario(usuario6, "¡Lo quiero!");
+        Comentario comentario6 = new Comentario(usuario, "¿Todavía está disponible?");
+        Comentario comentario7 = new Comentario(usuario2, "¿Hay más stock?");
+        Comentario comentario8 = new Comentario(usuario3, "Buen precio");
+        Comentario comentario9 = new Comentario(usuario4, "Lo recomiendo");
+        Comentario comentario10 = new Comentario(usuario5, "Perfecto para mi trabajo");
+        Comentario comentario11 = new Comentario(usuario6, "¿El precio es negociable?");
+        Comentario comentario12 = new Comentario(usuario, "¡Excelente calidad!");
+        Comentario comentario13 = new Comentario(usuario2, "¿Este producto es nuevo?");
+        Comentario comentario14 = new Comentario(usuario3, "Interesado en otro tamaño");
+        Comentario comentario15 = new Comentario(usuario4, "¡Muy bonito!");
 
         vendedor1.getMuro().getPublicaciones().add(publicacion1);
+        vendedor2.getMuro().getPublicaciones().add(publicacion2);
+        vendedor3.getMuro().getPublicaciones().add(publicacion3);
+        vendedor4.getMuro().getPublicaciones().add(publicacion4);
+        vendedor5.getMuro().getPublicaciones().add(publicacion5);
+        vendedor6.getMuro().getPublicaciones().add(publicacion6);
 
         publicacion1.getComentarios().add(comentario1);
         publicacion1.getComentarios().add(comentario2);
+        publicacion2.getComentarios().add(comentario3);
+        publicacion2.getComentarios().add(comentario4);
+        publicacion3.getComentarios().add(comentario5);
+        publicacion3.getComentarios().add(comentario6);
+        publicacion4.getComentarios().add(comentario7);
+        publicacion4.getComentarios().add(comentario8);
+        publicacion5.getComentarios().add(comentario9);
+        publicacion5.getComentarios().add(comentario10);
+        publicacion6.getComentarios().add(comentario11);
+        publicacion6.getComentarios().add(comentario12);
+        publicacion7.getComentarios().add(comentario13);
+        publicacion7.getComentarios().add(comentario14);
+        publicacion8.getComentarios().add(comentario15);
+
         marketplace.getVendedores().add(vendedor1);
         marketplace.getVendedores().add(vendedor2);
         marketplace.getVendedores().add(vendedor3);
