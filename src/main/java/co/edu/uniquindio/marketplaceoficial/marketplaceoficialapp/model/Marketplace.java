@@ -36,10 +36,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
     }
 
     private void agregarProductosVendedores(List<Producto> listaProductos) {
-        for (Vendedor vendedor : vendedores) {
-            List<Producto> productosVendedor = vendedor.getProductos();
-            listaProductos.addAll(productosVendedor);
-        }
+        vendedores.forEach(vendedor -> listaProductos.addAll(vendedor.getProductos()));
     }
 
     public Marketplace(){}
@@ -130,15 +127,11 @@ public class Marketplace implements IVendedorCrud, IObservable {
 
     @Override
     public Vendedor obtenerVendedor(String cedula) {
-        System.out.println("Buscando vendedor con cédula: " + cedula);
         for (Vendedor vendedor : getVendedores()) {
-            System.out.println("Comparando con vendedor: " + vendedor.getCedula());
             if (vendedor.getCedula().equals(cedula)) {
-                System.out.println("Vendedor encontrado: " + vendedor.getNombre());
                 return vendedor;
             }
         }
-        System.out.println("No se encontró ningún vendedor con la cédula: " + cedula);
         return null;
     }
 
@@ -222,8 +215,6 @@ public class Marketplace implements IVendedorCrud, IObservable {
                 break;
             }
         }
-
-
         return usuario;
     }
 
@@ -236,7 +227,6 @@ public class Marketplace implements IVendedorCrud, IObservable {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -319,12 +309,10 @@ public class Marketplace implements IVendedorCrud, IObservable {
 
     public List<Producto> obtenerTopProductosLikes() {
         Map<Producto, Integer> productoLikesMap = new HashMap<>();
-
         for (Producto producto : productos) {
-            Vendedor vendedor = producto.getVendedor(); // Se asume que cada producto tiene un vendedor asociado
+            Vendedor vendedor = producto.getVendedor();
             if (vendedor != null && vendedor.getMuro() != null) {
                 Muro muro = vendedor.getMuro();
-
                 for (Publicacion publicacion : muro.getPublicaciones()) {
                     if (publicacion != null) {
                         productoLikesMap.put(
@@ -335,10 +323,9 @@ public class Marketplace implements IVendedorCrud, IObservable {
                 }
             }
         }
-
         return productoLikesMap.entrySet()
                 .stream()
-                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue())) // Ordenar por likes
+                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
                 .limit(10)
                 .map(Map.Entry::getKey)
                 .toList();
@@ -351,11 +338,29 @@ public class Marketplace implements IVendedorCrud, IObservable {
     public void agregarContacto(String cedula, String cedula1) {
         Vendedor vendedor = obtenerVendedor(cedula);
         Vendedor vendedor1 = obtenerVendedor(cedula1);
-
-        if (vendedor!= null && vendedor1!= null && !vendedor.getContactos().contains(vendedor) && !vendedor1.getContactos().contains(vendedor)) {
-            vendedor.getContactos().add(vendedor1);
-            vendedor1.getContactos().add(vendedor);
-            notificarObservadores();
+        if (vendedor != null && vendedor1 != null) {
+            boolean vendedorNoEnContactosDeVendedor1 = true;
+            boolean vendedor1NoEnContactosDeVendedor = true;
+            Iterator<Vendedor> iteratorVendedor1 = vendedor1.getContactos().iterator();
+            while (iteratorVendedor1.hasNext()) {
+                if (iteratorVendedor1.next().equals(vendedor)) {
+                    vendedorNoEnContactosDeVendedor1 = false;
+                    break;
+                }
+            }
+            Iterator<Vendedor> iteratorVendedor = vendedor.getContactos().iterator();
+            while (iteratorVendedor.hasNext()) {
+                if (iteratorVendedor.next().equals(vendedor1)) {
+                    vendedor1NoEnContactosDeVendedor = false;
+                    break;
+                }
+            }
+            if (vendedorNoEnContactosDeVendedor1 && vendedor1NoEnContactosDeVendedor) {
+                vendedor.getContactos().add(vendedor1);
+                vendedor1.getContactos().add(vendedor);
+                notificarObservadores();
+            }
         }
+
     }
 }

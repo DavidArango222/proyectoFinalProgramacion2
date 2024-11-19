@@ -260,7 +260,6 @@ public class VendedorViewController implements IObservador {
 
     public void updateView(String cedula) {
         if (cedula == null || cedula.isEmpty()) {
-            System.out.println("Cédula no válida para actualizar la vista.");
             return;
         }
         this.cedula = cedula;
@@ -289,7 +288,6 @@ public class VendedorViewController implements IObservador {
     @Override
     public void actualizar() {
         if (cedula == null || cedula.isEmpty()) {
-            System.out.println("No se puede actualizar porque la cédula es nula o vacía.");
             return;
         }
         System.out.println("Actualizando vista para la cédula: " + cedula);
