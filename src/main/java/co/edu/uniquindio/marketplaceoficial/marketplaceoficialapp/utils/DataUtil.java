@@ -116,22 +116,64 @@ public class DataUtil{
                 .imagen("netflix.png")
                 .tipoEstado(TipoEstado.PUBLICADO)
                 .build();
-        Producto producto4 = Producto.builder().nombre("Cámara").categoria("tecnología").idProducto("40A").precio(1200000)
-                .imagen("camara.jpg").tipoEstado(TipoEstado.PUBLICADO).build();
-        Producto producto5 = Producto.builder().nombre("Libro").categoria("educación").idProducto("50A").precio(30000)
-                .imagen("libro.jpg").tipoEstado(TipoEstado.PUBLICADO).build();
-        Producto producto6 = Producto.builder().nombre("Celular").categoria("tecnología").idProducto("60A").precio(900000)
-                .imagen("celular.jpg").tipoEstado(TipoEstado.PUBLICADO).build();
-        Producto producto7 = Producto.builder().nombre("Bicicleta").categoria("deportes").idProducto("70A").precio(800000)
-                .imagen("bicicleta.jpg").tipoEstado(TipoEstado.PUBLICADO).build();
-        Producto producto8 = Producto.builder().nombre("Guitarra").categoria("música").idProducto("80A").precio(700000)
-                .imagen("guitarra.jpg").tipoEstado(TipoEstado.PUBLICADO).build();
-        Producto producto9 = Producto.builder().nombre("Reloj").categoria("accesorios").idProducto("90A").precio(150000)
-                .imagen("reloj.jpg").tipoEstado(TipoEstado.PUBLICADO).build();
-        Producto producto10 = Producto.builder().nombre("Zapatos").categoria("ropa").idProducto("100A").precio(200000)
-                .imagen("zapatos.jpg").tipoEstado(TipoEstado.PUBLICADO).build();
-        Producto producto11 = Producto.builder().nombre("Mochila").categoria("accesorios").idProducto("110A").precio(120000)
-                .imagen("mochila.jpg").tipoEstado(TipoEstado.PUBLICADO).build();
+        Producto producto4 = Producto.builder()
+                .nombre("Cámara")
+                .categoria("tecnología")
+                .idProducto("40A")
+                .precio(1200000)
+                .imagen("camara.jpg")
+                .tipoEstado(TipoEstado.PUBLICADO)
+                .build();
+        Producto producto5 = Producto.builder()
+                .nombre("Libro")
+                .categoria("educación")
+                .idProducto("50A")
+                .precio(30000)
+                .imagen("libro.jpg")
+                .tipoEstado(TipoEstado.PUBLICADO)
+                .build();
+        Producto producto6 = Producto.builder()
+                .nombre("Celular")
+                .categoria("tecnología")
+                .idProducto("60A")
+                .precio(900000)
+                .imagen("celular.jpg")
+                .tipoEstado(TipoEstado.PUBLICADO).build();
+        Producto producto7 = Producto.builder()
+                .nombre("Bicicleta")
+                .categoria("deportes")
+                .idProducto("70A")
+                .precio(800000)
+                .imagen("bicicleta.jpg")
+                .tipoEstado(TipoEstado.PUBLICADO).build();
+        Producto producto8 = Producto.builder()
+                .nombre("Guitarra")
+                .categoria("música")
+                .idProducto("80A")
+                .precio(700000)
+                .imagen("guitarra.jpg")
+                .tipoEstado(TipoEstado.PUBLICADO).build();
+        Producto producto9 = Producto.builder()
+                .nombre("Reloj")
+                .categoria("accesorios")
+                .idProducto("90A")
+                .precio(150000)
+                .imagen("reloj.jpg")
+                .tipoEstado(TipoEstado.PUBLICADO).build();
+        Producto producto10 = Producto.builder()
+                .nombre("Zapatos")
+                .categoria("ropa")
+                .idProducto("100A")
+                .precio(200000)
+                .imagen("zapatos.jpg")
+                .tipoEstado(TipoEstado.PUBLICADO).build();
+        Producto producto11 = Producto.builder()
+                .nombre("Mochila")
+                .categoria("accesorios")
+                .idProducto("110A")
+                .precio(120000)
+                .imagen("mochila.jpg")
+                .tipoEstado(TipoEstado.PUBLICADO).build();
         Publicacion publicacion1 = new Publicacion(15, producto1);
         Publicacion publicacion2 = new Publicacion(20, producto2);
         Publicacion publicacion3 = new Publicacion(25, producto3);
