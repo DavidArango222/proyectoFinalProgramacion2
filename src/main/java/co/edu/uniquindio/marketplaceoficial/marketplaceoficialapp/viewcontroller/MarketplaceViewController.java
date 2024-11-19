@@ -89,6 +89,14 @@ public class MarketplaceViewController {
         }
     }
 
+    public void bloquearTabAdministrador() {
+        administradorTab.setDisable(true);
+    }
+
+    public void habilitarTabAdministrador() {
+        administradorTab.setDisable(false);
+    }
+
 
     public void agregarTabVendedor(String cedula) {
         if (cedula == null || cedula.isEmpty()) {

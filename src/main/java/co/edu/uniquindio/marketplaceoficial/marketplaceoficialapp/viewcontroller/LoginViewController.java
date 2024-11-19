@@ -53,14 +53,12 @@ public class LoginViewController {
         VendedorUsuarioDto vendedor = loginController.autenticarUsuario(usuario, contrasena);
 
         if (vendedor != null) {
-            // El usuario es un vendedor, usamos la EstrategiaLoginVendedor
             EstrategiaLogin estrategia = new EstrategiaLoginVendedor();
             abrirMarketplaceView(estrategia, vendedor.cedula());
         } else {
-            // El usuario es un administrador, usamos la EstrategiaLoginAdministrador
             if (esAdministrador(usuario, contrasena)) {
                 EstrategiaLogin estrategia = new EstrategiaLoginAdministrador();
-                abrirMarketplaceView(estrategia, null);  // No se necesita cédula para el admin
+                abrirMarketplaceView(estrategia, null);
             } else {
                 mostrarMensaje(TITULO_INCORRECTO, HEADER, BODY_INCORRECTO, Alert.AlertType.ERROR);
             }
@@ -73,7 +71,7 @@ public class LoginViewController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplaceoficial/marketplaceoficialapp/marketplace.fxml"));
             Parent root = loader.load();
             MarketplaceViewController marketplaceController = loader.getController();
-            estrategia.abrirTab(marketplaceController, cedula);  // Pasamos cédula si es un vendedor
+            estrategia.abrirTab(marketplaceController, cedula);
             Stage stage = (Stage) txtUsuario.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

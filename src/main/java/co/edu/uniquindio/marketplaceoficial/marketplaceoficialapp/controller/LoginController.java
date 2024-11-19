@@ -6,17 +6,31 @@ import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.dto.Ve
 public class LoginController {
 
     private ModelFactory modelFactory;
+    private static VendedorUsuarioDto vendedorLogueado;
+
 
     public LoginController() {
         modelFactory = ModelFactory.getInstance();
     }
 
+
     public VendedorUsuarioDto autenticarUsuario(String usuario, String contrasena) {
-        return modelFactory.getVendedoresUsuarioDto()
+
+        VendedorUsuarioDto vendedor = modelFactory.getVendedoresUsuarioDto()
                 .stream()
                 .filter(v -> v.nombreUsuario().equals(usuario) && v.contrasena().equals(contrasena))
                 .findFirst()
                 .orElse(null);
+
+        if (vendedor != null) {
+            vendedorLogueado = vendedor;
+        }
+
+        return vendedor;
+    }
+
+    public static VendedorUsuarioDto getVendedorLogueado() {
+        return vendedorLogueado;
     }
 }
 

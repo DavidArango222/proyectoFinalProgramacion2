@@ -19,7 +19,7 @@
     <children>
         <TabPane prefHeight="658.0" prefWidth="1180.0" side="LEFT" stylesheets="@../../../../../styles.css" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="Productos">
+                <Tab fx:id="tabProductos" text="Productos">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                             <children>
@@ -161,7 +161,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Muro">
+                <Tab fx:id="tabMuro" text="Muro">
                     <content>
                         <AnchorPane maxWidth="-Infinity" prefHeight="2009.0" prefWidth="1146.0">
                             <children>

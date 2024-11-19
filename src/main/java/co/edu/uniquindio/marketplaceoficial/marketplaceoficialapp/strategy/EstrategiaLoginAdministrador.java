@@ -7,6 +7,7 @@ public class EstrategiaLoginAdministrador implements EstrategiaLogin {
 
     @Override
     public void abrirTab(MarketplaceViewController controller, String cedula) {
+        controller.habilitarTabAdministrador();
         controller.getMainTab().getSelectionModel().select(controller.getAdministradorTab());
     }
 }

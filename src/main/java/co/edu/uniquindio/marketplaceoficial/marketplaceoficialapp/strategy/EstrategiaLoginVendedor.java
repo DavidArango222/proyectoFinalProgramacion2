@@ -7,6 +7,7 @@ public class EstrategiaLoginVendedor implements EstrategiaLogin {
 
     @Override
     public void abrirTab(MarketplaceViewController controller, String cedula) {
+        controller.bloquearTabAdministrador();
         controller.mostrarTabVendedor(cedula);
     }
 }

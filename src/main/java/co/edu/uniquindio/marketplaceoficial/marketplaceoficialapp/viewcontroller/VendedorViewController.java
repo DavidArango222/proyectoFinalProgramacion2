@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.LoginController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.VendedorController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.dto.VendedorUsuarioDto;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Marketplace;
@@ -41,6 +42,12 @@ public class VendedorViewController implements IObservador {
 
     @FXML
     private URL location;
+
+    @FXML
+    private Tab tabMuro;
+
+    @FXML
+    private Tab tabProductos;
 
     @FXML
     private Button btnCrearProducto;
@@ -287,8 +294,32 @@ public class VendedorViewController implements IObservador {
         this.cedula = cedula;
         labelCedula.setText(cedula);
         System.out.println("Cédula actualizada en la vista: " + cedula);
+
         obtenerProductosVendedor(cedula);
+
+        verificarPermisosTabs();
     }
+
+    private void verificarPermisosTabs() {
+        VendedorUsuarioDto vendedorLogueado = LoginController.getVendedorLogueado();
+
+        if(vendedorLogueado!=null){
+            boolean esVendedorActual = this.cedula.equals(vendedorLogueado.cedula());
+
+            if (esVendedorActual) {
+                tabProductos.setDisable(false);
+                tabMuro.setDisable(false);
+            } else {
+                tabProductos.setDisable(true);
+                tabMuro.setDisable(false);
+            }
+        }else{
+            tabProductos.setDisable(false);
+            tabMuro.setDisable(false);
+        }
+    }
+
+
 
     private void obtenerProductosVendedor(String cedula) {
         if (cedula == null || cedula.isEmpty()) {
