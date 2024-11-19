@@ -172,7 +172,8 @@ public class EstadisticasViewController {
         List<Producto> topProductos = estadisticasController.obtenerTopProductosLikes();
         contenidoReporte.append("Top 10 productos con más likes:\n");
         for (Producto producto : topProductos) {
-            contenidoReporte.append(producto.getNombre()).append("\n");
+            contenidoReporte.append("Producto: ").append(producto.getNombre()).append(",  ")
+                    .append("Cantidad de likes: ").append(producto.getPublicacion().getLike()).append("\n");
         }
     }
 
@@ -182,13 +183,15 @@ public class EstadisticasViewController {
         for (Map.Entry<String, Integer> entry : contactosPorVendedor.entrySet()) {
             String cedula = entry.getKey();
             Integer cantidadContactos = entry.getValue();
-            contenidoReporte.append("Vendedor (Cédula: ").append(cedula).append("): ").append(cantidadContactos).append(" contactos\n");
+            contenidoReporte.append("Vendedor (Cédula: ").append(cedula).append("): ")
+                    .append(cantidadContactos).append(" contactos\n");
         }
     }
 
     private void anadirProductosPublicadosVendedor(StringBuilder contenidoReporte) {
         int productosVendedor = estadisticasController.contarProductosPorVendedor(txtCedulaBuscar.getText());
-        contenidoReporte.append("Cantidad de productos publicados por el vendedor: ").append(productosVendedor).append("\n");
+        contenidoReporte.append("Cantidad de productos publicados por el vendedor: ")
+                .append(productosVendedor).append("\n");
     }
 
     private void anadirProductosPublicadosFecha(StringBuilder contenidoReporte) {

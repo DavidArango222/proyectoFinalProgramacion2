@@ -18,6 +18,7 @@ import static co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils.M
 
 public class MarketplaceViewController {
     private static String currentCedula; // Variable estática para almacenar la cédula actual
+    
 
     public static String getCurrentCedula() {
         return currentCedula;

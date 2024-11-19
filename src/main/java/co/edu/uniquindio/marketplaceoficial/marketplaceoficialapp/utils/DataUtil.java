@@ -169,6 +169,13 @@ public class DataUtil{
         Mensaje mensaje1 = new Mensaje("Hola, ¿cómo estás?", vendedor1, vendedor2);
         Mensaje mensaje2 = new Mensaje("¿Tienes disponibles más productos?", vendedor2, vendedor1);
         Mensaje mensaje3 = new Mensaje("Me interesa tu oferta.", vendedor3, vendedor4);
+        Comentario comentario1 = new Comentario(usuario2, "¡Qué buen producto!");
+        Comentario comentario2 = new Comentario(usuario3, "Me interesa, ¿cómo puedo comprar?");
+
+        vendedor1.getMuro().getPublicaciones().add(publicacion1);
+
+        publicacion1.getComentarios().add(comentario1);
+        publicacion1.getComentarios().add(comentario2);
         marketplace.getVendedores().add(vendedor1);
         marketplace.getVendedores().add(vendedor2);
         marketplace.getVendedores().add(vendedor3);
@@ -186,6 +193,22 @@ public class DataUtil{
         marketplace.getMensajes().add(mensaje1);
         marketplace.getMensajes().add(mensaje2);
         marketplace.getMensajes().add(mensaje3);
+
+        marketplace.getProductos().add(producto1);
+        marketplace.getProductos().add(producto2);
+        marketplace.getProductos().add(producto3);
+        marketplace.getProductos().add(producto4);
+        marketplace.getProductos().add(producto5);
+        marketplace.getProductos().add(producto6);
+        marketplace.getProductos().add(producto7);
+        marketplace.getProductos().add(producto8);
+        marketplace.getProductos().add(producto9);
+        marketplace.getProductos().add(producto10);
+        marketplace.getProductos().add(producto11);
+
+        vendedor1.getMuro().getMensajes().add(mensaje1);
+        vendedor2.getMuro().getMensajes().add(mensaje2);
+        vendedor3.getMuro().getMensajes().add(mensaje3);
         return marketplace;
     }
 }

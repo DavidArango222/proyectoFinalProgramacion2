@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -12,7 +13,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import static co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils.MarketplaceConstantes.*;
 
@@ -37,6 +42,9 @@ public class AdministradorViewController implements IObservador {
 
     @FXML
     private Button btnEliminar;
+
+    @FXML
+    private Button btnLogout;
 
     @FXML
     private TableView<VendedorUsuarioDto> tableVendedor;
@@ -76,6 +84,20 @@ public class AdministradorViewController implements IObservador {
 
     @FXML
     private TextField txtUsuario;
+
+    @FXML
+    void onActionLogout(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplaceoficial/marketplaceoficialapp/login.fxml"));
+            Parent root = loader.load();
+            Scene loginScene = new Scene(root);
+            Stage stage = (Stage) btnLogout.getScene().getWindow();
+            stage.setScene(loginScene);
+            stage.show();
+        } catch (IOException e) {
+            mostrarMensaje("Error", "No se pudo cargar la pantalla de inicio de sesión", e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
 
     @FXML
     void onActionAgregar(ActionEvent event) {

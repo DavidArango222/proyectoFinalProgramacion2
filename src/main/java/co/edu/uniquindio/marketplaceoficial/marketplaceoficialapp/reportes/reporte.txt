@@ -1,1 +1,11 @@
 Top 10 productos con más likes:
+Producto: Cámara  Cantidad de likes: 30
+Producto: Netflix  Cantidad de likes: 25
+Producto: Guitarra  Cantidad de likes: 22
+Producto: Smoking  Cantidad de likes: 20
+Producto: Bicicleta  Cantidad de likes: 18
+Producto: Reloj  Cantidad de likes: 16
+Producto: Vaca  Cantidad de likes: 15
+Producto: Zapatos  Cantidad de likes: 14
+Producto: Mochila  Cantidad de likes: 13
+Producto: Libro  Cantidad de likes: 12

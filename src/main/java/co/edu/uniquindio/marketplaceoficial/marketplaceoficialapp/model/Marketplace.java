@@ -31,9 +31,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
     }
 
     public List<Producto> getProductos() {
-        List<Producto> productosActualizados = new ArrayList<>();
-        agregarProductosVendedores(productosActualizados);
-        return productosActualizados;
+        return productos;
     }
 
     private void agregarProductosVendedores(List<Producto> listaProductos) {
@@ -315,19 +313,13 @@ public class Marketplace implements IVendedorCrud, IObservable {
     public List<Producto> obtenerTopProductosLikes() {
         Map<Producto, Integer> productoLikesMap = new HashMap<>();
         for (Producto producto : productos) {
-            Vendedor vendedor = producto.getVendedor();
-            if (vendedor != null && vendedor.getMuro() != null) {
-                Muro muro = vendedor.getMuro();
-                for (Publicacion publicacion : muro.getPublicaciones()) {
-                    if (publicacion != null) {
-                        productoLikesMap.put(
-                                producto,
-                                productoLikesMap.getOrDefault(producto, 0) + publicacion.getLike()
-                        );
-                    }
-                }
+            Publicacion publicacion = producto.getPublicacion();
+            if (publicacion != null) {
+                int likes = publicacion.getLike();
+                productoLikesMap.put(producto, likes);
             }
         }
+
         return productoLikesMap.entrySet()
                 .stream()
                 .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
@@ -335,6 +327,7 @@ public class Marketplace implements IVendedorCrud, IObservable {
                 .map(Map.Entry::getKey)
                 .toList();
     }
+
 
     public List<Vendedor> getContactosMensajes(String cedulaContacto) {
         return obtenerVendedor(cedulaContacto).getContactos();

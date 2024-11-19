@@ -31,6 +31,7 @@ public class Vendedor extends Persona implements IProductoCrud, IObservable {
                     Usuario usuarioAsociado) {
         super(nombre,apellido,cedula,direccion);
         this.usuarioAsociado=usuarioAsociado;
+        this.muro= new Muro();
     }
 
     public Usuario getUsuarioAsociado() {
