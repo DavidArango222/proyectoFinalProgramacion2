@@ -162,5 +162,120 @@
     -fx-pref-width: 5; /* Grosor del divisor */
 }
 
+/* Estilo base del CheckBox */
+.custom-checkbox {
+    -fx-text-fill: #4B0082;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 5px 10px;
+}
+
+/* Estilo del cuadro (sin seleccionar) */
+.custom-checkbox .box {
+    -fx-background-color: transparent;
+    -fx-border-color: #4B0082;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px; /* Bordes redondeados */
+    -fx-pref-width: 20px;
+    -fx-pref-height: 20px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(75, 0, 130, 0.2), 5, 0.0, 0, 1);
+    -fx-transition: 0.3s ease-in-out;
+}
+
+/* Estado seleccionado */
+.custom-checkbox:selected .box {
+    -fx-background-color: linear-gradient(to bottom, #7A42F4, #4B0082);
+    -fx-border-color: #7A42F4;
+}
+
+/* Marca dentro del CheckBox al seleccionarlo */
+.custom-checkbox:selected .mark {
+    -fx-background-color: white;
+    -fx-border-radius: 3px;
+    -fx-pref-width: 12px;
+    -fx-pref-height: 12px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.5), 5, 0.0, 0, 1);
+}
+
+/* Estado al presionar el CheckBox */
+.custom-checkbox .box:pressed {
+    -fx-background-color: linear-gradient(to bottom, #4B0082, #7A42F4);
+    -fx-border-color: #7A42F4;
+}
+
+
+/* Estilo para DatePicker */
+.custom-datepicker {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f0f0f0);
+    -fx-border-color: #4B0082;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-padding: 2px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #4B0082;
+    -fx-cursor: hand;
+}
+
+.custom-datepicker .arrow-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #4B0082;
+    -fx-border-radius: 50%;
+    -fx-pref-width: 20px;
+    -fx-pref-height: 20px;
+}
+
+.custom-datepicker .arrow-button:hover {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 50%, #4B0082, #7A42F4);
+    -fx-border-color: #7A42F4;
+}
+
+.custom-datepicker:hover {
+    -fx-border-color: #7A42F4;
+    -fx-effect: dropshadow(three-pass-box, rgba(75, 0, 130, 0.3), 5, 0.0, 0, 1);
+}
+
+.custom-datepicker:focused {
+    -fx-border-color: #4B0082;
+    -fx-effect: dropshadow(three-pass-box, rgba(75, 0, 130, 0.5), 8, 0.0, 0, 2);
+}
+
+/* Estilo base para RadioButton */
+.custom-radio-button {
+    -fx-text-fill: #4B0082;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 10px;
+    -fx-cursor: hand;
+}
+
+.custom-radio-button .radio {
+    -fx-background-color: transparent;
+    -fx-border-color: #4B0082;
+    -fx-border-width: 2px;
+    -fx-border-radius: 50%; /* Forma circular */
+    -fx-pref-width: 20px;
+    -fx-pref-height: 20px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(75, 0, 130, 0.2), 5, 0.0, 0, 1);
+}
+
+.custom-radio-button:selected .radio {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 50%, #4B0082, #7A42F4);
+    -fx-border-color: #7A42F4;
+}
+
+.custom-radio-button:selected .mark {
+    -fx-background-color: white;
+    -fx-border-radius: 50%;
+    -fx-pref-width: 10px;
+    -fx-pref-height: 10px;
+    -fx-alignment: center;
+}
+
+
+
 
 

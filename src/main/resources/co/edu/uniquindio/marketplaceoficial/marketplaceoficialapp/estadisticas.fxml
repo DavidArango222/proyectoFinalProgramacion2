@@ -8,42 +8,83 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller.EstadisticasViewController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1120.0" stylesheets="@../../../../../styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller.EstadisticasViewController">
    <content>
       <AnchorPane prefHeight="913.0" prefWidth="1099.0">
          <children>
-            <Label layoutX="528.0" layoutY="41.0" text="Reporte" />
-            <CheckBox fx:id="chkAñadirReporteMensajesVendedores" layoutX="40.0" layoutY="134.0" mnemonicParsing="false" onAction="#onChkAñadirReporteMensajesVendedores" text="Añadir en el reporte" />
+            <ImageView fitHeight="900.0" fitWidth="1120.0" layoutX="-5.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../images/informeFondo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="474.0" layoutY="14.0" text="Reporte" textFill="#372b69">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font></Label>
+            <CheckBox fx:id="chkAñadirReporteMensajesVendedores" layoutX="40.0" layoutY="128.0" mnemonicParsing="false" onAction="#onChkAñadirReporteMensajesVendedores" styleClass="custom-checkbox" text="Añadir en el reporte" />
             <Separator layoutX="26.0" layoutY="77.0" prefHeight="5.0" prefWidth="1045.0" />
-            <Label layoutX="40.0" layoutY="99.0" text="Cantidad de mensajes enviados entre 2 vendedores" />
-            <TextField fx:id="txtCedulaVendedor1" layoutX="252.0" layoutY="172.0" prefHeight="25.0" prefWidth="230.0" />
-            <Label layoutX="126.0" layoutY="176.0" text="Cédula Vendedor 1:" />
-            <TextField fx:id="txtCedulaVendedor2" layoutX="742.0" layoutY="172.0" prefHeight="25.0" prefWidth="230.0" />
-            <Label layoutX="616.0" layoutY="176.0" text="Cédula Vendedor 2:" />
+            <Label layoutX="40.0" layoutY="99.0" text="Cantidad de mensajes enviados entre 2 vendedores" textFill="#372b69">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <TextField fx:id="txtCedulaVendedor1" layoutX="252.0" layoutY="172.0" prefHeight="25.0" prefWidth="230.0" styleClass="rounded-label" />
+            <Label layoutX="111.0" layoutY="175.0" text="Cédula Vendedor 1:" textFill="#372b69">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <TextField fx:id="txtCedulaVendedor2" layoutX="742.0" layoutY="172.0" prefHeight="25.0" prefWidth="230.0" styleClass="rounded-label" />
+            <Label layoutX="599.0" layoutY="175.0" text="Cédula Vendedor 2:" textFill="#372b69">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
             <Separator layoutX="27.0" layoutY="228.0" prefHeight="5.0" prefWidth="1045.0" />
-            <CheckBox fx:id="chkProductosPublicadosFecha" layoutX="31.0" layoutY="295.0" mnemonicParsing="false" onAction="#onChkProductosPublicadosFecha" text="Añadir en el reporte" />
-            <Label layoutX="31.0" layoutY="260.0" text="Cantidad de productos publicados entre determinada fecha " />
-            <DatePicker fx:id="DateInicio" layoutX="248.0" layoutY="331.0" prefHeight="25.0" prefWidth="230.0" />
-            <Label layoutX="132.0" layoutY="335.0" text="Fecha inicio:" />
-            <DatePicker fx:id="DateFin" layoutX="738.0" layoutY="331.0" prefHeight="25.0" prefWidth="230.0" />
-            <Label layoutX="638.0" layoutY="335.0" text="Fecha Fin:" />
+            <CheckBox fx:id="chkProductosPublicadosFecha" layoutX="40.0" layoutY="292.0" mnemonicParsing="false" onAction="#onChkProductosPublicadosFecha" styleClass="custom-checkbox" text="Añadir en el reporte" />
+            <Label layoutX="31.0" layoutY="260.0" text="Cantidad de productos publicados entre determinada fecha " textFill="#372b69">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <DatePicker fx:id="DateInicio" layoutX="248.0" layoutY="331.0" prefHeight="11.0" prefWidth="230.0" styleClass="custom-datepicker" />
+            <Label layoutX="111.0" layoutY="335.0" text="Fecha inicio:" textFill="#372b69">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <DatePicker fx:id="DateFin" layoutX="738.0" layoutY="331.0" prefHeight="25.0" prefWidth="230.0" styleClass="custom-datepicker" />
+            <Label layoutX="601.0" layoutY="335.0" text="Fecha Fin:" textFill="#372b69">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
             <Separator layoutX="26.0" layoutY="384.0" prefHeight="5.0" prefWidth="1045.0" />
-            <CheckBox fx:id="chkAñadirProductosPublicadosVendedor" layoutX="31.0" layoutY="446.0" mnemonicParsing="false" onAction="#onChkAñadirProductosPublicadosVendedor" text="Añadir en el reporte" />
-            <Label layoutX="31.0" layoutY="411.0" text="Cantidad de productos publicados por un vendedor" />
-            <TextField fx:id="txtCedulaBuscar" layoutX="243.0" layoutY="484.0" prefHeight="25.0" prefWidth="230.0" />
-            <Label layoutX="117.0" layoutY="488.0" text="Cédula Vendedor:" />
+            <CheckBox fx:id="chkAñadirProductosPublicadosVendedor" layoutX="40.0" layoutY="443.0" mnemonicParsing="false" onAction="#onChkAñadirProductosPublicadosVendedor" styleClass="custom-checkbox" text="Añadir en el reporte" />
+            <Label layoutX="31.0" layoutY="411.0" text="Cantidad de productos publicados por un vendedor" textFill="#372b69">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <TextField fx:id="txtCedulaBuscar" layoutX="248.0" layoutY="480.0" prefHeight="25.0" prefWidth="230.0" styleClass="rounded-label" />
+            <Label layoutX="111.0" layoutY="487.0" text="Cédula Vendedor:" textFill="#372b69">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
             <Separator layoutX="26.0" layoutY="539.0" prefHeight="5.0" prefWidth="1045.0" />
-            <CheckBox fx:id="chkCantidadContactos" layoutX="31.0" layoutY="605.0" mnemonicParsing="false" onAction="#onChkCantidadContactos" text="Añadir en el reporte" />
-            <Label layoutX="31.0" layoutY="570.0" text=" Cantidad de contactos por cada vendedor" />
+            <CheckBox fx:id="chkCantidadContactos" layoutX="40.0" layoutY="601.0" mnemonicParsing="false" onAction="#onChkCantidadContactos" styleClass="custom-checkbox" text="Añadir en el reporte" />
+            <Label layoutX="31.0" layoutY="570.0" text=" Cantidad de contactos por cada vendedor" textFill="#372b69">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
             <Separator layoutX="26.0" layoutY="651.0" prefHeight="5.0" prefWidth="1045.0" />
-            <CheckBox fx:id="chkAñadirTopProductos" layoutX="31.0" layoutY="716.0" mnemonicParsing="false" onAction="#onChkAñadirTopProductos" text="Añadir en el reporte" />
-            <Label layoutX="31.0" layoutY="681.0" text="Top 10 de los productos con más me gusta" />
+            <CheckBox fx:id="chkAñadirTopProductos" layoutX="40.0" layoutY="713.0" mnemonicParsing="false" onAction="#onChkAñadirTopProductos" styleClass="custom-checkbox" text="Añadir en el reporte" />
+            <Label layoutX="31.0" layoutY="681.0" text="Top 10 de los productos con más me gusta" textFill="#372b69">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
             <Separator layoutX="26.0" layoutY="766.0" prefHeight="5.0" prefWidth="1045.0" />
-            <Button fx:id="btnGenerarReporte" layoutX="497.0" layoutY="852.0" mnemonicParsing="false" onAction="#onGenerarReporte" text="Generar Reporte" />
-            <RadioButton fx:id="selectionPdf" layoutX="452.0" layoutY="800.0" mnemonicParsing="false" onAction="#onSelectionPdf" text="PDF" />
-            <RadioButton fx:id="selectionTexto" layoutX="601.0" layoutY="800.0" mnemonicParsing="false" onAction="#onSelectionTexto" text="Texto" />
+            <Button fx:id="btnGenerarReporte" layoutX="485.0" layoutY="847.0" mnemonicParsing="false" onAction="#onGenerarReporte" prefHeight="26.0" prefWidth="126.0" styleClass="rounded-button" text="Generar Reporte" />
+            <RadioButton fx:id="selectionPdf" layoutX="426.0" layoutY="800.0" mnemonicParsing="false" onAction="#onSelectionPdf" styleClass="custom-radio-button" text="PDF" />
+            <RadioButton fx:id="selectionTexto" layoutX="579.0" layoutY="800.0" mnemonicParsing="false" onAction="#onSelectionTexto" styleClass="custom-radio-button" text="Texto" />
          </children>
       </AnchorPane>
    </content>
