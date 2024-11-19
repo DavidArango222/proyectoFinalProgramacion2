@@ -200,7 +200,9 @@ public class EstadisticasViewController {
         LocalDateTime fechaInicio = fechaInicioLocal.atStartOfDay();
         LocalDateTime fechaFin = fechaFinLocal.atTime(23, 59, 59);
         int productosFecha = estadisticasController.contarProductosFechas(fechaInicio, fechaFin);
-        contenidoReporte.append("Cantidad de productos publicados entre fechas: ").append(productosFecha).append("\n");
+        contenidoReporte.append("Cantidad de productos publicados entre fechas: ").append(productosFecha).append("\n")
+                .append("Fecha inicio: ").append(fechaInicioLocal).append("\n")
+                .append("Fecha fin: ").append(fechaFinLocal).append("\n");
     }
 
     private void anadirReporteMensajesVendedores(StringBuilder contenidoReporte) {

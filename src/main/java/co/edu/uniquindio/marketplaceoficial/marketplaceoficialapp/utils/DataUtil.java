@@ -3,6 +3,8 @@ package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.*;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.TipoEstado;
 
+import java.time.LocalDateTime;
+
 public class DataUtil{
     public static Marketplace inicializarDatos() {
         Marketplace marketplace = Marketplace.builder()
@@ -99,6 +101,7 @@ public class DataUtil{
                 .precio(1500000)
                 .imagen("vaca.jpg")
                 .tipoEstado(TipoEstado.PUBLICADO)
+                .fecha(LocalDateTime.of(2024, 1, 15, 10, 30))
                 .build();
         Producto producto2 = Producto.builder()
                 .nombre("Smoking")
@@ -107,6 +110,7 @@ public class DataUtil{
                 .precio(500000)
                 .imagen("smoking.jpg")
                 .tipoEstado(TipoEstado.PUBLICADO)
+                .fecha(LocalDateTime.of(2024, 2, 5, 14, 0))
                 .build();
         Producto producto3 = Producto.builder()
                 .nombre("Netflix")
@@ -115,6 +119,7 @@ public class DataUtil{
                 .precio(17000)
                 .imagen("netflix.png")
                 .tipoEstado(TipoEstado.PUBLICADO)
+                .fecha(LocalDateTime.of(2024, 3, 10, 9, 15))
                 .build();
         Producto producto4 = Producto.builder()
                 .nombre("Cámara")
@@ -123,6 +128,7 @@ public class DataUtil{
                 .precio(1200000)
                 .imagen("camara.jpg")
                 .tipoEstado(TipoEstado.PUBLICADO)
+                .fecha(LocalDateTime.of(2024, 4, 25, 16, 45))
                 .build();
         Producto producto5 = Producto.builder()
                 .nombre("Libro")
@@ -131,6 +137,7 @@ public class DataUtil{
                 .precio(30000)
                 .imagen("libro.jpg")
                 .tipoEstado(TipoEstado.PUBLICADO)
+                .fecha(LocalDateTime.of(2024, 5, 20, 8, 0))
                 .build();
         Producto producto6 = Producto.builder()
                 .nombre("Celular")
@@ -138,42 +145,54 @@ public class DataUtil{
                 .idProducto("60A")
                 .precio(900000)
                 .imagen("celular.jpg")
-                .tipoEstado(TipoEstado.PUBLICADO).build();
+                .tipoEstado(TipoEstado.PUBLICADO)
+                .fecha(LocalDateTime.of(2024, 6, 15, 11, 30))
+                .build();
         Producto producto7 = Producto.builder()
                 .nombre("Bicicleta")
                 .categoria("deportes")
                 .idProducto("70A")
                 .precio(800000)
                 .imagen("bicicleta.jpg")
-                .tipoEstado(TipoEstado.PUBLICADO).build();
+                .tipoEstado(TipoEstado.PUBLICADO)
+                .fecha(LocalDateTime.of(2024, 7, 10, 13, 15))
+                .build();
         Producto producto8 = Producto.builder()
                 .nombre("Guitarra")
                 .categoria("música")
                 .idProducto("80A")
                 .precio(700000)
                 .imagen("guitarra.jpg")
-                .tipoEstado(TipoEstado.PUBLICADO).build();
+                .tipoEstado(TipoEstado.PUBLICADO)
+                .fecha(LocalDateTime.of(2024, 8, 5, 17, 0))
+                .build();
         Producto producto9 = Producto.builder()
                 .nombre("Reloj")
                 .categoria("accesorios")
                 .idProducto("90A")
                 .precio(150000)
                 .imagen("reloj.jpg")
-                .tipoEstado(TipoEstado.PUBLICADO).build();
+                .tipoEstado(TipoEstado.PUBLICADO)
+                .fecha(LocalDateTime.of(2024, 9, 30, 10, 0))
+                .build();
         Producto producto10 = Producto.builder()
                 .nombre("Zapatos")
                 .categoria("ropa")
                 .idProducto("100A")
                 .precio(200000)
                 .imagen("zapatos.jpg")
-                .tipoEstado(TipoEstado.PUBLICADO).build();
+                .tipoEstado(TipoEstado.PUBLICADO)
+                .fecha(LocalDateTime.of(2024, 10, 20, 15, 45))
+                .build();
         Producto producto11 = Producto.builder()
                 .nombre("Mochila")
                 .categoria("accesorios")
                 .idProducto("110A")
                 .precio(120000)
                 .imagen("mochila.jpg")
-                .tipoEstado(TipoEstado.PUBLICADO).build();
+                .tipoEstado(TipoEstado.PUBLICADO)
+                .fecha(LocalDateTime.of(2024, 11, 5, 12, 30))
+                .build();
         Publicacion publicacion1 = new Publicacion(15, producto1);
         Publicacion publicacion2 = new Publicacion(20, producto2);
         Publicacion publicacion3 = new Publicacion(25, producto3);
