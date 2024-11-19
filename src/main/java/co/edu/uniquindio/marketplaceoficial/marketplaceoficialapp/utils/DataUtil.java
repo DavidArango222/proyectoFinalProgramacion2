@@ -236,17 +236,17 @@ public class DataUtil{
         marketplace.getMensajes().add(mensaje2);
         marketplace.getMensajes().add(mensaje3);
 
-        marketplace.getProductos().add(producto1);
-        marketplace.getProductos().add(producto2);
-        marketplace.getProductos().add(producto3);
-        marketplace.getProductos().add(producto4);
-        marketplace.getProductos().add(producto5);
-        marketplace.getProductos().add(producto6);
-        marketplace.getProductos().add(producto7);
-        marketplace.getProductos().add(producto8);
-        marketplace.getProductos().add(producto9);
-        marketplace.getProductos().add(producto10);
-        marketplace.getProductos().add(producto11);
+        marketplace.obtenerProductos().add(producto1);
+        marketplace.obtenerProductos().add(producto2);
+        marketplace.obtenerProductos().add(producto3);
+        marketplace.obtenerProductos().add(producto4);
+        marketplace.obtenerProductos().add(producto5);
+        marketplace.obtenerProductos().add(producto6);
+        marketplace.obtenerProductos().add(producto7);
+        marketplace.obtenerProductos().add(producto8);
+        marketplace.obtenerProductos().add(producto9);
+        marketplace.obtenerProductos().add(producto10);
+        marketplace.obtenerProductos().add(producto11);
 
         vendedor1.getMuro().getMensajes().add(mensaje1);
         vendedor2.getMuro().getMensajes().add(mensaje2);
