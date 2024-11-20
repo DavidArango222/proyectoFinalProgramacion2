@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.LoginController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.MuroController;
@@ -13,6 +14,7 @@ import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.mapper
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.*;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.IObservador;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.TipoEstado;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -54,6 +56,9 @@ public class MuroViewController implements IObservador {
 
     @FXML
     private Label comentario;
+
+    @FXML
+    private TextField comentarioVendedor;
 
     @FXML
     private ImageView imgProducto;
@@ -197,8 +202,36 @@ public class MuroViewController implements IObservador {
 
     @FXML
     void onActionEnviarMensaje(ActionEvent event) {
-
+        Vendedor contactoSeleccionado = tableContactosMensajes.getSelectionModel().getSelectedItem();
+        if (contactoSeleccionado == null) {
+            System.out.println("Debe seleccionar un contacto.");
+            return;
+        }
+        String mensajeTexto = comentarioVendedor.getText();
+        if (mensajeTexto == null || mensajeTexto.isEmpty()) {
+            System.out.println("El mensaje está vacío.");
+            return;
+        }
+        Mensaje nuevoMensaje = new Mensaje(
+                mensajeTexto,
+                muroController.obtenerVendedor(cedula), // Emisor
+                contactoSeleccionado                    // Receptor
+        );
+        muroController.enviarMensaje(cedula, nuevoMensaje);
+        comentarioVendedor.clear();
+        mostrarMensajesContacto(contactoSeleccionado);
+        actualizar();
     }
+
+    private void actualizarChatDestinatario(String cedulaDestinatario) {
+        Vendedor destinatario = muroController.obtenerVendedor(cedulaDestinatario);
+        if (destinatario != null) {
+            // Llama al método que muestra los mensajes para ese destinatario
+            mostrarMensajesContacto(destinatario);
+        }
+    }
+
+
 
     @FXML
     void onActionLike(ActionEvent event) {
@@ -225,6 +258,10 @@ public class MuroViewController implements IObservador {
         marketplace.agregarObservador(this);
         initView();
         actualizar();
+        if (!tableContactosMensajes.getItems().isEmpty()) {
+            tableContactosMensajes.getSelectionModel().select(0);
+            mostrarMensajesContacto(tableContactosMensajes.getSelectionModel().getSelectedItem());
+        }
     }
 
 
@@ -237,8 +274,33 @@ public class MuroViewController implements IObservador {
         initDataBindingTableVendedores();
         listenerSelectionTableProducto();
         listenerSelectionTableContactosAgregados();
+        listenerSelectionTableContactosMensajes();
         agregarLikes();
         agregarComentarios();
+    }
+
+    private void listenerSelectionTableContactosMensajes() {
+        tableContactosMensajes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                mostrarMensajesContacto(newSelection);
+            }
+        });
+    }
+
+    private void mostrarMensajesContacto(Vendedor contactoSeleccionado) {
+        if (contactoSeleccionado == null) {
+            txtMensajes.clear();
+            return;
+        }
+        List<Mensaje> mensajes = muroController.getMensajesEntreUsuarios(cedula, contactoSeleccionado.getCedula());
+        if (mensajes != null && !mensajes.isEmpty()) {
+            String mensajesConcatenados = mensajes.stream()
+                    .map(m -> m.getRemitente().getNombre() + ": " + m.getMensaje())
+                    .collect(Collectors.joining("\n"));
+            txtMensajes.setText(mensajesConcatenados);
+        } else {
+            txtMensajes.setText("No hay mensajes aún.");
+        }
     }
 
     private void initDataBindingTableComentarios() {
@@ -358,6 +420,10 @@ public class MuroViewController implements IObservador {
         obtenerContantosAgregados(cedula);
         obtenerVendedores();
         obtenerContactosMensajes();
+        Vendedor contactoSeleccionado = tableContactosMensajes.getSelectionModel().getSelectedItem();
+        if (contactoSeleccionado != null) {
+            mostrarMensajesContacto(contactoSeleccionado);
+        }
     }
 
 

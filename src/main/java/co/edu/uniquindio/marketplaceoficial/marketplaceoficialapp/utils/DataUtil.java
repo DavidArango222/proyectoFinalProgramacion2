@@ -89,6 +89,7 @@ public class DataUtil{
                 .build();
         vendedor1.getContactos().add(vendedor2);
         vendedor2.getContactos().add(vendedor3);
+        vendedor2.getContactos().add(vendedor1);
         vendedor3.getContactos().add(vendedor4);
         vendedor4.getContactos().add(vendedor5);
         vendedor5.getContactos().add(vendedor6);

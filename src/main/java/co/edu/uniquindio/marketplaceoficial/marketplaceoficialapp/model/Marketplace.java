@@ -345,29 +345,50 @@ public class Marketplace implements IVendedorCrud, IObservable {
     public void agregarContacto(String cedula, String cedula1) {
         Vendedor vendedor = obtenerVendedor(cedula);
         Vendedor vendedor1 = obtenerVendedor(cedula1);
-        if (vendedor != null && vendedor1 != null) {
-            boolean vendedorNoEnContactosDeVendedor1 = true;
-            boolean vendedor1NoEnContactosDeVendedor = true;
-            Iterator<Vendedor> iteratorVendedor1 = vendedor1.getContactos().iterator();
-            while (iteratorVendedor1.hasNext()) {
-                if (iteratorVendedor1.next().equals(vendedor)) {
-                    vendedorNoEnContactosDeVendedor1 = false;
-                    break;
-                }
-            }
-            Iterator<Vendedor> iteratorVendedor = vendedor.getContactos().iterator();
-            while (iteratorVendedor.hasNext()) {
-                if (iteratorVendedor.next().equals(vendedor1)) {
-                    vendedor1NoEnContactosDeVendedor = false;
-                    break;
-                }
-            }
-            if (vendedorNoEnContactosDeVendedor1 && vendedor1NoEnContactosDeVendedor) {
-                vendedor.getContactos().add(vendedor1);
-                vendedor1.getContactos().add(vendedor);
-                notificarObservadores();
-            }
-        }
 
+        if (vendedor != null && vendedor1 != null) {
+            // Verifica si el vendedor1 ya está en los contactos de vendedor
+            boolean vendedor1NoEnContactosDeVendedor = vendedor.getContactos().stream()
+                    .noneMatch(contacto -> contacto.equals(vendedor1));
+
+            // Verifica si el vendedor ya está en los contactos de vendedor1
+            boolean vendedorNoEnContactosDeVendedor1 = vendedor1.getContactos().stream()
+                    .noneMatch(contacto -> contacto.equals(vendedor));
+
+            // Agrega los contactos si aún no están en las respectivas listas
+            if (vendedor1NoEnContactosDeVendedor) {
+                vendedor.getContactos().add(vendedor1);
+            }
+
+            if (vendedorNoEnContactosDeVendedor1) {
+                vendedor1.getContactos().add(vendedor);
+            }
+
+            // Notifica a los observadores para actualizar la vista
+            notificarObservadores();
+        }
+    }
+
+
+    public List<Mensaje> getMensajesVendedor(String cedula) {
+        Vendedor vendedor = obtenerVendedor(cedula);
+        if (vendedor!= null) {
+            return vendedor.getMuro().getMensajes();
+        }
+        return Collections.emptyList();
+    }
+
+    public void enviarMensaje(String cedula, Mensaje mensaje) {
+        getMensajes().add(mensaje);
+        notificarObservadores();
+    }
+
+    public List<Mensaje> getMensajesEntreUsuarios(String cedulaEmisor, String cedulaReceptor) {
+        return getMensajes().stream()
+                .filter(mensaje -> (mensaje.getRemitente().getCedula().equals(cedulaEmisor)
+                        && mensaje.getDestinatario().getCedula().equals(cedulaReceptor))
+                        || (mensaje.getRemitente().getCedula().equals(cedulaReceptor)
+                        && mensaje.getDestinatario().getCedula().equals(cedulaEmisor)))
+                .collect(Collectors.toList());
     }
 }

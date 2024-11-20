@@ -3,10 +3,12 @@ package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.factory;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.dto.VendedorUsuarioDto;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.mapper.MarketplaceMappingImpl;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Marketplace;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Mensaje;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Producto;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.TipoEstado;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils.DataUtil;
+import javafx.beans.property.Property;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -112,4 +114,19 @@ public class ModelFactory {
     }
 
 
+    public List<Mensaje> getMensajes() {
+        return marketplace.getMensajes();
+    }
+
+    public List<Mensaje> getMensajesVendedor(String cedula) {
+        return marketplace.getMensajesVendedor(cedula);
+    }
+
+    public void enviarMensaje(String cedula, Mensaje mensaje) {
+        marketplace.enviarMensaje(cedula, mensaje);
+    }
+
+    public List<Mensaje> getMensajesEntreUsuarios(String cedulaEmisor, String cedulaReceptor) {
+        return marketplace.getMensajesEntreUsuarios(cedulaEmisor, cedulaReceptor);
+    }
 }
