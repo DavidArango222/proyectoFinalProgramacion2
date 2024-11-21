@@ -3,6 +3,7 @@ package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.factory.ModelFactory;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Producto;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.TipoEstado;
 
 import java.util.List;
 
@@ -25,5 +26,4 @@ public class VendedorController {
         }
         return modelFactory.obtenerVendedor(cedula);
     }
-
 }

@@ -223,16 +223,6 @@ public class MuroViewController implements IObservador {
         actualizar();
     }
 
-    private void actualizarChatDestinatario(String cedulaDestinatario) {
-        Vendedor destinatario = muroController.obtenerVendedor(cedulaDestinatario);
-        if (destinatario != null) {
-            // Llama al método que muestra los mensajes para ese destinatario
-            mostrarMensajesContacto(destinatario);
-        }
-    }
-
-
-
     @FXML
     void onActionLike(ActionEvent event) {
         darLike();
@@ -329,17 +319,21 @@ public class MuroViewController implements IObservador {
     }
 
     private void mostrarComentariosProducto() {
-        if (productoSeleccionado != null) {
+        if (productoSeleccionado != null && productoSeleccionado.getPublicacion() != null) {
             List<Comentario> comentarios = productoSeleccionado.getPublicacion().getComentarios();
             ObservableList<Comentario> comentariosList = FXCollections.observableArrayList(comentarios);
             tableComentarios.setItems(comentariosList);
+        } else {
+            tableComentarios.setItems(FXCollections.observableArrayList());
         }
     }
 
     private void mostrarLikesDelProducto() {
-        if (productoSeleccionado != null) {
+        if (productoSeleccionado != null && productoSeleccionado.getPublicacion() != null) {
             int likes = productoSeleccionado.getPublicacion().getLike();
             labelCantidadLikes.setText("Likes: " + likes);
+        } else {
+            labelCantidadLikes.setText("Likes: 0");
         }
     }
 
@@ -434,9 +428,17 @@ public class MuroViewController implements IObservador {
     }
 
     private void obtenerProductosVendedor() {
-        List<Producto> productos = MarketplaceViewController.obtenerProductosVendedor(cedula);
-        ObservableList<Producto> listaProductosObservables = FXCollections.observableArrayList(productos);
-        tableProductos.setItems(listaProductosObservables);
+        // Obtener el vendedor actual
+        Vendedor vendedor = muroController.obtenerVendedor(cedula);
+        if (vendedor != null) {
+            // Obtener solo los productos del vendedor actual
+            List<Producto> productosVendedor = vendedor.getProductos();
+            ObservableList<Producto> listaProductosObservables = FXCollections.observableArrayList(productosVendedor);
+            tableProductos.setItems(listaProductosObservables);
+        } else {
+            System.out.println("No se encontraron productos para el vendedor con cédula: " + cedula);
+            tableProductos.setItems(FXCollections.observableArrayList());
+        }
     }
 
 

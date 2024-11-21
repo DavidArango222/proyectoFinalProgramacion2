@@ -160,21 +160,22 @@ public class VendedorViewController implements IObservador {
     private void agregarProducto() {
         Producto producto = crearProducto();
         Vendedor vendedor = vendedorController.obtenerVendedor(cedula);
-        if(datosValidos(producto)){
-            if(vendedor.crearProducto(producto)){
+        if (datosValidos(producto)) {
+            if (vendedor.crearProducto(producto)) {
                 listaProductos.add(producto);
                 limpiarCampos();
-                mostrarMensaje(TITULO_PRODUCTO_AGREGADO, HEADER,
-                        BODY_PRODUCTO_AGREGADO, Alert.AlertType.INFORMATION);
-                actualizar();
-            }else{
-                mostrarMensaje(TITULO_PRODUCTO_NO_AGREGADO, HEADER,
-                        BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
+                mostrarMensaje("Producto agregado", "Éxito", "El producto fue agregado correctamente.", Alert.AlertType.INFORMATION);
+
+                // Notificar a los observadores para actualizar la vista del muro
+                vendedorController.getModelFactory().getMarketplace().notificarObservadores();
+            } else {
+                mostrarMensaje("Error", "No se pudo agregar el producto.", "Por favor intente de nuevo.", Alert.AlertType.ERROR);
             }
-        }else{
-            mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
+        } else {
+            mostrarMensaje("Datos incompletos", "Por favor complete todos los campos.", "", Alert.AlertType.WARNING);
         }
     }
+
 
     @FXML
     void eliminarProducto(ActionEvent event) {
@@ -383,10 +384,11 @@ public class VendedorViewController implements IObservador {
                 .nombre(txtNombre.getText())
                 .tipoEstado(estado)
                 .idProducto(txtId.getText())
+                .precio(Double.parseDouble(txtPrecio.getText()))
                 .categoria(txtCategoria.getText())
-                .precio(Integer.parseInt(txtPrecio.getText()))
                 .imagen(txtImagen.getText())
                 .build();
+
     }
 
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
