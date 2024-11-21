@@ -254,6 +254,28 @@ public class MuroViewController implements IObservador {
         }
     }
 
+    public void verificarPermisosAcciones() {
+        VendedorUsuarioDto vendedorLogueado = LoginController.getVendedorLogueado();
+
+        if(vendedorLogueado!=null){
+            boolean esVendedorActual = this.cedula.equals(vendedorLogueado.cedula());
+
+            if (esVendedorActual) {
+                txtMensajes.setDisable(false);
+                btnAgregarContacto.setDisable(false);
+                btnEnviarMensaje.setDisable(false);
+            } else {
+                btnEnviarMensaje.setDisable(true);
+                txtMensajes.setDisable(true);
+                btnAgregarContacto.setDisable(true);
+            }
+        }else {
+            txtMensajes.setDisable(false);
+            btnAgregarContacto.setDisable(false);
+            btnEnviarMensaje.setDisable(false);
+        }
+    }
+
 
 
     private void initView() {
@@ -267,6 +289,7 @@ public class MuroViewController implements IObservador {
         listenerSelectionTableContactosMensajes();
         agregarLikes();
         agregarComentarios();
+        verificarPermisosAcciones();
     }
 
     private void listenerSelectionTableContactosMensajes() {
