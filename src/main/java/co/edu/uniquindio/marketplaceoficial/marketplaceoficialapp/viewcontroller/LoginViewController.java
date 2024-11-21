@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.LoginController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.dto.VendedorUsuarioDto;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.memento.TabPersistenciaManager;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.services.EstrategiaLogin;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.strategy.EstrategiaLoginAdministrador;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.strategy.EstrategiaLoginVendedor;
@@ -55,10 +56,12 @@ public class LoginViewController {
         if (vendedor != null) {
             EstrategiaLogin estrategia = new EstrategiaLoginVendedor();
             abrirMarketplaceView(estrategia, vendedor.cedula());
+            TabPersistenciaManager.limpiarDatos();
         } else {
             if (esAdministrador(usuario, contrasena)) {
                 EstrategiaLogin estrategia = new EstrategiaLoginAdministrador();
                 abrirMarketplaceView(estrategia, null);
+                TabPersistenciaManager.limpiarDatos();
             } else {
                 mostrarMensaje(TITULO_INCORRECTO, HEADER, BODY_INCORRECTO, Alert.AlertType.ERROR);
             }

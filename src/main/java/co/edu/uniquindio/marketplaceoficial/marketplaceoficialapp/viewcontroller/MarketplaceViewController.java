@@ -1,13 +1,19 @@
 package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.MarkeplaceController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.factory.ModelFactory;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.memento.TabPersistenciaManager;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Producto;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;
 import javafx.fxml.FXML;
@@ -22,9 +28,14 @@ import static co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.utils.M
 public class MarketplaceViewController {
     private static String currentCedula;
     private static MarkeplaceController marketplaceController;
+    private static List<Tab> tabsNuevos= new ArrayList<>();
 
     public static String getCurrentCedula() {
         return currentCedula;
+    }
+
+    public  List<Tab> getTabsNuevos(){
+        return tabsNuevos;
     }
 
     public static void setCurrentCedula(String cedula) {
@@ -57,11 +68,18 @@ public class MarketplaceViewController {
             AdministradorViewController adminController = loader.getController();
             adminController.setMarketplaceController(this);
             administradorTab.setContent(adminContent);
-            
+            cargarTabsPersistidos();
             vincularTabsVendedores();
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void cargarTabsPersistidos() {
+        List<String> cedulas = TabPersistenciaManager.cargarTabsNuevos();
+        for (String cedula : cedulas) {
+            agregarTabVendedor(cedula);
         }
     }
 
@@ -113,6 +131,9 @@ public class MarketplaceViewController {
             nuevoTab.setText(cedula);
             nuevoTab.setContent(vendedorContent);
             mainTab.getTabs().add(nuevoTab);
+            tabsNuevos.add(nuevoTab);
+            List<String> cedulas = tabsNuevos.stream().map(Tab::getText).collect(Collectors.toList());
+            TabPersistenciaManager.guardarTabsNuevos(cedulas);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error al cargar la vista de Vendedor.");
@@ -176,6 +197,8 @@ public class MarketplaceViewController {
         }
         if (tabToRemove != null) {
             mainTab.getTabs().remove(tabToRemove);
+            List<String> cedulas = tabsNuevos.stream().map(Tab::getText).collect(Collectors.toList());
+            TabPersistenciaManager.guardarTabsNuevos(cedulas);
             System.out.println("Tab con cédula " + cedula + " eliminado.");
         } else {
             System.out.println("No se encontró un tab con la cédula " + cedula);
@@ -216,7 +239,6 @@ public class MarketplaceViewController {
         }
         return Collections.emptyList();
     }
-
 
     public Tab getAdministradorTab() {
         return administradorTab;

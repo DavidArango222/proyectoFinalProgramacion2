@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp;
 
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.memento.TabPersistenciaManager;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller.LoginViewController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.viewcontroller.MarketplaceViewController;
 import javafx.application.Application;
@@ -18,6 +19,11 @@ public class Login extends Application {
         primaryStage.getIcons().add(new Image("file:src/main/resources/images/tradehub-icon.png"));
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    @Override
+    public void stop() {
+        TabPersistenciaManager.limpiarDatos();
+        TabPersistenciaManager.limpiarArchivo();
     }
 
     public static void main(String[] args) {

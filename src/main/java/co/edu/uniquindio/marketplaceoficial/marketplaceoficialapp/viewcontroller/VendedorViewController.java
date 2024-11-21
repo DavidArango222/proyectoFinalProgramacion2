@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.LoginController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.controller.VendedorController;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.mapping.dto.VendedorUsuarioDto;
+import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.memento.TabPersistenciaManager;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Marketplace;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Producto;
 import co.edu.uniquindio.marketplaceoficial.marketplaceoficialapp.model.Vendedor;

@@ -31,7 +31,6 @@ public class MuroViewController implements IObservador {
     Producto productoSeleccionado;
     ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
     ObservableList<Vendedor> contactos = FXCollections.observableArrayList();
-    MarketplaceViewController marketplaceViewController;
     VendedorUsuarioDto usuarioActual;
     MarketplaceMappingImpl mapper;
 
